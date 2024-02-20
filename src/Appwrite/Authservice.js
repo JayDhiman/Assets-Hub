@@ -14,35 +14,8 @@ export class AuthService{
        this.account = new Account(this.client);
     }
 
-    //   login new user
-    
-    async login({email, password}) {
-            try {
-            return  await this.account.createEmailSession(email, password);
-                
-            } catch (error) {
-                console.log('login err');
-            }
-        
-      }
 
-    //   Logout user
 
-    async logout(){
-        try {
-            return await this.account.deleteSession("current")
-        } catch (error) {
-            console.error("logout errr");
-        }
-    }
-    //  detail of current user
-    async currentUser(){
-        try {
-            return await this.account.get()
-        } catch (error) {
-            console.log("curr user error");
-        }
-    }
 
     //  register a new user
 
@@ -56,14 +29,47 @@ export class AuthService{
            return  userAccount;
         }
         } catch (error) {
-            
+            throw error
         }
     }
 
+    //   login new user
+    
+    async login({email, password}) {
+        try {
+            return await this.account.createEmailSession(email, password);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
+    //  detail of current user
+    async currentUser(){
+        try {
+            return await this.account.get()
+        } catch (error) {
+            console.log("current user error",error);
+        }
+    }
+
+
+    //   Logout user
+
+    async logout(){
+        try {
+            return await this.account.deleteSession("current")
+        } catch (error) {
+            console.error("logout errr");
+        }
+    }
+
+
 }
+const authService = new AuthService();
 
 
-export default AuthService
+export default authService
 
    
 

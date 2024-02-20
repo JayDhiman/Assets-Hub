@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
+import Homecontent from './Homecontent';
+import { useSelector} from 'react-redux';
+
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
+  
+  const authStatus = useSelector(state => state.auth.status);
+
+   return (
+        <>
+            {authStatus === true ? (
+                <Homecontent />
+            ) : (
+                <h1>You need to log in first</h1>
+            )}
+        </>
+    );
 }
 
-export default Home
+export default Home;

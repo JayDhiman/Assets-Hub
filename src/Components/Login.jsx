@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {login as authLogin} from '../store/AuthSlice'
-import {Link} from 'react-router-dom'
-import AuthService from "../Appwrite/Authservice";
+import { Link, useNavigate } from 'react-router-dom'
+import authService from '../Appwrite/Authservice'
 import { useForm } from "react-hook-form"
 import Button from "./Button";
 import Input from "./Input";
+import logo from '../assets/logo.jpeg'
+import logo1 from '../assets/logo1.webp'
 
 export function Login() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {register, handleSubmit} = useForm()
   const [error, setError] = useState("")
@@ -18,11 +20,12 @@ export function Login() {
   const login = async(data) => {
     
     try {
-        const session = await AuthService.login(data)
+        const session = await authService.login(data)
         if (session) {
-            const userData = await AuthService.getCurrentUser()
+            const userData = await authService.currentUser()
             if(userData) dispatch(authLogin(userData));
-            // navigate("/")
+            navigate("/")
+           
         }
     } catch (error) {
         setError(error.message)
@@ -31,15 +34,24 @@ export function Login() {
 
 
   return (
-    <section>
-      <h1>Login or register</h1>
-      <div
-    className='flex items-center justify-center w-full'
-    >
-        <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+    <section className="container mx-auto bg-red-300 w-fit">
+      <h1 className=" text-center font-semibold py-3">Login or register</h1>
+      
+      <div className="flex items-center justify-center  rounded-xl">
+
+     
+     
+
+      <div className='flex items-center justify-center'>
+      <div className="">
+        <img src={logo} alt="" className="w-full max-w-2xl h-auto"/>
+      </div>
+
+
+        <div className={`w-fit  max-w-lg bg-gray-100  p-10 border border-black/10`}>
         <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-[100px]">
-                        logo
+                    <span className="inline-block w-full max-w-[60px]">
+                        <img src={logo1} alt="" />
                     </span>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
@@ -48,7 +60,7 @@ export function Login() {
                     <Link
                         to="/signup"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
-                    >
+                    > 
                         Sign Up
                     </Link>
         </p>
@@ -82,6 +94,7 @@ export function Login() {
             </div>
         </form>
         </div>
+    </div>
     </div>
     </section>
   );
