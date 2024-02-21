@@ -6,6 +6,8 @@ import authService from '../Appwrite/Authservice'
 import { useForm } from "react-hook-form"
 import Button from "./Button";
 import Input from "./Input";
+import logo from '../assets/logo.jpeg';
+import logo1 from '../assets/logo1.webp';
 
 
 const Signup = () => {
@@ -32,27 +34,33 @@ const Signup = () => {
 }
 
   return (
-    <>
-     <div className="flex items-center justify-center">
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
-            <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-[100px]">
-                        {/* <Logo width="100%" /> */} Logo
-                    </span>
-                </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">Sign up to create account</h2>
-                <p className="mt-2 text-center text-base text-black/60">
-                    Already have an account?&nbsp;
-                    <Link
-                        to="/login"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
-                    >
-                        Sign In
-                    </Link>
-                </p>
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+<>
 
-                <form onSubmit={handleSubmit(create)}>
+<div className="flex w-full h-screen">
+
+<div className="flex flex-1 justify-center items-center">
+  <div className="w-[50vw] bg-gray-100 p-10 border border-black/10 h-full">
+      <div className='w-fit mx-auto mt-12 rounded-2xl bg-gray-200 p-12 shadow-xl '>
+
+      
+    <div className="mb-2 flex justify-center">
+      <span className="inline-block w-full max-w-[60px]">
+        <img src={logo1} alt="" />
+      </span>
+    </div>
+    <h2 className="text-center text-2xl font-bold leading-tight">
+    Sign up to create account
+    </h2>
+    <p className="mt-2 text-center text-base text-black/60 mb-3 pb-2">
+      Don&apos;t have any account?&nbsp;
+      <Link
+        to="/login"
+        className="font-medium text-primary transition-all duration-200 hover:underline "
+      >
+        Sign In
+      </Link>
+    </p>
+    <form onSubmit={handleSubmit(create)}>
                     <div className='space-y-5'>
                         <Input
                         label="Full Name: "
@@ -85,9 +93,18 @@ const Signup = () => {
                         </Button>
                     </div>
                 </form>
-            </div>
+  </div>
+  </div>
+</div>
 
-    </div>
+<div className="flex flex-1">
+  <img src={logo} alt="" className="object-cover w-full h-full" />
+</div>
+</div>
+
+            
+
+
     </>
   )
 }

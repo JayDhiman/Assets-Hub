@@ -8,10 +8,16 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Login } from './Components/Login.jsx'
+import Login  from './Components/Login.jsx'
 import Signup from './Components/Signup.jsx'
 import App from './App.jsx'
 import AuthLayout from  './Components/AuthLayout'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import Assets from './Pages/Dashboard/Assets'
+import Category from './Pages/Dashboard/Category'
+import Employee from './Pages/Dashboard/Employee'
+import Software from './Pages/Dashboard/Software'
+
 
 const router  = createBrowserRouter([
   {
@@ -36,8 +42,47 @@ const router  = createBrowserRouter([
           <Signup/>
 
         </AuthLayout>
-      }
+      },
+      {
+        path: '/dashboard',
+        element:
+        <AuthLayout authentication={true}>
+          <Dashboard/>
 
+        </AuthLayout>
+      }
+      ,{
+        path: '/dashboard/assets',
+        element:
+        <AuthLayout authentication={true}>
+          <Assets/>          
+
+        </AuthLayout>
+      }
+      ,{
+        path: '/dashboard/category',
+        element:
+        <AuthLayout authentication={true}>
+          <Category/>         
+
+        </AuthLayout>
+      }
+      ,{
+        path: '/dashboard/employee',
+        element:
+        <AuthLayout authentication={true}>
+          <Employee/>         
+
+        </AuthLayout>
+      }
+      ,{
+        path: '/dashboard/software',
+        element:
+        <AuthLayout authentication={true}>
+          <Software/>         
+
+        </AuthLayout>
+      }
     ]
   }
 

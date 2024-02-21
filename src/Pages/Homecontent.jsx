@@ -6,6 +6,10 @@ import Carousel from '../Components/Carousel';
 import { CiMobile1 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 import { MdWebAsset } from "react-icons/md";
+import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
+import Header from '../Components/Header/Header';
+
 
 
 
@@ -14,7 +18,7 @@ const Homecontent = () => {
  
     return (
     <>
-      
+  <Header />
   <motion.main 
    initial="hidden"
    animate="visible"
@@ -62,11 +66,11 @@ const Homecontent = () => {
     </div>
    
       <div className='mx-auto mb-12'>
-      {/* <Link to={"/dashboard"}> */}
+      <Link to={"/login"}>
       <Button  className='text-sm md:text-lg font-light hover:font-medium hover:bg-orange-600 mt-3 md:mx-4 md:px-4 '>
         GET STARTED
       </Button>
-      {/* </Link>   */}
+      </Link>  
       </div>
 
       </div> 
@@ -84,7 +88,7 @@ const Homecontent = () => {
 
   {/* cards */}
 
-  <section className=' overflow-hidden w-full mt-12 pt-12'>
+<section className=' overflow-hidden w-full mt-12 pt-12'>
 
  
 <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4 pb-8 '>
@@ -165,19 +169,12 @@ Use our Programmable QR Code Tags and track & mantain your assets</h1>
 
 </section>
               
-            
-
-       
           
-          
-
-
-  
-
   {/* Service Section */}
  <section className=''>
    <Carousel />
  </section>
+ <Footer/>
  
     </>
   )

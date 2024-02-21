@@ -5,10 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-     
-      'xs': '340px',
-        // => @media (min-width: 340px) { ... }
+    fontFamily:{
+      primary: 'Roboto',
+      secondary: "Playfair Display"
+    },
+    extend: {},
+    screen:{
+      'xs': '420px',
+      // => @media (min-width: 420px) { ... }
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -22,11 +26,8 @@ export default {
       // => @media (min-width: 1280px) { ... }
 
       '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
 
-   
-    },
-    extend: {},
+    }
   },
   plugins: [],
 }

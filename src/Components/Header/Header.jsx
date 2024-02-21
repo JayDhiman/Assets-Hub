@@ -15,11 +15,7 @@ function Header() {
       slug: "/",
       active: true
     }, 
-    {
-      name: "Login",
-      slug: "/login",
-      active: !authStatus,
-  },
+    
   {
       name: "Signup",
       slug: "/signup",
@@ -30,7 +26,7 @@ function Header() {
 
 
   return (
-    <header className='py-3 shadow bg-transparent absolute z-10 w-full'>
+    <header className='py-3 shadow bg-transparent absolute z-10 w-full overflow-hidden '>
       
         <nav className='flex items-center justify-center gap-4'>
           <div className='mx-3'>
@@ -42,7 +38,7 @@ function Header() {
                <img src={logo1} alt="" width={40} className="" />
               </div>
               <div className='mt-4'>
-              <h1 className='uppercase text-lg text-white'>AssetsHub</h1>
+              <h1 className='uppercase text-lg text-white max-sm:hidden'>AssetsHub</h1>
               </div>
 
               </Link>
@@ -50,7 +46,7 @@ function Header() {
           <ul className='flex ml-auto'>
             {navItems.map((item) => 
             item.active ? (
-              <li key={item.name}>
+              <li key={item.name} className='max-sm:hidden'>
                 <button
                 onClick={() => navigate(item.slug)}
                 className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 hover:text-black rounded-full text-white'

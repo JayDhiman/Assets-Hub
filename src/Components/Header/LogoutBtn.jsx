@@ -3,7 +3,12 @@ import {useDispatch} from 'react-redux'
 import authService from '../../Appwrite/Authservice'
 import {logout} from '../../store/AuthSlice'
 
-function LogoutBtn() {
+function LogoutBtn({
+  className,
+  value,
+  ...props
+  
+}) {
     const dispatch = useDispatch()
     const logoutHandler = () => {
         authService.logout().then(() => {
@@ -12,9 +17,9 @@ function LogoutBtn() {
     }
   return (
     <button
-    className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full text-white hover:text-black'
+    className={`inline-bock  py-2  ${className} `}{...props}
     onClick={logoutHandler}
-    >Logout</button>
+    >{value}</button>
   )
 }
 
