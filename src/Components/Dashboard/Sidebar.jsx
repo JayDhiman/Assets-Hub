@@ -7,7 +7,10 @@ import { FaRegUser } from 'react-icons/fa';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { SiBmcsoftware } from 'react-icons/si';
 import { MdOutlineWebAsset } from 'react-icons/md';
-import { IoIosLogOut } from "react-icons/io";
+// import { IoIosLogOut } from "react-icons/io";
+import { BiAlignRight } from "react-icons/bi";
+
+
 
 
 const Sidebar = () => {
@@ -15,7 +18,7 @@ const Sidebar = () => {
   const [activeLink, setActiveLink] = useState('');
 
   const handleToggleSidebar = () => setSidebarOpen(!sidebarOpen);
-  const handleActiveLink = (id) => setActiveLink(id);
+  // const handleActiveLink = (id) => setActiveLink(id);
 
   // list items for the Dashboard Items
   const DashboardItems = [
@@ -27,16 +30,21 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className={`h-screen  overflow-auto bg-gray-700 ${!sidebarOpen ? 'w-24 duration-200 ':'duration-200 w-52'}`}>
-      <div className='w-fit'>
-        <button onClick={handleToggleSidebar}>Open</button>
+    <aside className={`h-screen  overflow-auto bg-gray-700 ${!sidebarOpen ? 'w-24 duration-200 ':'duration-200 w-52'} max-sm:hidden`}>
+      <div className='relative'>
+
+      <div className='absolute right-0'>
+        <button onClick={handleToggleSidebar} className='text-white text-xl pt-2'><BiAlignRight/></button>
+      </div>
       </div>
       <div className="p-4">
-        {/* Profile image */}
-        <div className="text-white">Profile Image</div>
-      </div>
+  {/* Profile image */}
+  <div className={`flex  items-center justify-center text-blue-600 text-xl rounded-full bg-slate-100 w-[40px] h-[40px] ${!sidebarOpen ? 'mt-3' : 'mx-auto'}`}>
+    A
+  </div>
+</div>
 
-      <div className="mt-8">
+      <div className="mt-3">
         <ul>
           {DashboardItems.map((items) => (
             <li key={items.id} className={`flex items-center py-2 px-4 text-white uppercase ${activeLink === items.id ? 'bg-gray-600' : ''} ${!sidebarOpen ? 'mx-2':'mx-3 '} hover:text-blue-200 hover:scale-105 hover:transtion hover:duration-200`}>
@@ -49,6 +57,9 @@ const Sidebar = () => {
         </ul>
       </div>
 
+
+
+{/* 
       <div className="absolute bottom-6 mx-3">
        <div className={`flex items-center uppercase  ${!sidebarOpen ? 'mx-2':'mx-3'}  hover:text-blue-200 hover:scale-105 hover:transtion hover:duration-200`}>
         <span className={`text-white inline-block ${!sidebarOpen ? 'text-2xl':'text-xl'} hover:scale-105`}><IoIosLogOut /></span>
@@ -64,7 +75,7 @@ const Sidebar = () => {
 
 
         
-      </div>
+      </div> */}
     </aside>
   );
 };
