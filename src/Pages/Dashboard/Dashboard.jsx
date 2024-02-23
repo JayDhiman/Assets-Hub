@@ -3,8 +3,12 @@ import Layout from '../../Components/Dashboard/Layout';
 import { MdOutlineWebAsset } from 'react-icons/md';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { SiBmcsoftware } from 'react-icons/si';
+import { useDispatch,useSelector } from 'react-redux';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const theme =useSelector((state)=> state.toggleTheme.theme)
+  
   return (
     <Layout>
       <div className='flex  overflow-auto'>

@@ -1,23 +1,40 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import logo1 from "../../assets/logo1.webp";
 import LogoutBtn from "../Header/Logoutbtn";
 import { CgDarkMode } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineLightMode } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from "../../store/ThemeToggle";
+
+
 
 const Navbar = () => {
+const dispatch = useDispatch()
+const theme = useSelector((state)=>state.toggleTheme.theme)
+
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme()); // Dispatch the toggleTheme action
+  };
+
   const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
+
+
+
+
+  
 
   return (
     <>
-      <div className="bg-gray-400 w-auto h-auto">
-        <nav className="w-full flex items-center justify-between">
+     <div className={`w-auto h-auto dark`}>
+     <nav className={`w-full flex items-center justify-between ${theme === 'dark' ? 'dark text-white' : 'bg-stone-900'}`}>
           <div className="mx-6 flex items-center justify-center p-2">
             <div>
               <img src={logo1} alt="" className="w-[40px]" />
             </div>
             <div className="mt-3">
-              <h1 className="uppercase text-xl font-primary font-light text-white">
+              <h1 className={`uppercase text-xl font-primary font-light  ${theme === 'dark' ? ' text-black' : 'text-white'} `}>
                 AssetHub
               </h1>
             </div>
@@ -25,18 +42,20 @@ const Navbar = () => {
 
           <div className="mx-6 p-2 max-sm:hidden">
             <ul className="flex items-center justify-between gap-2">
-              <li className="text-[20px] hover:scale-125 duration-200">
-                <CgDarkMode />
+              <li className={`text-[20px] hover:scale-125 duration-200 ${theme === 'dark' ? ' dark text-black':'text-white'}`}>
+                <button onClick={handleToggleTheme}>
+                {theme === 'dark'  ?  <MdOutlineLightMode/>:<CgDarkMode /> }
+                </button>
               </li>
 
               {/* dropdown menu */}
 
               <li>
-                <div className="relative inline-block text-left">
+                <div className={`relative inline-block text-left`}>
                   <div>
                     <button
                       type="button"
-                      className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      className={`inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  ${theme === 'dark'? 'bg-stone-800 text-white hover:bg-stone-900 ':'hover:bg-slate-200'}`}
                       onClick={toggleProfileDropdown}
                     >
                       Profile
