@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import logo1 from "../../assets/logo1.webp";
 import LogoutBtn from "../Header/Logoutbtn";
 import { CgDarkMode } from "react-icons/cg";
