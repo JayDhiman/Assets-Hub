@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Layout from '../../Components/Dashboard/Layout';
-import Input from '../../Components/Input';
-import { IoIosArrowDown } from 'react-icons/io';
-import { IoAddOutline } from 'react-icons/io5';
-import EmpForm from '../../Components/Dashboard/Employee/EmpForm';
-import EmpTable from '../../Components/Dashboard/Employee/EmpTable';
+
+
+// import EmpForm from '../../Components/Dashboard/Employee/EmpForm';
+// import EmpTable from '../../Components/Dashboard/Employee/EmpTable';
 
 const Employee = () => {
-  const [empForm, setEmpForm] = useState(false);
+  // const [empForm, setEmpForm] = useState(false);
 
   return (
     <Layout>
@@ -20,7 +19,7 @@ const Employee = () => {
         </div>
       </div>
 
-      <div className=''>
+      {/* <div className=''>
         <div className='container mx-auto w-full p-2 '>
           <div className='flex items-center flex-wrap gap-4 w-full'>
             <div className=' mx-2 max-md:w-full flex-1'>
@@ -73,7 +72,7 @@ const Employee = () => {
 
 
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 };

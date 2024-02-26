@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { useTable } from 'react-table';
 import axios from 'axios';
 
-const EmpTable = () => {
+const AssetsTable = () => {
 const [data , setData ] = useState([])
+const [editRowId, setEditRowId] = React.useState(null);
+
+const handleEditClick = (rowId) => {
+  setEditRowId(rowId);
+};
 
 
 const columns = useMemo(()=>{
@@ -41,6 +46,10 @@ const columns = useMemo(()=>{
            Header: 'DETAILS',
            accessor: 'DETAILS',
        },
+       {
+        Header: 'ACTIONS',
+        accessor: 'ACTIONS',
+    },
    ];
 },[]);
 
@@ -84,15 +93,34 @@ const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
                     {rows.map((row) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()} className='bg-gray-200 '>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()} className='p-2 px-3 m-4'>
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
+                            <tr {...row.getRowProps()} className='bg-gray-200'>
+                            {row.cells.map((cell) => {
+                                return (
+                                    <td {...cell.getCellProps()} className='p-2 px-3 m-4'>
+                                        {editRowId === row.id ? (
+                                            /* Render custom input field for editing */
+                                            <div>
+                                                {/* Custom input field */}
+                                                <button
+                                                    onClick={() => handleDelete(row.original.id)} // Assuming 'id' is the unique identifier for each row
+                                                    className=""
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            /* Render static text or delete button */
+                                            <div className=''>
+                                                {/* Render cell content */}
+                                                {cell.render('Cell')}
+                                                {/* Delete button */}
+                                               
+                                            </div>
+                                        )}
+                                    </td>
+                                );
+                            })}
+                        </tr>
                         );
                     })}
 
@@ -106,4 +134,4 @@ const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
   )
 }
 
-export default EmpTable
+export default AssetsTable

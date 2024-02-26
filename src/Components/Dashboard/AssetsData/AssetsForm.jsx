@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 
-const EmpForm = ({onClose}) => {
+const AssetsForm = ({onClose}) => {
   const { register, handleSubmit } = useForm();
   const handleForm = (data) => {
     console.log(data);
@@ -23,7 +23,7 @@ const EmpForm = ({onClose}) => {
           
           <div className="bg-gray-50 rounded-lg shadow-lg p-6 mt-12 ">
           <div className=''>
-            <h1 className='text-center font-primary font-semibold text-xl my-2 pt-2'>ADD Employee</h1>
+            <h1 className='text-center font-primary font-semibold text-xl my-2 pt-2'>ADD ASSETS</h1>
             </div>
           
       
@@ -147,4 +147,4 @@ const EmpForm = ({onClose}) => {
   );
 };
 
-export default EmpForm;
+export default AssetsForm;
