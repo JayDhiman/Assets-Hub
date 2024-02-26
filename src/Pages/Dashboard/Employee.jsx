@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '../../Components/Dashboard/Layout'
+import EmpForm from '../../Components/Dashboard/Employee/EmpForm'
 
 const Employee = () => {
   return (
@@ -13,7 +14,11 @@ const Employee = () => {
           </div>
         </div>
 
+
       </div>
+        <div className=''>
+        <EmpForm/>
+        </div>
     </Layout>
   )
 }
