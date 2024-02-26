@@ -4,6 +4,7 @@ import Input from '../../Components/Input';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoAddOutline } from 'react-icons/io5';
 import EmpForm from '../../Components/Dashboard/Employee/EmpForm';
+import EmpTable from '../../Components/Dashboard/Employee/EmpTable';
 
 const Employee = () => {
   const [empForm, setEmpForm] = useState(false);
@@ -66,6 +67,11 @@ const Employee = () => {
             </div>
           )}
        
+              <div className='w-auto h-auto mx-3'>
+                <EmpTable/>
+              </div>
+
+
         </div>
       </div>
     </Layout>
