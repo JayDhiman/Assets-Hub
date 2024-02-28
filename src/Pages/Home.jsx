@@ -1,9 +1,22 @@
-import React from 'react'
+import React from 'react';
+import Homecontent from './Homecontent';
+import { useSelector} from 'react-redux';
+import Dashboard from './Dashboard/Dashboard';
+
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
+  
+  const authStatus = useSelector(state => state.auth.status);
+
+   return (
+        <>
+            {authStatus === true ? (
+              <Dashboard/> ) : (
+                    <Homecontent />
+                    
+            )}
+        </>
+    );
 }
 
-export default Home
+export default Home;
