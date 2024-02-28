@@ -4,6 +4,8 @@ import { MdOutlineWebAsset } from 'react-icons/md';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { SiBmcsoftware } from 'react-icons/si';
 
+// create a object and map through
+
 const Dashboard = () => {
   return (
     <Layout>

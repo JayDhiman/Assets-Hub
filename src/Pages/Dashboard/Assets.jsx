@@ -8,6 +8,9 @@ import AssetsTable from '../../Components/Dashboard/AssetsData/AssetsTable';
 
 const Assets = () => {
   const [empForm, setEmpForm] = useState(false);
+  const [data, setData] = useState([]); // if 
+ 
+
   return (
     <Layout>
       <div className='flex overflow-auto'>
@@ -64,12 +67,12 @@ const Assets = () => {
 
           {empForm && (
             <div className=''>
-              <AssetsForm onClose = {()=>setEmpForm(false)}/>
+              <AssetsForm setData={setData} onClose = {()=>setEmpForm(false)}/>
             </div>
           )}
        
               <div className='w-auto h-auto mx-3'>
-                <AssetsTable/>
+                <AssetsTable data={data} setData={setData}/>
               </div>
 
 

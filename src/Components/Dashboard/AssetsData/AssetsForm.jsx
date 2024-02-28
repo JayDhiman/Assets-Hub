@@ -1,13 +1,31 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
+import axios from 'axios';
 
-const AssetsForm = ({onClose}) => {
+const AssetsForm = ({onClose, setData}) => {
   const { register, handleSubmit } = useForm();
-  const handleForm = (data) => {
-    console.log(data);
-  };
 
+  
+  // function for adding the data
+ 
+  const handleForm = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:3000/Assets", data);
+      console.log("Response:", res.data);
+
+      // After successfully adding the new asset, fetch the updated data
+      const response = await axios.get("http://localhost:3000/Assets");
+      setData(response.data);
+
+      onClose(); // Close the form after successful addition
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
+  
+ 
   return (
     <>
       <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 ">
@@ -51,7 +69,7 @@ const AssetsForm = ({onClose}) => {
                   label="OS:"
                   placeholder="Enter OS"
                   type="text"
-                  {...register('OS', {
+                  {...register('os', {
                     required: true,
                   })}
                 />
@@ -68,7 +86,7 @@ const AssetsForm = ({onClose}) => {
                   label="LICENSE:"
                   placeholder="Enter License"
                   type="text"
-                  {...register('LICENSE', {
+                  {...register('license', {
                     required: true,
                   })}
                 />
@@ -84,7 +102,7 @@ const AssetsForm = ({onClose}) => {
                   label="UPDATE:"
                   placeholder="Enter Update"
                   type="text"
-                  {...register('UPDATE', {
+                  {...register('update', {
                     required: true,
                   })}
                 />
@@ -99,7 +117,7 @@ const AssetsForm = ({onClose}) => {
                   label="BRAND:"
                   placeholder="Enter Brand"
                   type="text"
-                  {...register('BRAND', {
+                  {...register('brand', {
                     required: true,
                   })}
                 />
@@ -110,7 +128,7 @@ const AssetsForm = ({onClose}) => {
                   label="EXPIRY:"
                   placeholder="Enter Expiry"
                   type="text"
-                  {...register('EXPIRY', {
+                  {...register('expiry', {
                     required: true,
                   })}
                 />
@@ -127,14 +145,15 @@ const AssetsForm = ({onClose}) => {
     label="DETAILS:"
     placeholder="Enter Details"
     type="text"
-    {...register('DETAILS', {
+    {...register('details', {
       required: true,
     })}
   />
 </div>
 
 <div className="p-2 text-center">
-  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+  <button 
+   className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
     Submit
   </button>
 </div>
