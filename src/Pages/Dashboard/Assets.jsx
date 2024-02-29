@@ -67,7 +67,7 @@ const Assets = () => {
 
           {empForm && (
             <div className=''>
-              <AssetsForm setData={setData} onClose = {()=>setEmpForm(false)}/>
+              <AssetsForm setData={setData} onClose = {()=>setEmpForm(false)} />
             </div>
           )}
        

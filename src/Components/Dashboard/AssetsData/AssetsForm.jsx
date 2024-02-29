@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 import axios from 'axios';
 
-const AssetsForm = ({onClose, setData}) => {
+const AssetsForm = ({ onClose, setData}) => {
   const { register, handleSubmit } = useForm();
+  // const [formData,setFormData] = useState(intialData || {})
 
   
   // function for adding the data
@@ -28,7 +29,7 @@ const AssetsForm = ({onClose, setData}) => {
  
   return (
     <>
-      <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 ">
+      <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30">
        
 
           <button

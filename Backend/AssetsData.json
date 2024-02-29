@@ -10,5 +10,13 @@
       "expiry": "30-12-2025",
       "details": "xxxxxx"
     }
+  ],
+  "Software": [
+    {
+      "id": "",
+      "version": "",
+      "software": "",
+      "assigns": ""
+    }
   ]
 }

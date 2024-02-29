@@ -6,6 +6,7 @@ import { RxUpdate } from "react-icons/rx";
 import { FaLongArrowAltDown } from "react-icons/fa";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import Delete from '../Crud/Delete';
+import AssetsForm from './AssetsForm';
 
 
 //setData and Data are the Props receving form the Parent component that is Assets so that this comppnent have the acces to the data
@@ -13,8 +14,9 @@ const AssetsTable = ({data,setData}) => {
     
   const [deleteModel , setDeleteModel]= useState();   //I have added the state to conditonally render the popup 
   const [assetIdToDelete, setAssetIdToDelete] = useState(null); // to get the id of Particular row 
+  const [assetsIdToUpdate,setAssetsIdToUpdate] = useState(null) // to get the Id of Selected Row
 
-    const columns = useMemo(() => {
+  const columns = useMemo(() => {
         return [
             {
                 Header: 'ID',
@@ -53,7 +55,12 @@ const AssetsTable = ({data,setData}) => {
                 accessor: 'actions',
                 Cell: ({ row }) => (
                     <div>
-                        <button onClick={() => handleEdit(row.original.id)} className='text-lg px-1 text-blue-500'><RxUpdate className='hover:scale-110 transition duration-200'/></button>
+                        <button onClick={() =>{
+                         setAssetsIdToUpdate(row.original.id)
+                         
+                        }
+
+                             } className='text-lg px-1 text-blue-500'><RxUpdate className='hover:scale-110 transition duration-200'/></button>
                         <button onClick={() =>{ 
                             setAssetIdToDelete(row.original.id)
                             setDeleteModel(true)} 
@@ -109,7 +116,11 @@ const AssetsTable = ({data,setData}) => {
         fetchAssetData();
     }, []);
 
-
+ 
+    const handleUpdate = (id) => {
+        setAssetsIdToUpdate(id);
+      };
+    
     
 
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data }, useSortBy);
@@ -153,6 +164,7 @@ const AssetsTable = ({data,setData}) => {
                         })}
                     </tbody>
                 </table>
+              
                 {
                     deleteModel &&(
                         <div>
@@ -165,7 +177,14 @@ const AssetsTable = ({data,setData}) => {
 
                   )
                 }
-
+                
+{assetsIdToUpdate && (
+  <AssetsForm 
+    initialData={data.find(asset => asset.id === assetsIdToUpdate)}
+    setData={setData}
+    onClose={() => setAssetsIdToUpdate(null)} // Close the form after submission
+  />
+)}
             </div>
            
         </>
