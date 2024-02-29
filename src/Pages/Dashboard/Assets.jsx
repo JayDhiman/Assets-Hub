@@ -7,8 +7,8 @@ import AssetsForm from '../../Components/Dashboard/AssetsData/AssetsForm';
 import AssetsTable from '../../Components/Dashboard/AssetsData/AssetsTable';
 
 const Assets = () => {
-  const [empForm, setEmpForm] = useState(false);
-  const [data, setData] = useState([]); // if 
+  const [empForm, setEmpForm] = useState(false);// popup for formModel
+  const [data, setData] = useState([]); 
  
 
   return (

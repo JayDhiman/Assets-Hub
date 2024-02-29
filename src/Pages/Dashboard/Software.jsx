@@ -3,10 +3,12 @@ import Layout from '../../Components/Dashboard/Layout'
 import Input from '../../Components/Input'
 import { IoAddOutline } from 'react-icons/io5';
 import SoftwareForm from '../../Components/Dashboard/Software/SoftwareForm';
+import SoftwareTable from '../../Components/Dashboard/Software/SoftwareTable';
 
 
 const Software = () => {
   const[softwareForm,setSoftwareForm] = useState(false)
+  const [defaultData,setDefaultData] = useState([]) 
 
   return (
    <Layout>
@@ -50,9 +52,17 @@ const Software = () => {
           </div>
           {
             softwareForm && (
-              <SoftwareForm onClose = {()=> setSoftwareForm(false)} />
+            <SoftwareForm onClose = {()=> setSoftwareForm(false)}  setDefaultData={setDefaultData} />
             )
           }
+
+
+  <div className='w-auto h-auto mx-3'>
+    <SoftwareTable defaultData={defaultData} setDefaultData={setDefaultData}/>
+  </div>
+
+
+          
           
 
         </div>

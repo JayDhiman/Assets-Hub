@@ -9,14 +9,16 @@
       "brand": "dell",
       "expiry": "30-12-2025",
       "details": "xxxxxx"
-    }
-  ],
-  "Software": [
+    },
     {
-      "id": "",
-      "version": "",
-      "software": "",
-      "assigns": ""
+      "id": "a370",
+      "cpu": "Intel core i5",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "23-06-224",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "Details"
     }
   ]
 }
