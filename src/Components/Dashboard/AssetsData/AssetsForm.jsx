@@ -1,28 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
-import axios from 'axios';
 
-const AssetsForm = ({ onClose, setData}) => {
-  const { register, handleSubmit } = useForm();
-  // const [formData,setFormData] = useState(intialData || {})
+
+const AssetsForm = ({ onClose}) => {
+  
+const { register, handleSubmit } = useForm();
 
   
-  // function for adding the data
+ 
  
   const handleForm = async (data) => {
-    try {
-      const res = await axios.post("http://localhost:3000/Assets", data);
-      console.log("Response:", res.data);
-
-      // After successfully adding the new asset, fetch the updated data
-      const response = await axios.get("http://localhost:3000/Assets");
-      setData(response.data);
-
-      onClose(); // Close the form after successful addition
-    } catch (error) {
-      console.log(error);
-    }
+   console.log(data)
   };
  
   
@@ -34,7 +23,7 @@ const AssetsForm = ({ onClose, setData}) => {
 
           <button
             className=" fixed top-5 right-[27vw] text-red-400  text-xl hover:text-red-800"
-            onClick={onClose}>
+            onClick={()=> {onClose && onClose()}}>
             X
           </button>
           <div className='flex justify-center items-center flex-wrap '>

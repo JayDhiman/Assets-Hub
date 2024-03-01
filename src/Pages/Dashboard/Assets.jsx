@@ -1,33 +1,30 @@
-import React,{useState} from 'react'
-import Layout from '../../Components/Dashboard/Layout'
+import React, { useState } from 'react';
+import Layout from '../../Components/Dashboard/Layout';
 import Input from '../../Components/Input';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoAddOutline } from 'react-icons/io5';
 import AssetsForm from '../../Components/Dashboard/AssetsData/AssetsForm';
 import AssetsTable from '../../Components/Dashboard/AssetsData/AssetsTable';
+import axios from 'axios';
 
 const Assets = () => {
-  const [empForm, setEmpForm] = useState(false);// popup for formModel
-  const [data, setData] = useState([]); 
- 
-
+  const [empForm, setEmpForm] = useState(false); // popup for formModel
+   const closeForm = ()=> setEmpForm(false) 
   return (
     <Layout>
       <div className='flex overflow-auto'>
         <div className='w-full overflow-hidden'>
-        <div className='m-4 border-b'>
-            {/* it needs to be dynamic */}
+          <div className='m-4 border-b'>
             <h1 className='text-2xl font-primary mx-1 font-medium '>Assets</h1>
             <h2 className='uppercase text-[15px] mx-2 mb-2 '>Dashboard / Assets</h2>
           </div>
         </div>
-
       </div>
 
       <div className=''>
         <div className='container mx-auto w-full p-2 '>
           <div className='flex items-center flex-wrap gap-4 w-full'>
-            <div className=' mx-2 max-md:w-full flex-1'>
+            <div className='mx-2 max-md:w-full flex-1'>
               <Input placeholder={'Search here'} />
             </div>
 
@@ -55,7 +52,11 @@ const Assets = () => {
             <div className=''>
               <button
                 className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex'
-                onClick={() => setEmpForm(true)}>
+                onClick={() => {
+                 
+                  setEmpForm(true)}
+                }
+                  >
                 <span className='text-2xl px-1'>
                   <IoAddOutline />
                 </span>
@@ -63,23 +64,20 @@ const Assets = () => {
               </button>
             </div>
           </div>
-        
 
           {empForm && (
             <div className=''>
-              <AssetsForm setData={setData} onClose = {()=>setEmpForm(false)} />
+              <AssetsForm />
             </div>
           )}
-       
-              <div className='w-auto h-auto mx-3'>
-                <AssetsTable data={data} setData={setData}/>
-              </div>
 
-
+          <div className='w-auto h-auto mx-3'>
+            <AssetsTable onClose ={closeForm} />
+          </div>
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
-export default Assets
+export default Assets;

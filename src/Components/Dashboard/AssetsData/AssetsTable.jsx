@@ -8,11 +8,12 @@ import { FaLongArrowAltUp } from "react-icons/fa";
 import Delete from './Crud/Delete'
 import AssetsForm from "./AssetsForm";
 
-//setData and Data are the Props receving form the Parent component that is Assets so that this comppnent have the acces to the data
-const AssetsTable = ({ data, setData }) => {
-  const [deleteModel, setDeleteModel] = useState(false); //I have added the state to conditonally render the popup
-  const [assetIdToDelete, setAssetIdToDelete] = useState(null); // to get the id of Particular row
-  const [assetsIdToUpdate, setAssetsIdToUpdate] = useState(null); // to get the Id of Selected Row
+const AssetsTable = () => {
+  const [deleteModel, setDeleteModel] = useState(false); // popup model for delete
+  const [assetIdToDelete, setAssetIdToDelete] = useState(null);  // id id a entity for delete
+  const [assetsIdToUpdate, setAssetsIdToUpdate] = useState(null); //getting the id of entity in a row
+  const [data, setData] = useState([]
+    ); //for fetching the data from the server
 
   const columns = useMemo(() => {
     return [
@@ -54,9 +55,7 @@ const AssetsTable = ({ data, setData }) => {
         Cell: ({ row }) => (
           <div>
             <button
-              onClick={() => {
-                setAssetsIdToUpdate(row.original.id);
-              }}
+              onClick={() => handleUpdate(row.original.id)}
               className="text-lg px-1 text-blue-500"
             >
               <RxUpdate className="hover:scale-110 transition duration-200" />
@@ -76,9 +75,20 @@ const AssetsTable = ({ data, setData }) => {
     ];
   }, []);
 
-  useEffect(() => {
+  const handleUpdate = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3000/Assets/${id}`);
+      const assetToUpdate = response.data;
+      console.log(assetToUpdate)
+      setAssetsIdToUpdate(id);
 
-    // fetch the Data
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
     const fetchAssetData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/Assets");
@@ -89,10 +99,6 @@ const AssetsTable = ({ data, setData }) => {
     };
     fetchAssetData();
   }, []);
-
-  // const handleUpdate = (id) => {
-  //   setAssetsIdToUpdate(id);
-  // };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
@@ -164,7 +170,8 @@ const AssetsTable = ({ data, setData }) => {
           <AssetsForm
             initialData={data.find((asset) => asset.id === assetsIdToUpdate)}
             setData={setData}
-            onClose={() => setAssetsIdToUpdate(null)} // Close the form after submission
+            onClose={() => setAssetsIdToUpdate(null)}
+            handleUpdate ={handleUpdate}
           />
         )}
       </div>

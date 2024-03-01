@@ -1,18 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import Layout from '../../Components/Dashboard/Layout'
 import Input from '../../Components/Input'
 import { IoAddOutline } from 'react-icons/io5';
 import SoftwareForm from '../../Components/Dashboard/Software/SoftwareForm';
 import SoftwareTable from '../../Components/Dashboard/Software/SoftwareTable';
+import axios from 'axios';
 
 
 const Software = () => {
-  const[softwareForm,setSoftwareForm] = useState(false)
-  const [defaultData,setDefaultData] = useState([]) 
+  const [softwareForm,setSoftwareForm] = useState(false)
+  const [data,setData] = useState([]) 
+
+
+
+  useEffect(() => {
+    fetchData();
+  },[]);
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/Software');
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  console.log("software-component",typeof(data))
+
 
   return (
    <Layout>
     <div className='flex overflow-auto'>
+      
         <div className='w-full overflow-hidden'>
         <div className='m-4 border-b'>
             {/* it needs to be dynamic */}
@@ -52,23 +72,23 @@ const Software = () => {
           </div>
           {
             softwareForm && (
-            <SoftwareForm onClose = {()=> setSoftwareForm(false)}  setDefaultData={setDefaultData} />
+            <SoftwareForm onClose = {()=> setSoftwareForm(false)}  setData={setData} />
             )
           }
 
 
   <div className='w-auto h-auto mx-3'>
-    <SoftwareTable defaultData={defaultData} setDefaultData={setDefaultData}/>
+    <SoftwareTable data={data} setData={setData}/>
   </div>
-
-
-          
-          
-
         </div>
-
       </div>
    </Layout>
+
+
+          
+          
+
+
   )
 }
 

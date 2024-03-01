@@ -1,20 +1,20 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
 import { RxUpdate } from 'react-icons/rx';
-import axios from 'axios';
 import SoftwareForm from './SoftwareForm';
 import Deleteform from './Crud/Deleteform';
 
-const SoftwareTable = ({ defaultData, setDefaultData }) => {
+const SoftwareTable = ({ data,setData }) => {
     const [showUpdateForm, setShowUpdateForm] = useState(false);
-    const [selectedSoftware, setSelectedSoftware] = useState(null);
     const [deleteModel, setDeleteModel] = useState(false); //I have added the state to conditonally render the popup
     const [assetIdToDelete, setAssetIdToDelete] = useState(null); 
-
-    const columns = useMemo(
-    () => [
+    const [softwareId,setSoftwareId] =useState(null)
+    
+    // Ensure data is always an array before proceeding
+   
+    const columns = useMemo(() => [
       {
         Header: 'ID',
         accessor: 'id',
@@ -36,7 +36,13 @@ const SoftwareTable = ({ defaultData, setDefaultData }) => {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <button onClick={() => handleUpdate(row.original.id)} className="text-lg px-1 text-blue-500">
+            <button onClick={() => {
+              setSoftwareId(row.original.id)
+              setShowUpdateForm(true);
+            }
+          }
+            
+               className="text-lg px-1 text-blue-500">
               <RxUpdate className="hover:scale-110 transition duration-200" />
             </button>
             <button
@@ -51,35 +57,18 @@ const SoftwareTable = ({ defaultData, setDefaultData }) => {
           </div>
         ),
       },
-    ],
-    []
-  );
+    ],[]);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: defaultData },
-    useSortBy
-  );
-
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow
+  } = useTable({ columns, data },useSortBy);
  
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/Software');
-      setDefaultData(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
-  const handleUpdate = (software) => {
-    setSelectedSoftware(software);
-    setShowUpdateForm(true);
-  };
-
-
-  
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div className="mt-6 overflow-auto m-3 p-3">
       <table {...getTableProps()} className="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -118,26 +107,28 @@ const SoftwareTable = ({ defaultData, setDefaultData }) => {
             );
           })}
         </tbody>
-      </table>
+        </table>
 
-      {showUpdateForm && (
+      {showUpdateForm  && (
         <SoftwareForm
-          software={selectedSoftware}
-          setShowUpdateForm={setShowUpdateForm}
-          setDefaultData={setDefaultData}
-          
+        onClose={() => setShowUpdateForm(false)}
+        setData={setData}
+        softwareId={softwareId}
+        setShowUpdateForm={setShowUpdateForm}
         />
-      )}
+        )}
+
       {deleteModel && (
-          <div>
+        <div>
             <Deleteform
               id={assetIdToDelete}
               setDeleteModel={setDeleteModel}
-              setDefaultData={setDefaultData}
-            />
+              setData={setData}
+              />
           </div>
         )}
 
+  
 
     </div>
   );
