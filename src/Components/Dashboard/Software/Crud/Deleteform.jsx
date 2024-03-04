@@ -1,14 +1,19 @@
 import React from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { deleteSoftware } from '../../../../store/SoftwareSlice'; // Update the path to your software slice
 
-const Deleteform = ({ id, setDeleteModel, setDefaultData }) => {
+const Deleteform = ({ softwareId, setDeleteModel}) => {
+    const dispatch = useDispatch();
+
     const handleClose = () => setDeleteModel(false);
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:4000/Software/${id}`);
-            setDefaultData(prevData => prevData.filter(asset => asset.id !== id));
-            handleClose();
+            await axios.delete(`http://localhost:4000/Software/${softwareId}`);
+            dispatch(deleteSoftware(softwareId)); // Dispatch Redux action to delete the software
+            handleClose() 
+           
         } catch (error) {
             if (error.response && error.response.status === 404) {
                 console.error('Asset not found:', error);

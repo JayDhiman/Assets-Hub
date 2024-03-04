@@ -1,41 +1,31 @@
-import axios from 'axios';
 import Input from '../../Input';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addSoftware,updateSoftware } from '../../../store/SoftwareSlice';
+import axios from 'axios';
 
-const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
+
+const SoftwareForm = ({ onClose, softwareId }) => {
   const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (softwareId) {
-          const response = await axios.get(`http://localhost:4000/Software/${softwareId}`);
-          const data = response.data;
-          reset(data);
-        } else {
-          reset();
-        }
-      } catch (err) {
-        console.log(err, "error");
-      }
-    };
-
-    fetchData();
-  }, [softwareId, reset]);
-
+  const handleUpdate = async (data) => {
+    try {
+      await axios.put(`http://localhost:4000/Software/${softwareId}`, data); // Send the PUT request with updated data
+      dispatch(updateSoftware({ id: softwareId, ...data })); // Dispatch Redux action to update the software
+      onClose(); // Close the form after updating
+    } catch (error) {
+      console.error('Error updating software:', error);
+    }
+  };
   const handleForm = async (data) => {
     try {
       if (softwareId) {
-        const res = await axios.put(`http://localhost:4000/Software/${softwareId}`, data);
-        setData(res.data);
-        setShowUpdateForm(false);
-        console.log("Put-response", res.data);
+        handleUpdate(data); // Call handleUpdate if it's an update operation
       } else {
-        const res = await axios.post(`http://localhost:4000/Software`, data);
-        // setData(res.data);
+        dispatch(addSoftware(data)); // Dispatch Redux action to add new software
         onClose(); // Close the form after adding new entry
-        console.log("Post-response", res.data);
       }
     } catch (error) {
       console.log(error);
@@ -43,7 +33,9 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
       reset(); // Reset the form fields
     }
   };
+  useEffect(()=>{
 
+  },[handleUpdate])
   return (
     <>
       <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30">
@@ -68,6 +60,7 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
                       {...register('id', {
                         required: true,
                       })}
+                     
                     />
                   </div>
                   <div className="p-2 mx-3">
@@ -78,6 +71,7 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
                       {...register('software', {
                         required: true,
                       })}
+                      
                     />
                   </div>
                 </div>
@@ -90,6 +84,7 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
                       {...register('version', {
                         required: true,
                       })}
+                      
                     />
                   </div>
                   <div className="p-2 mx-3">
@@ -100,6 +95,7 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
                       {...register('assign', {
                         required: true,
                       })}
+                    
                     />
                   </div>
                 </div>
@@ -121,3 +117,4 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
 };
 
 export default SoftwareForm;
+

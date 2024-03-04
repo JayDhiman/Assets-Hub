@@ -1,23 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
-import { MdOutlineDelete } from 'react-icons/md';
-import { RxUpdate } from 'react-icons/rx';
+
+// import { deleteSoftware ,updateSoftware} from '../../../store/SoftwareSlice';
 import SoftwareForm from './SoftwareForm';
 import Deleteform from './Crud/Deleteform';
+import { RxUpdate } from "react-icons/rx";
+import { MdOutlineDelete } from "react-icons/md";
 
-const SoftwareTable = ({ data, setData }) => {
-    const [showUpdateForm, setShowUpdateForm] = useState(false);
-    const [deleteModel, setDeleteModel] = useState(false); //I have added the state to conditonally render the popup
-    const [assetIdToDelete, setAssetIdToDelete] = useState(null); 
-    const [softwareId,setSoftwareId] =useState(null)
 
-    // const dataArray = Array.isArray(data) ? data : Object.keys(data).map(key => data[key]);
+const SoftwareTable = ({ data }) => {
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [deleteModel, setDeleteModel] = useState(false);
+  const [softwareId, setSoftwareId] = useState(null);
 
-    
-    // Ensure data is always an array before proceeding
-   
-    const columns = useMemo(() => [
+
+  const columns = useMemo(
+    () => [
       {
         Header: 'ID',
         accessor: 'id',
@@ -39,18 +38,18 @@ const SoftwareTable = ({ data, setData }) => {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <button onClick={() => {
-              setSoftwareId(row.original.id)
-              setShowUpdateForm(true);
-            }
-          }
-            
-               className="text-lg px-1 text-blue-500">
+            <button
+              onClick={() => {
+                setSoftwareId(row.original.id);
+                setShowUpdateForm(true);
+              }}
+              className="text-lg px-1 text-blue-500"
+            >
               <RxUpdate className="hover:scale-110 transition duration-200" />
             </button>
             <button
               onClick={() => {
-                setAssetIdToDelete(row.original.id);
+                setSoftwareId(row.original.id);
                 setDeleteModel(true);
               }}
               className="text-lg px-1 text-red-500"
@@ -60,7 +59,9 @@ const SoftwareTable = ({ data, setData }) => {
           </div>
         ),
       },
-    ],[]);
+    ],
+    []
+  );
 
   const {
     getTableProps,
@@ -69,9 +70,8 @@ const SoftwareTable = ({ data, setData }) => {
     rows,
     prepareRow
   } = useTable({ columns, data }, useSortBy);
- 
 
-
+  
   return (
     <div className="mt-6 overflow-auto m-3 p-3">
       <table {...getTableProps()} className="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -110,29 +110,27 @@ const SoftwareTable = ({ data, setData }) => {
             );
           })}
         </tbody>
-        </table>
+      </table>
 
-      {showUpdateForm  && (
+      {showUpdateForm && (
         <SoftwareForm
-        onClose={() => setShowUpdateForm(false)}
-        setData={setData}
-        softwareId={softwareId}
-        setShowUpdateForm={setShowUpdateForm}
+          onClose={() => setShowUpdateForm(false)}
+          softwareId={softwareId}
+          setShowUpdateForm={setShowUpdateForm}
+
         />
-        )}
+      )}
 
       {deleteModel && (
         <div>
-            <Deleteform
-              id={assetIdToDelete}
-              setDeleteModel={setDeleteModel}
-              setData={setData}
-              />
-          </div>
-        )}
-
-  
-
+          <Deleteform
+            onClick = {()=> setDeleteModel(false)}
+            softwareId={softwareId}
+            setDeleteModel={setDeleteModel}
+            // handleDeleteSoftware={handleDeleteSoftware}
+          />
+        </div>
+      )}
     </div>
   );
 };

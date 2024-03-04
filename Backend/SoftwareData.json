@@ -2,27 +2,21 @@
   "Software": [
     {
       "id": "2",
-      "software": "xxxxxxxxxx",
-      "version": "xxxx232",
-      "assign": "ll323"
+      "software": "1",
+      "version": "1",
+      "assign": "1"
     },
     {
-      "id": "id-01",
-      "software": "software--Updates",
-      "version": "version-01",
-      "assign": "number"
+      "id": "22",
+      "software": "3434",
+      "version": "3434",
+      "assign": "4343"
     },
     {
-      "id": "id-new",
-      "software": "soft-new",
-      "version": "v",
+      "id": "rrw",
+      "software": "softwaree",
+      "version": "version",
       "assign": "num"
-    },
-    {
-      "id": "1",
-      "software": "0000",
-      "version": "------",
-      "assign": "5522"
     }
   ]
 }

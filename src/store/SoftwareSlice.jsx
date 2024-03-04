@@ -21,9 +21,9 @@ export const addSoftware = createAsyncThunk('software/addSoftware', async (softw
 });
 
 // Define thunk for updating existing software
-export const updateSoftware = createAsyncThunk('software/updateSoftware', async (softwareData) => {
-  const { id, ...updatedData } = softwareData;
-  const response = await axios.put(`http://localhost:4000/Software/${id}`, updatedData);
+export const updateSoftware = createAsyncThunk('software/updateSoftware', async () => {
+
+  const response = await axios.put(`http://localhost:4000/Software`, updatedData);
   return response.data;
 });
 
@@ -55,9 +55,10 @@ const softwareSlice = createSlice({
         state.softwareList.push(action.payload);
       })
       .addCase(updateSoftware.fulfilled, (state, action) => {
-        const index = state.softwareList.findIndex((software) => software.id === action.payload.id);
+        const updatedSoftware = action.payload;
+        const index = state.softwareList.findIndex((software) => software.id === updatedSoftware.id);
         if (index !== -1) {
-          state.softwareList[index] = action.payload;
+          state.softwareList[index] = updatedSoftware;
         }
       })
       .addCase(deleteSoftware.fulfilled, (state, action) => {
