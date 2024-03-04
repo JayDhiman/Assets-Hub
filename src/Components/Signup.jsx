@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {login } from '../store/AuthSlice'
+import { login } from '../store/AuthSlice'
 import { Link , useNavigate } from 'react-router-dom'
 import authService from '../Appwrite/Authservice'
 import { useForm } from "react-hook-form"
@@ -60,6 +60,7 @@ const Signup = () => {
         Sign In
       </Link>
     </p>
+    {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
     <form onSubmit={handleSubmit(create)}>
                     <div className='space-y-5'>
                         <Input

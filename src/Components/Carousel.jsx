@@ -113,7 +113,7 @@ const Carousel = () => {
                 src={card4}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-xl mb-2 w-fit mx-auto max-md:text-sm ">
                   Asset Database
                 </div>
@@ -127,7 +127,7 @@ const Carousel = () => {
                 src={card5}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-xl mb-2 w-fit mx-auto max-md:text-sm ">
                   Asset Bookings
                 </div>
@@ -141,7 +141,7 @@ const Carousel = () => {
                 src={card6}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-xl mb-2 w-fit mx-auto max-md:text-sm ">
                   Print your own tags
                 </div>

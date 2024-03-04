@@ -33,7 +33,7 @@ const SoftwareForm = ({ onClose, setData, softwareId, setShowUpdateForm }) => {
         console.log("Put-response", res.data);
       } else {
         const res = await axios.post(`http://localhost:4000/Software`, data);
-        setData(res.data);
+        // setData(res.data);
         onClose(); // Close the form after adding new entry
         console.log("Post-response", res.data);
       }

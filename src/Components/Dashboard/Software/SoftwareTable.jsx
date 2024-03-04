@@ -6,11 +6,14 @@ import { RxUpdate } from 'react-icons/rx';
 import SoftwareForm from './SoftwareForm';
 import Deleteform from './Crud/Deleteform';
 
-const SoftwareTable = ({ data,setData }) => {
+const SoftwareTable = ({ data, setData }) => {
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [deleteModel, setDeleteModel] = useState(false); //I have added the state to conditonally render the popup
     const [assetIdToDelete, setAssetIdToDelete] = useState(null); 
     const [softwareId,setSoftwareId] =useState(null)
+
+    // const dataArray = Array.isArray(data) ? data : Object.keys(data).map(key => data[key]);
+
     
     // Ensure data is always an array before proceeding
    
@@ -65,7 +68,7 @@ const SoftwareTable = ({ data,setData }) => {
     headerGroups,
     rows,
     prepareRow
-  } = useTable({ columns, data },useSortBy);
+  } = useTable({ columns, data }, useSortBy);
  
 
 
