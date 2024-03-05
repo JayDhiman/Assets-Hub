@@ -9,6 +9,16 @@
       "brand": "dell",
       "expiry": "30-12-2025",
       "details": "xxxxxx"
+    },
+    {
+      "id": "ff46",
+      "cpu": "q1",
+      "os": "1",
+      "license": "1",
+      "update": "1",
+      "brand": "1",
+      "expiry": "1",
+      "details": "1"
     }
   ]
 }

@@ -14,7 +14,7 @@ const SoftwareTable = ({ data }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [deleteModel, setDeleteModel] = useState(false);
   const [softwareId, setSoftwareId] = useState(null);
-  const dispatch = useDispatch()
+  const  dispatch = useDispatch()
 
   const columns = useMemo(
     () => [

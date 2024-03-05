@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React, {  useState, useEffect } from 'react';
 import Layout from '../../Components/Dashboard/Layout';
 import Input from '../../Components/Input';
-import { IoIosArrowDown } from 'react-icons/io';
+
 import { IoAddOutline } from 'react-icons/io5';
 import AssetsForm from '../../Components/Dashboard/AssetsData/AssetsForm';
 import AssetsTable from '../../Components/Dashboard/AssetsData/AssetsTable';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAssets,getAssets } from '../../store/AssetsSlice'; 
 
 const Assets = () => {
-  const [empForm, setEmpForm] = useState(false); // popup for formModel
-  const closeForm = ()=> setEmpForm(false) 
-  
-  const fetchAssetsData = ()=>{
+  const [empForm, setEmpForm] = useState(false); // State for form popup
+  const dispatch = useDispatch();
 
-  }
+  const assets = useSelector((state) => {
 
+    return state.assets.assetsData;
+  });
 
-
-
-
+  const handleAddAsset = (assetData) => {
+    dispatch(addAssets(assetData));
+    setEmpForm(false); // Close the form after adding the asset
+  };
+  useEffect(() => {
+    dispatch(getAssets()); // Fetch assets data when component mounts
+  }, [dispatch]);
   return (
     <Layout>
       <div className='flex overflow-auto'>
@@ -37,35 +42,16 @@ const Assets = () => {
               <Input placeholder={'Search here'} />
             </div>
 
-            <div className='inline-block relative'>
-              <select
-                className='block appearance-none bg-stone-800 border border-stone-800 text-white py-3 px-2 pr-8 rounded-xl leading-tight focus:outline-none focus:bg-stone-900 focus:border-stone-900 '
-                id='dog-names'
-                name='dog-names'>
-                <option value='Designation'>Designation</option>
-                <option value='Brand'>Brand</option>
-                <option value='Title'>Title</option>
-                <option value='CPU'>CPU</option>
-              </select>
-              <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white'>
-                <IoIosArrowDown />
-              </div>
-            </div>
-
-            <div className=''>
-              <button className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950'>
-                Search
-              </button>
-            </div>
+            {/* Other input fields and buttons */}
 
             <div className=''>
               <button
                 className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex'
                 onClick={() => {
-                 
-                  setEmpForm(true)}
+                  setEmpForm(true)
+              
                 }
-                  >
+                }>
                 <span className='text-2xl px-1'>
                   <IoAddOutline />
                 </span>
@@ -74,19 +60,15 @@ const Assets = () => {
             </div>
           </div>
 
-          {empForm && (
-            <div className=''>
-              <AssetsForm />
-            </div>
-          )}
+            {empForm && <AssetsForm setEmpForm={setEmpForm} empForm={empForm } onsubmit={handleAddAsset} />}
 
           <div className='w-auto h-auto mx-3'>
-            <AssetsTable onClose ={closeForm} />
+            <AssetsTable assets={assets} />
           </div>
         </div>
       </div>
     </Layout>
   );
-}
+};
 
 export default Assets;
