@@ -3,17 +3,15 @@ import { useTable, useSortBy } from "react-table";
 import axios from "axios";
 import { MdOutlineDelete } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
-import { FaLongArrowAltDown } from "react-icons/fa";
-import { FaLongArrowAltUp } from "react-icons/fa";
-import Delete from './Crud/Delete'
+import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
+import Delete from './Crud/Delete';
 import AssetsForm from "./AssetsForm";
 
 const AssetsTable = () => {
-  const [deleteModel, setDeleteModel] = useState(false); // popup model for delete
-  const [assetIdToDelete, setAssetIdToDelete] = useState(null);  // id id a entity for delete
-  const [assetsIdToUpdate, setAssetsIdToUpdate] = useState(null); //getting the id of entity in a row
-  const [data, setData] = useState([]
-    ); //for fetching the data from the server
+  const [deleteModel, setDeleteModel] = useState(false);
+  const [assetIdToDelete, setAssetIdToDelete] = useState(null);
+
+  const [data, setData] = useState([]);
 
   const columns = useMemo(() => {
     return [
@@ -55,7 +53,9 @@ const AssetsTable = () => {
         Cell: ({ row }) => (
           <div>
             <button
-              onClick={() => handleUpdate(row.original.id)}
+              onClick={() => {
+               handleUpdate(row.original.id);
+              }}
               className="text-lg px-1 text-blue-500"
             >
               <RxUpdate className="hover:scale-110 transition duration-200" />
@@ -75,18 +75,7 @@ const AssetsTable = () => {
     ];
   }, []);
 
-  const handleUpdate = async (id) => {
-    try {
-      const response = await axios.get(`http://localhost:3000/Assets/${id}`);
-      const assetToUpdate = response.data;
-      console.log(assetToUpdate)
-      setAssetsIdToUpdate(id);
-
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+ 
 
   useEffect(() => {
     const fetchAssetData = async () => {
@@ -100,16 +89,12 @@ const AssetsTable = () => {
     fetchAssetData();
   }, []);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data }, useSortBy);
 
   return (
     <>
       <div className="mt-12 overflow-auto">
-        <table
-          {...getTableProps()}
-          className="w-full text-sm text-left rtl:text-right text-gray-500 "
-        >
+        <table {...getTableProps()} className="w-full text-sm text-left rtl:text-right text-gray-500 ">
           <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 ">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()} className=" ">
@@ -143,13 +128,11 @@ const AssetsTable = () => {
                   {...row.getRowProps()}
                   className="bg-gray-200 hover:bg-blue-100"
                 >
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()} className="p-2 px-3 m-4 ">
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} className="p-2 px-3 m-4 ">
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
                 </tr>
               );
             })}
@@ -159,21 +142,18 @@ const AssetsTable = () => {
         {deleteModel && (
           <div>
             <Delete
-              id= {assetIdToDelete}
+              id={assetIdToDelete}
               setDeleteModel={setDeleteModel}
               setData={setData}
             />
           </div>
         )}
 
-        {assetsIdToUpdate && (
+        {/* { (
           <AssetsForm
-            initialData={data.find((asset) => asset.id === assetsIdToUpdate)}
-            setData={setData}
-            onClose={() => setAssetsIdToUpdate(null)}
-            handleUpdate ={handleUpdate}
+            
           />
-        )}
+        )} */}
       </div>
     </>
   );

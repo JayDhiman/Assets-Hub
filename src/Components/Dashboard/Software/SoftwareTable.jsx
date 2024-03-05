@@ -1,19 +1,20 @@
 import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
-
-// import { deleteSoftware ,updateSoftware} from '../../../store/SoftwareSlice';
+import { useDispatch } from 'react-redux';
+import { deleteSoftware } from '../../../store/SoftwareSlice';
 import SoftwareForm from './SoftwareForm';
 import Deleteform from './Crud/Deleteform';
 import { RxUpdate } from "react-icons/rx";
 import { MdOutlineDelete } from "react-icons/md";
+import axios from 'axios';
 
 
 const SoftwareTable = ({ data }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [deleteModel, setDeleteModel] = useState(false);
   const [softwareId, setSoftwareId] = useState(null);
-
+  const dispatch = useDispatch()
 
   const columns = useMemo(
     () => [
@@ -62,6 +63,20 @@ const SoftwareTable = ({ data }) => {
     ],
     []
   );
+
+  const handleDeleteSoftware = async () => {
+    try {
+      
+      // Perform the deletion operation
+      await axios.delete(`http://localhost:4000/Software/${softwareId}`);
+      dispatch(deleteSoftware(softwareId)); 
+      setDeleteModel(false); 
+    } catch (error) {
+      console.error('Error deleting asset:', error);
+    
+    }
+  };
+  
 
   const {
     getTableProps,
@@ -127,7 +142,7 @@ const SoftwareTable = ({ data }) => {
             onClick = {()=> setDeleteModel(false)}
             softwareId={softwareId}
             setDeleteModel={setDeleteModel}
-            // handleDeleteSoftware={handleDeleteSoftware}
+            handleDeleteSoftware={handleDeleteSoftware}
           />
         </div>
       )}

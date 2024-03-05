@@ -27,7 +27,7 @@ const Update = ({ initialData }) => {
             onClose={() => {
               /* Handle close functionality if needed */
             }}
-            onSubmit={handleUpdateData}
+           
           />
         </div>
       </div>

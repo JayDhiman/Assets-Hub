@@ -9,7 +9,16 @@ import axios from 'axios';
 
 const Assets = () => {
   const [empForm, setEmpForm] = useState(false); // popup for formModel
-   const closeForm = ()=> setEmpForm(false) 
+  const closeForm = ()=> setEmpForm(false) 
+  
+  const fetchAssetsData = ()=>{
+
+  }
+
+
+
+
+
   return (
     <Layout>
       <div className='flex overflow-auto'>
