@@ -5,7 +5,7 @@ import AssetsForm from "./AssetsForm";
 import Delete from "./Crud/Delete";
 
 
-const AssetsTable = ({ assets, empForm, setEmpForm}) => {
+const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
 
   const [selectedAssetId, setSelectedAssetId] = useState(null);
   //for deletePop up
@@ -14,7 +14,7 @@ const AssetsTable = ({ assets, empForm, setEmpForm}) => {
 
   
   const handleUpdate = (selectedAssetId)=>{
-    setEmpForm(true)
+    toggleEmpForm()
     setSelectedAssetId(selectedAssetId)
   }
   
@@ -57,11 +57,11 @@ const AssetsTable = ({ assets, empForm, setEmpForm}) => {
               <td className="p-2 px-3 m-4">
                 <button 
                  onClick={() => handleUpdate(asset.id)}
-                className="text-lg px-1 text-blue-500">
+                 className="text-lg px-1 text-blue-500">
                   <RxUpdate className="hover:scale-110 transition duration-200" />
                 </button>
                 <button
-                 onClick={()=>handleDelete(asset.id)}
+                  onClick={()=>handleDelete(asset.id)}
                   className="text-lg px-1 text-red-500">
                   <MdOutlineDelete className="hover:scale-110 transition duration-200" />
                 </button>
@@ -72,7 +72,7 @@ const AssetsTable = ({ assets, empForm, setEmpForm}) => {
       </table>
       
       {
-        empForm && <AssetsForm assetId={selectedAssetId} setEmpForm={setEmpForm} onSubmit={handleUpdate}/>
+        empForm && <AssetsForm assetId={selectedAssetId}  onSubmit={handleUpdate}/>
       }
 
       {

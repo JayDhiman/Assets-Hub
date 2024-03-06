@@ -2,25 +2,26 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 
-const AssetsForm = ({ setEmpForm, onSubmit, initialValues }) => {
+const AssetsForm = ({ setEmpForm, onAdd, assetId, onUpdate }) => {
   const { register, handleSubmit } = useForm();
-
-  const handleForm = async (data) => {
-    onSubmit(data);
-  };
-
+ 
+    //update the current assets
+    const handleFormSubmit = (data) => {
+      onAdd(data)
+      setEmpForm(false) // Close the form after submission
+    };
   return (
     <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 flex justify-center items-center">
-      <div className="bg-red-100 rounded-lg shadow-lg p-6 max-w-lg w-full">
+      <div className=" bg-gray-100 rounded-lg shadow-lg p-6 max-w-lg w-full">
         <button
           className="absolute top-2 right-2 text-red-400 text-xl hover:text-red-800"
           onClick={()=>setEmpForm(false)}>
           X
         </button>
         <h1 className="text-center font-primary font-semibold text-xl my-2">
-          {initialValues ? 'UPDATE ASSETS' : 'ADD ASSETS'}
+          {assetId ? 'UPDATE ASSETS' : 'ADD ASSETS'}
         </h1>
-        <form onSubmit={handleSubmit(handleForm)}>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="CPU:"
@@ -82,7 +83,7 @@ const AssetsForm = ({ setEmpForm, onSubmit, initialValues }) => {
           <div className="text-center mt-4">
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              {initialValues ? 'Update' : 'Submit'}
+              {assetId ? 'Update' : 'Submit'}
             </button>
           </div>
         </form>

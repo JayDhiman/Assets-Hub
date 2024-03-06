@@ -11,14 +11,14 @@
       "details": "xxxxxx"
     },
     {
-      "id": "ff46",
-      "cpu": "q1",
-      "os": "1",
-      "license": "1",
-      "update": "1",
-      "brand": "1",
-      "expiry": "1",
-      "details": "1"
+      "id": "88ea",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "23-06-2024",
+      "brand": "Accer",
+      "expiry": "30-12-2025",
+      "details": "Details"
     }
   ]
 }

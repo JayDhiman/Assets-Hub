@@ -6,21 +6,34 @@ import { IoAddOutline } from 'react-icons/io5';
 import AssetsForm from '../../Components/Dashboard/AssetsData/AssetsForm';
 import AssetsTable from '../../Components/Dashboard/AssetsData/AssetsTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAssets,getAssets } from '../../store/AssetsSlice'; 
+import { addAssets,getAssets, updateAssets } from '../../store/AssetsSlice'; 
+
 
 const Assets = () => {
   const [empForm, setEmpForm] = useState(false); // State for form popup
   const dispatch = useDispatch();
+
+  const handleToggleEmpForm= () => setEmpForm(true)
 
   const assets = useSelector((state) => {
 
     return state.assets.assetsData;
   });
 
+ //update the current asset
+
+
+  const handleUpdateAssets = (assetData)=>{
+   dispatch(updateAssets(assetData))
+   setEmpForm(false)
+  }
+
+ // Add asstes
   const handleAddAsset = (assetData) => {
     dispatch(addAssets(assetData));
     setEmpForm(false); // Close the form after adding the asset
   };
+
   useEffect(() => {
     dispatch(getAssets()); // Fetch assets data when component mounts
   }, [dispatch]);
@@ -49,8 +62,8 @@ const Assets = () => {
                 className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex'
                 onClick={() => {
                   setEmpForm(true)
-              
                 }
+              
                 }>
                 <span className='text-2xl px-1'>
                   <IoAddOutline />
@@ -60,10 +73,10 @@ const Assets = () => {
             </div>
           </div>
 
-            {empForm && <AssetsForm setEmpForm={setEmpForm} empForm={empForm } onsubmit={handleAddAsset} />}
+            {empForm && <AssetsForm setEmpForm={ setEmpForm } empForm={empForm } onAdd={handleAddAsset} onUpdate={handleUpdateAssets} />}
 
           <div className='w-auto h-auto mx-3'>
-            <AssetsTable assets={assets} />
+            <AssetsTable assets={assets} toggleEmpForm={handleToggleEmpForm}  />
           </div>
         </div>
       </div>
