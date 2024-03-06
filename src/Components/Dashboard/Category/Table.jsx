@@ -1,50 +1,25 @@
-import React, {  useState } from "react";
+import React from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
-import AssetsForm from "./AssetsForm";
-import Delete from "./Crud/Delete";
 
-
-const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
-
-  const [selectedAssetId, setSelectedAssetId] = useState(null);
-  //for deletePop up
-  const [deleteModel,setDelteModel]= useState(false);
-  const [assetId,setAssetId] =useState(null)
-
-  
-  const handleUpdate = (assetID)=>{
-    toggleEmpForm()
-    setSelectedAssetId(assetID)
-  }
-  
-  
-
-
- const handleDelete = (assetId)=>{
-   setDelteModel(true)
-   setAssetId(assetId)
- }
-
-
+const Table = () => {
   return (
-    <div className="mt-12 overflow-auto">
+    <>
+       <div className="mt-12 overflow-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead className="text-[14px] text-gray-700 uppercase bg-gray-100">
           <tr>
             <th className="p-2 px-3 m-4">ID</th>
-            <th className="p-2 px-3 m-4">CPU</th>
-            <th className="p-2 px-3 m-4">OS</th>
-            <th className="p-2 px-3 m-4">LICENSE</th>
-            <th className="p-2 px-3 m-4">UPDATE</th>
-            <th className="p-2 px-3 m-4">BRAND</th>
-            <th className="p-2 px-3 m-4">EXPIRY</th>
-            <th className="p-2 px-3 m-4">DETAILS</th>
+            <th className="p-2 px-3 m-4">MACHINE</th>
+            <th className="p-2 px-3 m-4">TOTAL</th>
+            <th className="p-2 px-3 m-4 uppercase">Assigned</th>
             <th className="p-2 px-3 m-4">ACTIONS</th>
+
+           
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset,index) => (
+          {/* {assets.map((asset,index) => (
             <tr key={index} className="bg-gray-200 hover:bg-blue-100">
               <td className="p-2 px-3 m-4">{asset.id}</td>
               <td className="p-2 px-3 m-4">{asset.cpu}</td>
@@ -67,19 +42,37 @@ const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
                 </button>
               </td>
             </tr>
-          ))}
+          ))} */}
+
+
+          <tr className='bg-gray-200 hover:bg-blue-100'>
+            <td className='p-2 px-3 m-4'></td>
+            <td className='p-2 px-3 m-4'></td>
+            <td className='p-2 px-3 m-4'> </td>
+            <td className='p-2 px-3 m-4'></td>
+          <td className='p-2 px-3 m-4'>
+          <button 
+                 onClick={() => handleUpdate(asset.id)}
+                 className="text-lg px-1 text-blue-500">
+                  <RxUpdate className="hover:scale-110 transition duration-200" />
+                </button>
+                <button
+                  onClick={()=>handleDelete(asset.id)}
+                  className="text-lg px-1 text-red-500">
+                  <MdOutlineDelete className="hover:scale-110 transition duration-200" />
+                </button>
+              </td>
+       
+        </tr>
+    
+
+
         </tbody>
       </table>
       
-      {
-        empForm && <AssetsForm assetId={selectedAssetId}  onSubmit={handleUpdate}/>
-      }
-
-      {
-      deleteModel && <Delete setDeleteModel={setDelteModel} assetId={assetId}/>    
-      }
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default AssetsTable;
+export default Table

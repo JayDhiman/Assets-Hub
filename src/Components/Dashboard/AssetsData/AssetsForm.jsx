@@ -5,8 +5,8 @@ import Input from '../../Input';
 const AssetsForm = ({ setEmpForm, onAdd, assetId, onUpdate }) => {
   const { register, handleSubmit } = useForm();
  
-    //update the current assets
-    const handleFormSubmit = (data) => {
+      //update the current assets
+     const handleFormSubmit = (data) => {
       onAdd(data)
       setEmpForm(false) // Close the form after submission
     };

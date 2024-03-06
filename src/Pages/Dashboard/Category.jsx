@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../Components/Dashboard/Layout'
+import { IoAddOutline } from 'react-icons/io5';
+import Input from '../../Components/Input';
+import Table from '../../Components/Dashboard/Category/Table';
+import Form from '../../Components/Dashboard/Category/Form';
+import axios from 'axios';
 
 const Category = () => {
+  const[form,setForm] = useState(false)
+
+  const handleToggleClose = () => setForm(false)
+
+  const handleAddCategory = async()=>{
+    try {
+      const res  = await axios.post("http://localhost:3001/headers")
+      const data = res.data
+
+      console.log(data)
+    } catch (error) {
+      console.log(error,"Post Error ")
+    }
+  }
   return (
    <Layout>
 <div className='flex overflow-auto'>
@@ -13,6 +32,40 @@ const Category = () => {
           </div>
         </div>
 
+      </div>
+
+      <div className=''>
+        <div className='container mx-auto w-full p-2 '>
+          <div className='flex items-center flex-wrap gap-4 w-full'>
+            <div className='mx-2 max-md:w-full flex-1'>
+              <Input placeholder={'Search here'} />
+            </div>
+
+            {/* Other input fields and buttons */}
+
+            <div className=''>
+              <button
+                className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex'
+                onClick={()=>setForm(true)}
+              
+                >
+                <span className='text-2xl px-1'>
+                  <IoAddOutline />
+                </span>
+                <span className='max-sm:hidden'>ADD</span>
+              </button>
+            </div>
+          </div>
+ 
+          <div>
+            <Table />
+          </div>
+
+         {
+          form && <Form setForm={handleToggleClose} handleAddCategory={handleAddCategory} />
+         }
+        </div>
+        
       </div>
 
    </Layout>

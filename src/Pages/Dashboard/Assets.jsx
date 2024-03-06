@@ -73,7 +73,7 @@ const Assets = () => {
             </div>
           </div>
 
-            {empForm && <AssetsForm setEmpForm={ setEmpForm } empForm={empForm } onAdd={handleAddAsset} onUpdate={handleUpdateAssets} />}
+            {empForm && <AssetsForm setEmpForm={ setEmpForm } empForm={empForm } onAdd={handleAddAsset} onUpdate={handleUpdateAssets} assets={assets} />}
 
           <div className='w-auto h-auto mx-3'>
             <AssetsTable assets={assets} toggleEmpForm={handleToggleEmpForm}  />
