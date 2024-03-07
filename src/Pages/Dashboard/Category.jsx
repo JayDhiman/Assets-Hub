@@ -9,18 +9,10 @@ import axios from 'axios';
 const Category = () => {
   const[form,setForm] = useState(false)
 
+
   const handleToggleClose = () => setForm(false)
 
-  const handleAddCategory = async()=>{
-    try {
-      const res  = await axios.post("http://localhost:3001/headers")
-      const data = res.data
-
-      console.log(data)
-    } catch (error) {
-      console.log(error,"Post Error ")
-    }
-  }
+ 
   return (
    <Layout>
 <div className='flex overflow-auto'>

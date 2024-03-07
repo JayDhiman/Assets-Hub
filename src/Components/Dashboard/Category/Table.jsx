@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
 
-const Table = () => {
+const Table = ({apiData}) => {
   return (
     <>
        <div className="mt-12 overflow-auto">
@@ -44,26 +44,28 @@ const Table = () => {
             </tr>
           ))} */}
 
+  
+    
+    <tr  className='bg-gray-200 hover:bg-blue-100'>
+    <td className='p-2 px-3 m-4'></td>
+    <td className='p-2 px-3 m-4'></td>
+    <td className='p-2 px-3 m-4'> </td>
+    <td className='p-2 px-3 m-4'></td>
+  <td className='p-2 px-3 m-4'>
+  <button 
+         onClick={() => handleUpdate(asset.id)}
+         className="text-lg px-1 text-blue-500">
+          <RxUpdate className="hover:scale-110 transition duration-200" />
+        </button>
+        <button
+          onClick={()=>handleDelete(asset.id)}
+          className="text-lg px-1 text-red-500">
+          <MdOutlineDelete className="hover:scale-110 transition duration-200" />
+        </button>
+      </td>
 
-          <tr className='bg-gray-200 hover:bg-blue-100'>
-            <td className='p-2 px-3 m-4'></td>
-            <td className='p-2 px-3 m-4'></td>
-            <td className='p-2 px-3 m-4'> </td>
-            <td className='p-2 px-3 m-4'></td>
-          <td className='p-2 px-3 m-4'>
-          <button 
-                 onClick={() => handleUpdate(asset.id)}
-                 className="text-lg px-1 text-blue-500">
-                  <RxUpdate className="hover:scale-110 transition duration-200" />
-                </button>
-                <button
-                  onClick={()=>handleDelete(asset.id)}
-                  className="text-lg px-1 text-red-500">
-                  <MdOutlineDelete className="hover:scale-110 transition duration-200" />
-                </button>
-              </td>
-       
-        </tr>
+</tr>
+
     
 
 

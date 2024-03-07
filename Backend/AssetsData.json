@@ -19,6 +19,16 @@
       "brand": "Accer",
       "expiry": "30-12-2025",
       "details": "Details"
+    },
+    {
+      "id": "6cbe",
+      "cpu": "s",
+      "os": "s",
+      "license": "s",
+      "update": "s",
+      "brand": "s",
+      "expiry": "s",
+      "details": "s"
     }
   ]
 }

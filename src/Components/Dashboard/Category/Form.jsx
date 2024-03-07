@@ -2,8 +2,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '../../Input'
 
-const Form = ({setForm ,handleAddCategory}) => {
- const {register,handleSubmit} = useForm({defaultValues:{}})
+const Form = () => {
+ const {register,handleSubmit} = useForm({defaultValues:[]})
   
 // add assets
 
@@ -12,7 +12,7 @@ const Form = ({setForm ,handleAddCategory}) => {
 
 
  const handleFormSubmit=(data)=>{
-  handleAddCategory(data)
+
   console.log(data)
  }
 

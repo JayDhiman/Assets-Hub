@@ -6,12 +6,17 @@ import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/ThemeToggle";
+import { RiMenu3Line } from 'react-icons/ri';
 
 const Navbar = () => {
 const dispatch = useDispatch();
 const theme = useSelector((state) => state.toggleTheme.theme);
 
 const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+const [navMenu,setNavMenu] =useState(false) // for the hamburger menu
+
+
 const handleToggleTheme = () => {
 dispatch(toggleTheme()); // Dispatch the toggleTheme action
 };
@@ -34,19 +39,19 @@ className={`w-full flex items-center justify-between ${
     <h1
       className={`uppercase text-xl font-primary font-light  ${
         theme === "dark" ? " text-black" : "text-white"
-      } `}
+      }  max-sm:hidden`}
     >
       AssetHub
     </h1>
   </div>
 </div>
 
-<div className="mx-6 p-2 max-sm:hidden">
+ <div className="mx-6 max-sm:mx-3 p-2 ">
   <ul className="flex items-center justify-between gap-2">
     <li
       className={`text-[20px] hover:scale-125 duration-200 ${
         theme === "dark" ? " dark text-black" : "text-white"
-      }`}
+      } max-sm:text-[15px]`}
     >
       <button onClick={handleToggleTheme}>
         {theme === "dark" ? <MdOutlineLightMode /> : <CgDarkMode />}
@@ -55,8 +60,12 @@ className={`w-full flex items-center justify-between ${
 
     {/* dropdown menu */}
 
-    <li>
-      <div className={`relative inline-block text-left`}>
+
+
+{
+  navMenu && (
+<li>
+      <div className={`relative inline-block text-left `}>
         <div>
           <button
             type="button"
@@ -74,7 +83,7 @@ className={`w-full flex items-center justify-between ${
           </button>
         </div>
 
-        {isProfileOpen && (
+        { isProfileOpen && (
           <div className="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
               <div className="block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer text-sm transition-colors duration-300">
@@ -88,6 +97,15 @@ className={`w-full flex items-center justify-between ${
         )}
       </div>
     </li>
+  ) || (
+    <div className="">
+    <RiMenu3Line
+    className={`sm:hidden text-white`}
+    onClick={()=>setNavMenu(!navMenu)} />
+</div>
+  )
+}
+    
   </ul>
 </div>
 </nav>

@@ -37,6 +37,7 @@ const AssetsForm = ({ setEmpForm, onAdd, assetId, onUpdate }) => {
               type="text"
               {...register('os', {
                 required: true,
+                
               })}
             />
             <Input

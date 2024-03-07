@@ -58,7 +58,7 @@ const Carousel = () => {
             </h2>
           </div>
      
-     {/* I have added the container class in the slider component */}
+        {/* I have added the container class in the slider component */}
         <div className="container mx-auto  mb-10 text-center pt-3 mt-4 ">
           <Slider
             {...settings}
@@ -71,7 +71,7 @@ const Carousel = () => {
                 src={card1}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-xl mb-2 w-fit text-center mx-auto max-md:text-sm ">
                   Quick and Easy Tagging
                 </div>
@@ -86,7 +86,7 @@ const Carousel = () => {
                 src={card2}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-lg mb-2 w-fit mx-auto max-md:text-sm ">
                   QR Code Scanning
                 </div>
@@ -100,7 +100,7 @@ const Carousel = () => {
                 src={card3}
                 alt="Sunset in the mountains"
               />
-              <div class="px-2 py-4">
+              <div className="px-2 py-4">
                 <div className="font-semi-bold text-xl mb-2 w-fit mx-auto max-md:text-sm ">
                   Location Tracking
                 </div>
