@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
 
-const Table = ({apiData}) => {
+const Table = () => {
   return (
     <>
        <div className="mt-12 overflow-auto">

@@ -2,8 +2,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '../../Input'
 
-const Form = () => {
- const {register,handleSubmit} = useForm({defaultValues:[]})
+
+const Form = ({setForm,addData}) => {
+
+
+
+ const {register,handleSubmit} = useForm()
   
 // add assets
 
@@ -13,7 +17,7 @@ const Form = () => {
 
  const handleFormSubmit=(data)=>{
 
-  console.log(data)
+  addData(data)
  }
 
   return (
@@ -57,7 +61,7 @@ const Form = () => {
            
           </div>
           <div className="text-center mt-4">
-            <button
+            <button 
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               {/* {assetId ? 'Update' : 'Submit'}  */} submit
             </button>
