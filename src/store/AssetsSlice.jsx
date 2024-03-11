@@ -93,7 +93,7 @@ export const addAssets = (assetData) => async (dispatch) => {
 export const updateAssets = (assetData) => async (dispatch) => {
   try {
     dispatch(updateAssetsStart());
-    const response = await axios.put(`http://localhost:3000/Assets/${assetData}`, assetData);
+    const response = await axios.put(`http://localhost:3000/Assets/${assetData.id}`, assetData);
     dispatch(updateAssetsSuccess(response.data));
   } catch (error) {
     dispatch(updateAssetsFailure(error.message));

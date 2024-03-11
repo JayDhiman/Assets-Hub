@@ -2,14 +2,29 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 
-const AssetsForm = ({ setEmpForm, onAdd, assetId, onUpdate }) => {
-  const { register, handleSubmit } = useForm();
- 
-      //update the current assets
-     const handleFormSubmit = (data) => {
-      onAdd(data)
-      setEmpForm(false) // Close the form after submission
-    };
+const AssetsForm = ({ setEmpForm, onAdd, assetId, onSubmit,assets }) => {
+  const { register, handleSubmit, setValue } = useForm();
+  
+  // Function to pre-fill form fields with existing data if assetId is provided
+  React.useEffect(() => {
+    if (assetId) {
+      const assetToUpdate = assets.find(asset => asset.id === assetId);
+      if (assetToUpdate) {
+        Object.entries(assetToUpdate).forEach(([key, value]) => {
+          setValue(key, value);
+        });
+      }
+    }
+  }, [assetId, assets, setValue]);
+
+  const handleFormSubmit = (data) => {
+    if (assetId) {
+      onSubmit({ id: assetId, ...data });
+    } else {
+      onAdd(data);
+    }
+    setEmpForm(false); // Close the form after submission
+  };
   return (
     <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 flex justify-center items-center">
       <div className=" bg-gray-100 rounded-lg shadow-lg p-6 max-w-lg w-full">

@@ -2,19 +2,69 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../Components/Dashboard/Layout';
 import Input from '../../Components/Input';
 import { IoAddOutline } from 'react-icons/io5';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSoftwareList } from '../../store/SoftwareSlice';
 import SoftwareForm from '../../Components/Dashboard/Software/SoftwareForm';
 import SoftwareTable from '../../Components/Dashboard/Software/SoftwareTable';
+import axios from 'axios';
 
 const Software = () => {
-  const dispatch = useDispatch();
-  const softwareList = useSelector((state) => state.software.softwareList);
-  const [softwareForm, setSoftwareForm] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchSoftwareList());
-  }, [dispatch]);
+  const [softwareId , setSoftwareId] =useState(null); // id for manging the software
+  const [addForm,setAddForm] =useState(false);  // state for add form
+  const [updateForm,setUpdateForm] =useState(false); //state for update form
+  const [softwareData,setSoftwareData] =useState([]) // storing the data
+
+
+useEffect(()=>{
+  fetchSoftwareData()
+},[])
+
+// fetching the data form the backend
+const fetchSoftwareData = async ()=>{
+  try {
+    const response = await axios.get("http://localhost:4000/Software");
+    setSoftwareData(response.data);
+  } catch (error) {
+    console.error("Error fetching Software:", error);
+  }
+}
+
+const toggleAddForm = () => {
+  setAddForm(!addForm);
+};
+
+const toggleEditForm = () => {
+  setUpdateForm(!updateForm);
+};
+
+const handleSoftwareForm = async (formData) => {
+  try {
+    if (softwareId) {
+      await axios.put(`http://localhost:4000/Software/${softwareId.id}`, formData);
+    } else {
+      await axios.post(`http://localhost:4000/Software`, formData);
+    }
+    fetchSoftwareData();
+    setSoftwareId(null);
+    toggleEditForm(false); // Close add form after submission
+    toggleAddForm(false); // Close update form after submission
+  } catch (error) {
+    console.log("Error submitting the form:", error);
+  }
+};
+const handleUpdate = (asset) => {
+  setSoftwareId(asset);
+  setUpdateForm(true);
+};
+
+
+
+
+
+
+
+
+
+
 
  
   return (
@@ -37,7 +87,7 @@ const Software = () => {
               </div>
               <div className=''>
                 <button
-                  onClick={() => setSoftwareForm(true)}
+                  onClick={() => setAddForm(true)}
                   className='rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex'
                 >
                   <span className='text-2xl px-1'>
@@ -49,9 +99,29 @@ const Software = () => {
             </div>
           </div>
           
-          {softwareForm && <SoftwareForm onClose={() => setSoftwareForm(false)} />}
-          <div className='w-auto h-auto mx-3'>
-            <SoftwareTable data={softwareList} />
+            
+          {
+            updateForm  &&  (<SoftwareForm 
+              onSubmit={handleSoftwareForm} 
+              onClose={() => setUpdateForm(false)} 
+              initialValues ={softwareData}  />
+          )}
+
+          {
+            addForm && 
+            <SoftwareForm
+             onSubmit={handleSoftwareForm} 
+             onClose={() => setAddForm(false)}/>
+          }
+
+              <div className='w-auto h-auto mx-3'>
+
+            <SoftwareTable 
+
+            data={softwareData}
+            onEdit={handleUpdate}
+           
+            />
           </div>
         </div>
       </div>

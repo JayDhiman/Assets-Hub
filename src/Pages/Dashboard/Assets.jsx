@@ -11,32 +11,27 @@ import { addAssets,getAssets, updateAssets } from '../../store/AssetsSlice';
 
 const Assets = () => {
   const [empForm, setEmpForm] = useState(false); // State for form popup
+  const [selectedAsset, setSelectedAsset] = useState(null); // State for selected asset to be updated
   const dispatch = useDispatch();
+  const assets = useSelector((state) => state.assets.assetsData);
 
-  const handleToggleEmpForm= () => setEmpForm(true)
+  // const handleToggleEmpForm = () => setEmpForm(true);
 
-  const assets = useSelector((state) => {
-
-    return state.assets.assetsData;
-  });
-
- //update the current asset
-
-
-  const handleUpdateAssets = (assetData)=>{
-   dispatch(updateAssets(assetData))
-   setEmpForm(false)
-  }
-
- // Add asstes
-  const handleAddAsset = (assetData) => {
-    dispatch(addAssets(assetData));
-    setEmpForm(false); // Close the form after adding the asset
+  const handleAddOrUpdateAsset = (assetData) => {
+    if (selectedAsset) {
+      dispatch(updateAssets(assetData));
+    } else {
+      dispatch(addAssets(assetData));
+    }
+    setEmpForm(false);
+    setSelectedAsset(null);
   };
 
-  useEffect(() => {
-    dispatch(getAssets()); // Fetch assets data when component mounts
-  }, [dispatch]);
+  const handleUpdateAsset = (asset) => {
+    setSelectedAsset(asset);
+    setEmpForm(true);
+  };
+
   return (
     <Layout>
       <div className='flex overflow-auto'>
@@ -73,10 +68,17 @@ const Assets = () => {
             </div>
           </div>
 
-            {empForm && <AssetsForm setEmpForm={ setEmpForm } empForm={empForm } onAdd={handleAddAsset} onUpdate={handleUpdateAssets} assets={assets} />}
+            {
+            empForm &&
+             <AssetsForm 
+
+             setEmpForm={setEmpForm}
+             onAddOrUpdate={handleAddOrUpdateAsset}
+             initialValues={selectedAsset} />}
 
           <div className='w-auto h-auto mx-3'>
-            <AssetsTable assets={assets} toggleEmpForm={handleToggleEmpForm}  />
+            <AssetsTable
+             assets={assets} onUpdate={handleUpdateAsset}/>
           </div>
         </div>
       </div>

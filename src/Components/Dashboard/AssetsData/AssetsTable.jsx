@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
 import AssetsForm from "./AssetsForm";
-import Delete from "./Crud/Delete";
+// import Delete from "./Crud/Delete";
 
 
 const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
@@ -10,21 +10,21 @@ const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
   const [selectedAssetId, setSelectedAssetId] = useState(null);
   //for deletePop up
   const [deleteModel,setDelteModel]= useState(false);
-  const [assetId,setAssetId] =useState(null)
+  // const [assetId,setAssetId] =useState(null)
 
   
-  const handleUpdate = (assetID)=>{
-    toggleEmpForm()
-    setSelectedAssetId(assetID)
-  }
+  // const handleUpdate = (assetID)=>{
+  //   toggleEmpForm()
+  //   setSelectedAssetId(assetID)
+  // }
   
   
 
 
- const handleDelete = (assetId)=>{
-   setDelteModel(true)
-   setAssetId(assetId)
- }
+//  const handleDelete = (assetId)=>{
+//    setDelteModel(true)
+//    setAssetId(assetId)
+//  }
 
 
   return (
@@ -44,25 +44,16 @@ const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset,index) => (
+        {assets.map((asset, index) => (
             <tr key={index} className="bg-gray-200 hover:bg-blue-100">
-              <td className="p-2 px-3 m-4">{asset.id}</td>
-              <td className="p-2 px-3 m-4">{asset.cpu}</td>
-              <td className="p-2 px-3 m-4">{asset.os}</td>
-              <td className="p-2 px-3 m-4">{asset.license}</td>
-              <td className="p-2 px-3 m-4">{asset.update}</td>
-              <td className="p-2 px-3 m-4">{asset.brand}</td>
-              <td className="p-2 px-3 m-4">{asset.expiry}</td>
-              <td className="p-2 px-3 m-4">{asset.details}</td>
+              {/* Table data cells */}
               <td className="p-2 px-3 m-4">
-                <button 
-                 onClick={() => handleUpdate(asset.id)}
-                 className="text-lg px-1 text-blue-500">
+                {/* Update button */}
+                <button onClick={() => handleUpdate(asset.id)}>
                   <RxUpdate className="hover:scale-110 transition duration-200" />
                 </button>
-                <button
-                  onClick={()=>handleDelete(asset.id)}
-                  className="text-lg px-1 text-red-500">
+                {/* Delete button */}
+                <button onClick={() => handleDelete(asset.id)}>
                   <MdOutlineDelete className="hover:scale-110 transition duration-200" />
                 </button>
               </td>
@@ -71,13 +62,11 @@ const AssetsTable = ({ assets, empForm, toggleEmpForm}) => {
         </tbody>
       </table>
       
-      {
-        empForm && <AssetsForm assetId={selectedAssetId}  onSubmit={handleUpdate}/>
-      }
-
-      {
-      deleteModel && <Delete setDeleteModel={setDelteModel} assetId={assetId}/>    
-      }
+   {/* Render AssetsForm when empForm is true */}
+       {empForm && <AssetsForm assetId={selectedAssetId} onSubmit={handleUpdate} />}
+      
+      {/* Render delete confirmation modal when deleteModel is true */}
+      {/* {deleteModel && <Delete setDeleteModel={setDeleteModel} assetId={assetId} />} */}
     </div>
   );
 };
