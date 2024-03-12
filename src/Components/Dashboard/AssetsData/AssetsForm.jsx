@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 
 const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
+  
   const { register, handleSubmit, reset } = useForm({
     defaultValues: intialvalue || {
   
@@ -14,9 +15,7 @@ const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
       expiry:"",
       details:""
 
-
-
-}
+    }
   });
   
 const handleAssetForm = (data)=>{

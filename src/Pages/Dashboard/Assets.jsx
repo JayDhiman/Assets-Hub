@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../Components/Dashboard/Layout";
 import Input from "../../Components/Input";
-
 import { IoAddOutline } from "react-icons/io5";
 import AssetsForm from "../../Components/Dashboard/AssetsData/AssetsForm";
 import AssetsTable from "../../Components/Dashboard/AssetsData/AssetsTable";
