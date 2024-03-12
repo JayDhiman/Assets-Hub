@@ -23,7 +23,7 @@ const Sidebar = () => {
   // list items for the Dashboard Items
   const DashboardItems = [
     { id: 1, title: 'Dashboard', slug: '/dashboard', icon: <RxDashboard /> },
-    { id: 2, title: 'Employee', slug: '/dashboard/employee', icon: <FaRegUser /> },
+    // { id: 2, title: 'Employee', slug: '/dashboard/employee', icon: <FaRegUser /> },
     { id: 3, title: 'Assets', slug: '/dashboard/assets', icon: <MdOutlineWebAsset /> },
     { id: 4, title: 'Category', slug: '/dashboard/category', icon: <TbCategoryPlus /> },
     { id: 5, title: 'Software', slug: '/dashboard/software', icon: <SiBmcsoftware /> }

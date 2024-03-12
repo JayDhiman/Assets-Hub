@@ -8,11 +8,11 @@ import axios from "axios";
 
 
 const Category = () => {
-  const [showAddForm, setShowAddForm] = useState(false); // state managing the Post req
-  const [showEditForm, setShowEditForm] = useState(false); // state managing the put req
   const [assets, setAssets] = useState([]);  // state for storing the data
   const [selectedAsset, setSelectedAsset] = useState(null);  // state managing the id for each individual field 
-  const [showDelete, setShowDeleteForm] = useState(false);  // state for managing the delete req
+  const [showAddForm, setShowAddForm] = useState(false); // state managing the Post req
+  const [showEditForm, setShowEditForm] = useState(false); // state managing the put req
+  const [showDelete, setShowDelete] = useState(false);  // state for managing the delete req
 
   useEffect(() => {
     fetchAssets();
@@ -27,13 +27,12 @@ const Category = () => {
     }
   };
 
-  const toggleAddForm = () => {
-    setShowAddForm(!showAddForm);
-  };
+
 
   const toggleEditForm = () => {
     setShowEditForm(!showEditForm);
   };
+
 
   const handleFormSubmit = async (formData) => {
     try {
@@ -41,32 +40,46 @@ const Category = () => {
         await axios.put(
           `http://localhost:3001/headers/${selectedAsset.id}`,
           formData
-        );
+          );
+          toggleEditForm(false);
       } else {
         await axios.post("http://localhost:3001/headers", formData);
+        setShowAddForm(false);
       }
       fetchAssets();
-      toggleEditForm(false);
-      toggleAddForm(false);
       setSelectedAsset(null);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
+
   const handleEdit = (asset) => {
     setSelectedAsset(asset);
     setShowEditForm(true);
   };
 
-  const handleDelete = async (asset) => {
+
+  const handleDeleteConfirmation = (asset) => {
+    setSelectedAsset(asset); // Set the asset to delete
+    setShowDelete(true); // Show the delete confirmation popup
+  };
+
+
+  const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/headers/${asset.id}`);
-      setShowDeleteForm(true);
-      fetchAssets();
+      if (selectedAsset) {
+        await axios.delete(`http://localhost:3001/headers/${selectedAsset.id}`);
+        fetchAssets(); // Fetch assets after successful deletion
+        setShowDelete(false); // Close the delete confirmation popup
+      }
     } catch (error) {
       console.error("Error deleting asset:", error);
     }
+  };
+
+  const handleAddFormCancel = () => {
+    setShowAddForm(false);
   };
 
   return (
@@ -93,7 +106,7 @@ const Category = () => {
             <div className="">
               <button
                 className="rounded-xl py-[10px] bg-stone-800 text-white px-12  hover:bg-stone-950 flex"
-                onClick={toggleAddForm}
+                onClick={()=> setShowAddForm(true)}
               >
                 <span className="text-2xl px-1">
                   <IoAddOutline />
@@ -107,11 +120,14 @@ const Category = () => {
             <Table
               assets={assets}
               onEdit={handleEdit}
-              onDelete={handleDelete}
+              onDelete={handleDeleteConfirmation}
             />
           </div>
 
-          {showAddForm && <Form onSubmit={handleFormSubmit} />}
+          {showAddForm && <Form 
+          onSubmit={handleFormSubmit}
+          onCancel={handleAddFormCancel} />}
+
           {showEditForm && (
             <Form
               onSubmit={handleFormSubmit}
@@ -122,19 +138,19 @@ const Category = () => {
         </div>
       </div>
 
-      {/* {showDelete && (
+      {showDelete && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="bg-white p-4 rounded-lg">
             <p>Are you sure you want to delete this asset?</p>
             <div className="flex justify-end mt-4">
               <button
-                onClick={() => setShowDeleteForm(false)}
+                onClick={() => setShowDelete(false)} // Close delete confirmation
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
               >
                 Cancel
               </button>
               <button
-                onClick={() => handleDelete(selectedAsset)}
+                onClick={handleDelete} // Call handleDelete directly
                 className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
               >
                 Delete
@@ -142,7 +158,7 @@ const Category = () => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </Layout>
   );
 };

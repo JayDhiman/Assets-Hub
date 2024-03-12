@@ -14,8 +14,8 @@ const SoftwareForm = ({ onClose, initialValues, onSubmit }) => {
 
   const handleSubmitForm = (data) => {
     onSubmit(data);
-    // onClose();
     reset();
+  
   };
 
   return (
@@ -30,20 +30,13 @@ const SoftwareForm = ({ onClose, initialValues, onSubmit }) => {
           <div className="bg-gray-50 rounded-lg shadow-lg p-6 mt-12 ">
             <div className=''>
               <h1 className='text-center font-primary font-semibold text-xl my-2 pt-2'>
-                {initialValues ? 'Update Software' : 'Add Software'}
+                {initialValues ? 'Edit Software' : 'Add Software'}
               </h1>
             </div>
             <form onSubmit={handleSubmit(handleSubmitForm)}>
               <div className="text-black flex items-center justify-between gap-4 flex-wrap">
                 <div className='p-2 flex-1'>
-                  {/* <div className="p-2 mx-3">
-                    <Input
-                      label="ID"
-                      placeholder="ID"
-                      type="text"
-                      {...register('id', { required: true })}
-                    />
-                  </div> */}
+                 
                   <div className="p-2 mx-3">
                     <Input
                       label="SOFTWARE"

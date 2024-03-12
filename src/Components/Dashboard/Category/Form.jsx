@@ -1,10 +1,9 @@
-// Form.js
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../Input';
 
-const Form = ({ onSubmit, initialValues , onCancel }) => {
-  const { register, handleSubmit, reset} = useForm({
+const Form = ({ onSubmit, initialValues, onCancel }) => {
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: initialValues || {
       Machines: '',
       Count: '',
@@ -15,8 +14,6 @@ const Form = ({ onSubmit, initialValues , onCancel }) => {
   const handleFormSubmit = (data) => {
     onSubmit(data);
     reset();
-
-    // Reset form fields after submission
   };
 
   return (
@@ -35,19 +32,19 @@ const Form = ({ onSubmit, initialValues , onCancel }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
                 label="MACHINES:"
-                placeholder="Enter CPU"
+                placeholder="Machines"
                 type="text"
                 {...register('Machines', { required: true })}
               />
               <Input
                 label="COUNT:"
-                placeholder="Enter OS"
+                placeholder=" Count"
                 type="text"
                 {...register('Count', { required: true })}
               />
               <Input
                 label="ASSIGNED:"
-                placeholder="Enter License"
+                placeholder="Assigned"
                 type="text"
                 {...register('Assigned', { required: true })}
               />

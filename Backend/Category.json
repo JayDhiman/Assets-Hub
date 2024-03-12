@@ -4,19 +4,19 @@
       "id": "5acd",
       "Machines": "Android",
       "Count": "12",
-      "Assigned": "2"
+      "Assigned": "3"
     },
     {
-      "id": "3549",
-      "Machines": "mac",
+      "id": "ec7f",
+      "Machines": "Mac",
       "Count": "12",
-      "Assigned": "2"
+      "Assigned": "3"
     },
     {
-      "id": "49ad",
-      "Machines": "s",
-      "Count": "s",
-      "Assigned": "s"
+      "id": "ec7f",
+      "Machines": "Mac",
+      "Count": "12",
+      "Assigned": "3"
     }
   ]
 }

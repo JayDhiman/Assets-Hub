@@ -1,40 +1,16 @@
 {
-  "Software": [
+  "software": [
     {
-      "software": "222",
-      "version": "2",
-      "assign": "2",
-      "id": "2"
+      "id": "96cb",
+      "Software": "1",
+      "Version": "12",
+      "Assign": "1"
     },
     {
-      "id": "q",
-      "software": "q",
-      "version": "q",
-      "assign": "q"
-    },
-    {
-      "id": "2",
-      "software": "3",
-      "version": "3",
-      "assign": "3"
-    },
-    {
-      "Software": "a",
-      "Version": "a",
-      "Assign": "a",
-      "id": "2342"
-    },
-    {
-      "id": "24",
-      "software": "w",
-      "version": "w",
-      "assign": "w"
-    },
-    {
-      "id": "a432",
-      "Software": "q",
-      "Version": "q",
-      "Assign": "q"
+      "id": "98be",
+      "Software": "3",
+      "Version": "2",
+      "Assign": "2"
     }
   ]
 }

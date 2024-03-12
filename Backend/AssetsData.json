@@ -8,7 +8,7 @@
       "update": "23-06-224",
       "brand": "dell",
       "expiry": "30-12-2025",
-      "details": "xxxxxx"
+      "details": "detailssS"
     },
     {
       "id": "88ea",
@@ -19,6 +19,26 @@
       "brand": "Accer",
       "expiry": "30-12-2025",
       "details": "Details"
+    },
+    {
+      "id": "f225",
+      "cpu": "Intel core i5",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "1",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "1"
+    },
+    {
+      "id": "c3ff",
+      "cpu": "13",
+      "os": "a33",
+      "license": "a333",
+      "update": "a3",
+      "brand": "a3",
+      "expiry": "a3",
+      "details": "Detailssss"
     }
   ]
 }

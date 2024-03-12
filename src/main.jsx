@@ -67,14 +67,14 @@ const router  = createBrowserRouter([
 
         </AuthLayout>
       }
-      ,{
-        path: '/dashboard/employee',
-        element:
-        <AuthLayout authentication={true}>
-          <Employee/>         
+      // ,{
+      //   path: '/dashboard/employee',
+      //   element:
+      //   <AuthLayout authentication={true}>
+      //     <Employee/>         
 
-        </AuthLayout>
-      }
+      //   </AuthLayout>
+      // }
       ,{
         path: '/dashboard/software',
         element:
