@@ -1,26 +1,6 @@
 {
   "Assets": [
     {
-      "id": "0238",
-      "cpu": "Intel core i5",
-      "os": "windows-11",
-      "license": "xxxx",
-      "update": "23-06-224",
-      "brand": "dell",
-      "expiry": "30-12-2025",
-      "details": "xxxxxx"
-    },
-    {
-      "id": "88ea",
-      "cpu": "Intel core i7",
-      "os": "windows-11",
-      "license": "xxxx",
-      "update": "23-06-2024",
-      "brand": "Accer",
-      "expiry": "30-12-2025",
-      "details": "Details"
-    },
-    {
       "id": "6cbe",
       "cpu": "s",
       "os": "s",
@@ -29,6 +9,46 @@
       "brand": "s",
       "expiry": "s",
       "details": "s"
+    },
+    {
+      "id": "b269",
+      "cpu": "1",
+      "os": "1",
+      "license": "1",
+      "update": "1",
+      "brand": "dell",
+      "expiry": "1",
+      "details": "1"
+    },
+    {
+      "id": "4bf4",
+      "cpu": "1",
+      "os": "sadf",
+      "license": "asdfzsdd",
+      "update": "sadf",
+      "brand": "adsf",
+      "expiry": "asdf",
+      "details": "sadf"
+    },
+    {
+      "id": "f7f8",
+      "cpu": "dell",
+      "os": "dell",
+      "license": "deell",
+      "update": "de",
+      "brand": "de",
+      "expiry": "ed",
+      "details": "e"
+    },
+    {
+      "id": "ac22",
+      "cpu": "sa",
+      "os": "11111",
+      "license": "122222",
+      "update": "3333",
+      "brand": "4444",
+      "expiry": "5555",
+      "details": "6666"
     }
   ]
 }
