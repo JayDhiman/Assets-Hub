@@ -9,9 +9,9 @@ const Layout = ({ children }) => {
         <div>
           <Sidebar />
         </div>
-        <div className="w-full overflow-auto">
+        <div className="w-full overflow-hidden">
           <Navbar />
-          {children}
+          <div className="overflow-y-auto h-full">{children}</div>
         </div>
       </div>
     </div>

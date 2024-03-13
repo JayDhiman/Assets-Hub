@@ -1,54 +1,136 @@
 {
   "Assets": [
     {
-      "id": "6cbe",
-      "cpu": "s",
-      "os": "s",
-      "license": "s",
-      "update": "s",
-      "brand": "s",
-      "expiry": "s",
-      "details": "s"
-    },
-    {
-      "id": "b269",
-      "cpu": "1",
-      "os": "1",
-      "license": "1",
-      "update": "1",
+      "id": "a761",
+      "sNo": "1",
+      "cpu": "Intel core i5",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "23-06-224",
       "brand": "dell",
-      "expiry": "1",
-      "details": "1"
+      "expiry": "30-12-2025",
+      "details": "xxx"
     },
     {
-      "id": "4bf4",
-      "cpu": "1",
-      "os": "sadf",
-      "license": "asdfzsdd",
-      "update": "sadf",
-      "brand": "adsf",
-      "expiry": "asdf",
-      "details": "sadf"
+      "id": "688f",
+      "sNo": "2",
+      "cpu": "Intel core i6",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "23-06-2024",
+      "brand": "Accer",
+      "expiry": "30-12-2025",
+      "details": "Details"
     },
     {
-      "id": "f7f8",
-      "cpu": "dell",
-      "os": "dell",
-      "license": "deell",
-      "update": "de",
-      "brand": "de",
-      "expiry": "ed",
-      "details": "e"
+      "id": "beab",
+      "sNo": "3",
+      "cpu": "Intel core i3",
+      "os": "windows-10",
+      "license": "xxxx",
+      "update": "23-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "Details"
     },
     {
-      "id": "ac22",
-      "cpu": "sa",
-      "os": "11111",
-      "license": "122222",
-      "update": "3333",
-      "brand": "4444",
-      "expiry": "5555",
-      "details": "6666"
+      "id": "db00",
+      "sNo": "4",
+      "cpu": "Intel core i5",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "21-04-2024",
+      "brand": "hp",
+      "expiry": "30-11-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f943e",
+      "sNo": "5",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94e2",
+      "sNo": "6",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94e1",
+      "sNo": "7",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94a1c",
+      "sNo": "8",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94aa1",
+      "sNo": "9",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94b1",
+      "sNo": "10",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "f94a11",
+      "sNo": "11",
+      "cpu": "Intel core i7",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "12-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025",
+      "details": "xxx"
+    },
+    {
+      "id": "839b",
+      "sNo": "12",
+      "cpu": "Intel core i5",
+      "os": "windows-11",
+      "license": "xxxx",
+      "update": "xx",
+      "brand": "xx",
+      "expiry": "xxx",
+      "details": "xx"
     }
   ]
 }

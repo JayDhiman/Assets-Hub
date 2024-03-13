@@ -27,6 +27,15 @@ const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
         </h1>
         <form onSubmit={handleSubmit(handleAssetForm)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Input
+                      label="S.NO"
+                      placeholder="id"
+                      type="text"
+                      {...register('sNo', {
+                        required: true,
+                      })}
+                     
+                    />
             <Input
               label="CPU:"
               placeholder="Enter CPU"
