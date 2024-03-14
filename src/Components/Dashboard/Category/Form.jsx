@@ -4,13 +4,23 @@ import Input from "../../Input";
 
 const Form = ({ initialValue, onSubmit, onClose }) => {
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset,formState:{errors},trigger } = useForm({
     defaultValues: initialValue  || {},
   });
 
-  const handleFormSubmit = (data) => {
-    onSubmit(data);
-    reset();
+  const handleFormSubmit = async (data) => {
+    try {
+      // Trigger validation only on submit
+      await trigger();
+  
+      // If no errors, submit the form
+      if (Object.keys(errors).length === 0) {
+        onSubmit(data);
+        reset();
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -40,28 +50,37 @@ const Form = ({ initialValue, onSubmit, onClose }) => {
                     />
               <Input
                 label="MACHINES:"
-                placeholder="Enter CPU"
+                placeholder="Enter Machines"
                 type="text"
                 {...register("Machines", {
-                  required: true,
+                  required: 'required',
                 })}
               />
+               {errors.Machines?.type === 'required' && (
+                      <p className='text-red-500'>{errors.Machines.message}</p>
+                    )}
               <Input
                 label="COUNT:"
-                placeholder="Enter OS"
+                placeholder="Enter Count"
                 type="text"
                 {...register("Count", {
-                  required: true,
+                  required: 'required',
                 })}
               />
+              {errors.Count?.type === 'required' && (
+                      <p className='text-red-500'>{errors.Count.message}</p>
+                    )}
               <Input
                 label="ASSIGNED:"
-                placeholder="Enter License"
+                placeholder="Enter Assigned"
                 type="text"
                 {...register("Assigned", {
-                  required: true,
+                  required: 'required',
                 })}
               />
+              {errors.Assigned?.type === 'required' && (
+                      <p className='text-red-500'>{errors.Assigned.message}</p>
+                    )}
             </div>
             <div className="text-center mt-4">
               <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

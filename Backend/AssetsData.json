@@ -3,7 +3,7 @@
     {
       "id": "a761",
       "sNo": "1",
-      "cpu": "Intel core i5",
+      "processor": "Intel core i5",
       "os": "windows-11",
       "license": "xxxx",
       "update": "23-06-224",
@@ -14,7 +14,7 @@
     {
       "id": "688f",
       "sNo": "2",
-      "cpu": "Intel core i6",
+      "processor": "Intel core i6",
       "os": "windows-11",
       "license": "xxxx",
       "update": "23-06-2024",
@@ -25,7 +25,7 @@
     {
       "id": "beab",
       "sNo": "3",
-      "cpu": "Intel core i3",
+      "processor": "Intel core i3",
       "os": "windows-10",
       "license": "xxxx",
       "update": "23-06-2024",
@@ -36,7 +36,7 @@
     {
       "id": "db00",
       "sNo": "4",
-      "cpu": "Intel core i5",
+      "processor": "Intel core i5",
       "os": "windows-11",
       "license": "xxxx",
       "update": "21-04-2024",
@@ -47,7 +47,7 @@
     {
       "id": "f943e",
       "sNo": "5",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -58,7 +58,7 @@
     {
       "id": "f94e2",
       "sNo": "6",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -69,7 +69,7 @@
     {
       "id": "f94e1",
       "sNo": "7",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -80,7 +80,7 @@
     {
       "id": "f94a1c",
       "sNo": "8",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -91,7 +91,7 @@
     {
       "id": "f94aa1",
       "sNo": "9",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -102,7 +102,7 @@
     {
       "id": "f94b1",
       "sNo": "10",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -113,7 +113,7 @@
     {
       "id": "f94a11",
       "sNo": "11",
-      "cpu": "Intel core i7",
+      "processor": "Intel core i7",
       "os": "windows-11",
       "license": "xxxx",
       "update": "12-06-2024",
@@ -124,7 +124,7 @@
     {
       "id": "839b",
       "sNo": "12",
-      "cpu": "Intel core i5",
+      "processor": "Intel core i5",
       "os": "windows-11",
       "license": "xxxx",
       "update": "xx",

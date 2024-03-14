@@ -8,15 +8,24 @@ import { useForm } from 'react-hook-form';
 const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
 
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset  ,formState:{errors},trigger} = useForm({
     defaultValues: initialValue  || {},
   });
 
 
-
-  const handleFormSubmit = (data) => {
-    onSubmit(data);
-    reset();
+  const handleFormSubmit = async (data) => {
+    try {
+      // Trigger validation only on submit
+      await trigger();
+  
+      // If no errors, submit the form
+      if (Object.keys(errors).length === 0) {
+        onSubmit(data);
+        reset();
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -37,14 +46,15 @@ const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
                 <div className='p-2 flex-1'>
                   <div className="p-2 mx-3">
                     <Input
-                      label="S"
+                      label="SNO"
                       placeholder="id"
                       type="text"
-                      {...register('num', {
+                      {...register('sNo', {
                         required: true,
                       })}
                      
                     />
+                   
                   </div>
                   <div className="p-2 mx-3">
                     <Input
@@ -52,10 +62,15 @@ const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
                       placeholder="software"
                       type="text"
                       {...register('software', {
-                        required: true,
+                        required: 'required',
+                      
+                       
                       })}
                       
                     />
+                    {errors.software?.type === 'required' && (
+                      <p className='text-red-500'>{errors.software.message}</p>
+                    )}
                   </div>
                 </div>
                 <div className='p-2 mt-3'>
@@ -65,10 +80,13 @@ const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
                       placeholder="version"
                       type="text"
                       {...register('version', {
-                        required: true,
+                        required: 'required',
                       })}
                       
                     />
+                    {errors.version?.type === 'required' && (
+                      <p className='text-red-500'>{errors.version.message}</p>
+                    )}
                   </div>
                   <div className="p-2 mx-3">
                     <Input
@@ -76,10 +94,13 @@ const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
                       placeholder="Number of Assigns"
                       type="text"
                       {...register('assign', {
-                        required: true,
+                        required: 'required',
                       })}
                     
                     />
+                    {errors.assign?.type === 'required' && (
+                      <p className='text-red-500'>{errors.assign.message}</p>
+                    )}
                   </div>
                 </div>
               </div>

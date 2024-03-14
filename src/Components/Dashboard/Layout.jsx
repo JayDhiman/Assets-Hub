@@ -5,13 +5,14 @@ import Sidebar from './Sidebar';
 const Layout = ({ children }) => {
   return (
     <div className="h-screen overflow-hidden">
+       <Navbar />
+         
       <div className="flex h-full">
         <div>
           <Sidebar />
         </div>
-        <div className="w-full overflow-hidden">
-          <Navbar />
-          <div className="overflow-y-auto h-full">{children}</div>
+        <div className="w-full overflow-auto">
+          {children}
         </div>
       </div>
     </div>

@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../Components/Dashboard/Layout';
 import { MdOutlineWebAsset } from 'react-icons/md';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { SiBmcsoftware } from 'react-icons/si';
+import axios from 'axios';
 
 // create a object and map through
 
+// function to fetch the data from the api for all the fields
 const Dashboard = () => {
+  
+const [assetsData,setAssetData] = useState([])
+const [categoryData,setCategoryData]= useState([])
+const [softwareData,setSoftwareData]= useState([])
+console.log(assetsData)
+  useEffect(()=>{
+
+  fetchAssetData()
+},[])
+//Asset Data
+const fetchAssetData = async () => {
+  try {
+    const res = await axios.get("http://localhost:3000/Assets");
+    setAssetData(res.data);
+  } catch (error) {
+    console.log("Error getting the response from the server", error);
+  }
+  };
+
+
   return (
     <Layout>
       <div className='flex  overflow-auto'>
@@ -26,7 +48,7 @@ const Dashboard = () => {
                 <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] bg-orange-100 rounded-full p-2' />
               </div>
               <div>
-                <h2 className='text-xl font-semibold'>12</h2>
+                <h2 className='text-xl font-semibold text-black'>{assetsData.length}</h2>
                 <h1 className='font-light text-lg'>Assets</h1>
               </div>
             </div>

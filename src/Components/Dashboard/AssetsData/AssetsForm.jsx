@@ -4,13 +4,21 @@ import Input from '../../Input';
 
 const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
   
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset ,formState:{errors},trigger} = useForm({
     defaultValues: intialvalue || {}, // Use defaultValues to pre-fill the form fields
   });
 
-  const handleAssetForm = (data) => {
-    onSubmit(data);
-    reset();
+  const handleAssetForm = async (data) => {
+    try {
+      await trigger();
+      if(Object.keys(errors).length === 0){
+        onSubmit(data);
+        reset();
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+    
   };
 
 
@@ -37,54 +45,72 @@ const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
                      
                     />
             <Input
-              label="CPU:"
-              placeholder="Enter CPU"
+              label="PROCESSOR:"
+              placeholder="Enter PROCESSOR"
               type="text"
-              {...register('cpu', {
-                required: true,
+              {...register('processor', {
+                required: 'required',
               })}
             />
+             {errors.processor?.type === 'required' && (
+                      <p className='text-red-500'>{errors.processor.message}</p>
+                    )}
             <Input
               label="OS:"
               placeholder="Enter OS"
               type="text"
               {...register('os', {
-                required: true,
+                required: 'required',
                 
               })}
             />
+             {errors.os?.type === 'required' && (
+                      <p className='text-red-500'>{errors.os.message}</p>
+             )}
             <Input
               label="LICENSE:"
               placeholder="Enter License"
               type="text"
               {...register('license', {
-                required: true,
+                required: 'required',
               })}
             />
+             {errors.license?.type === 'required' && (
+                      <p className='text-red-500'>{errors.license.message}</p>
+                    )}
             <Input
               label="UPDATE:"
               placeholder="Enter Update"
               type="text"
               {...register('update', {
-                required: true,
+                required: 'required',
               })}
             />
+             {errors.update?.type === 'required' && (
+                      <p className='text-red-500'>{errors.update.message}</p>
+                    )}
             <Input
               label="BRAND:"
               placeholder="Enter Brand"
               type="text"
               {...register('brand', {
-                required: true,
+                required: 'required',
               })}
             />
+             {errors.brand?.type === 'required' && (
+                      <p className='text-red-500'>{errors.brand.message}</p>
+                    )}
             <Input
               label="EXPIRY:"
               placeholder="Enter Expiry"
               type="text"
               {...register('expiry', {
-                required: true,
+                required: 'required',
               })}
             />
+             {errors.expiry?.type === 'required' && (
+                      <p className='text-red-500'>{errors.expiry.message}</p>
+                    )}
             <Input
               label="DETAILS:"
               placeholder="Enter Details"
@@ -93,6 +119,9 @@ const AssetsForm = ({ intialvalue ,onSubmit,onClose}) => {
                 required: true,
               })}
             />
+             {errors.software?.type === 'required' && (
+                      <p className='text-red-500'>{errors.software.message}</p>
+                    )}
           </div>
           <div className="text-center mt-4">
             <button

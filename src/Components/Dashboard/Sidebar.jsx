@@ -39,9 +39,9 @@ const Sidebar = () => {
       </div>
       <div className="p-4">
   {/* Profile image */}
-  <div className={`flex  items-center justify-center text-blue-600 text-xl rounded-full bg-slate-100 w-[40px] h-[40px] ${!sidebarOpen ? 'mt-3' : 'mx-auto'}`}>
+  {/* <div className={`flex  items-center justify-center text-blue-600 text-xl rounded-full bg-slate-100 w-[40px] h-[40px] ${!sidebarOpen ? 'mt-3' : 'mx-auto'}`}>
     A
-  </div>
+  </div> */}
 </div>
 
       <div className="mt-3">
