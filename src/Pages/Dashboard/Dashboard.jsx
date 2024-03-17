@@ -17,6 +17,8 @@ console.log(assetsData)
   useEffect(()=>{
 
   fetchAssetData()
+  fetchCategoryData()
+  SoftwareData()
 },[])
 //Asset Data
 const fetchAssetData = async () => {
@@ -27,7 +29,22 @@ const fetchAssetData = async () => {
     console.log("Error getting the response from the server", error);
   }
   };
-
+  const fetchCategoryData = async ()=>{
+    try {
+      const res = await axios.get("http://localhost:3000/Assets");
+      setAssetData(res.data);
+    } catch (error) {
+      console.log("Error getting the response from the server", error);
+    }
+  }
+const SoftwareData = async ()=>{
+  try {
+    const res = await axios.get("http://localhost:3000/Assets");
+    setAssetData(res.data);
+  } catch (error) {
+    console.log("Error getting the response from the server", error);
+  }
+}
 
   return (
     <Layout>
@@ -58,7 +75,7 @@ const fetchAssetData = async () => {
                 <TbCategoryPlus  className='text-orange-400 lg:text-[60px]  bg-orange-100 rounded-full p-2' />
               </div>
               <div>
-                <h2 className='text-xl font-semibold'>5</h2>
+                <h2 className='text-xl font-semibold'>{categoryData.length}</h2>
                 <h1 className='font-light text-lg'>Category</h1>
               </div>
             </div>
@@ -68,7 +85,7 @@ const fetchAssetData = async () => {
                 <SiBmcsoftware className='text-orange-400 lg:text-[60px] bg-orange-100 rounded-full p-2' />
               </div>
               <div>
-                <h2 className='text-xl font-semibold'>10</h2>
+                <h2 className='text-xl font-semibold'>{softwareData.length}</h2>
                 <h1 className='font-light text-lg'>Software</h1>
               </div>
             </div>

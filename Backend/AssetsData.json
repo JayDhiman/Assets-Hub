@@ -1,26 +1,6 @@
 {
   "Assets": [
     {
-      "emp_Id": "2",
-      "emp_Name": "2",
-      "processor": "2",
-      "os": "2",
-      "license": "2",
-      "update": "2",
-      "brand": "2",
-      "expiry": "2"
-    },
-    {
-      "emp_Id": "1",
-      "emp_Name": "Ayush",
-      "processor": "1",
-      "os": "1",
-      "license": "1",
-      "update": "1",
-      "brand": "1",
-      "expiry": "1"
-    },
-    {
       "id": "a214",
       "emp_Id": "asf",
       "emp_Name": "dsaf",
@@ -42,6 +22,30 @@
       "expiry": "d",
       "emp_Id": "5d",
       "details": "d"
+    },
+    {
+      "id": "9391",
+      "emp_Id": "23",
+      "emp_Name": "sad",
+      "processor": "asas",
+      "os": "df",
+      "license": "d",
+      "update": "sd",
+      "brand": "ds",
+      "expiry": "sd",
+      "details": "ds"
+    },
+    {
+      "id": "6954",
+      "emp_Id": "1",
+      "emp_Name": "Ayush",
+      "processor": "1",
+      "os": "s",
+      "license": "s",
+      "update": "s",
+      "brand": "s",
+      "expiry": "s",
+      "details": "s"
     }
   ]
 }

@@ -11,7 +11,7 @@ import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 import { MdFilterList } from "react-icons/md";
 
-
+``
 
 const Assets = () => {
   const [assets, setAssets] = useState([]); // state for managing the data
@@ -39,32 +39,28 @@ const Assets = () => {
   // function for handling the post and put request
   const handleForm = async (data) => {
     try {
-      if (assetID) {
-        const response = await axios.put(`http://localhost:3000/Assets/${assetID.emp_Id}`, data);
+      // Check if the asset already exists based on emp_Id
+      const existingEmployee = assets.find((asset) => asset.emp_Id === data.emp_Id);
+      
+      if (existingEmployee) {
+        // If the asset already exists, update it
+        const response = await axios.put(`http://localhost:3000/Assets/${data.emp_Id}`, data);
         if (response.status === 200) {
           // Data successfully updated
           fetchData();
-          setAssetID(null);
           setEditForm(false);
         } else {
           console.log("Error updating the asset:", response);
         }
       } else {
-        // Proceed with creating a new asset
-        const existingEmployee = assets.find((asset) => asset.emp_Id === data.emp_Id);
-        if (existingEmployee) {
-          alert("A user with the same ID already exists. Please choose a different ID.");
-           
+        // If the asset doesn't exist, create a new one
+        const response = await axios.post("http://localhost:3000/Assets", data);
+        if (response.status === 201) {
+          // Data successfully created
+          fetchData();
+          setAddForm(false);
         } else {
-          const response = await axios.post("http://localhost:3000/Assets", data);
-          if (response.status === 201) {
-            // Data successfully created
-            fetchData();
-            setAssetID(null);
-            setAddForm(false);
-          } else {
-            console.log("Error creating the asset:", response);
-          }
+          console.log("Error creating the asset:", response);
         }
       }
     } catch (error) {
