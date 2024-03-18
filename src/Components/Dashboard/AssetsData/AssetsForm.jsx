@@ -41,23 +41,19 @@ const AssetsForm = ({ intialvalue, onSubmit, onClose }) => {
         </h1>
         <form onSubmit={handleSubmit(handleAssetForm)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Input
             
+            <Input
               label="EMP_ID"
-              placeholder="id"
+              placeholder="emp_id"
               type="text"
-              {...register("emp_Id",
-              
+              {...register("emp_id",
               {
                 required: true,
               }
               )}
               disabled ={!!intialvalue}
               className = {`${intialvalue ? 'opacity-30 cursor-pointer border focus:border-red-400 hover:border-red-600 ':''}`}
-              
-              
-            />
-
+              />
             <Input
               label="EMP_NAME"
               placeholder="employee name"
@@ -65,7 +61,11 @@ const AssetsForm = ({ intialvalue, onSubmit, onClose }) => {
               {...register("emp_Name", {
                 required: true,
               })}
-            />
+              />
+              
+              
+              
+
 
            
             <Input

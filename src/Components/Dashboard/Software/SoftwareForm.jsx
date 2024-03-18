@@ -45,16 +45,7 @@ const SoftwareForm = ({ initialValue, onSubmit, onClose}) => {
               <div className="text-black flex items-center justify-between gap-4 flex-wrap">
                 <div className='p-2 flex-1'>
                   <div className="p-2 mx-3">
-                    <Input
-                      label="SNO"
-                      placeholder="id"
-                      type="text"
-                      {...register('sNo', {
-                        required: true,
-                      })}
-                     
-                    />
-                   
+                
                   </div>
                   <div className="p-2 mx-3">
                     <Input

@@ -43,9 +43,12 @@ const Form = ({ initialValue, onSubmit, onClose }) => {
                       label="S.NO"
                       placeholder="id"
                       type="text"
-                      {...register('s.No', {
+                      {...register('sNo', {
                         required: true,
-                      })}
+                      })
+                    }
+                    isabled ={!!initialValue}
+                    className = {`${initialValue ? 'opacity-30 cursor-pointer border focus:border-red-400 hover:border-red-600 ':''}`}
                      
                     />
               <Input

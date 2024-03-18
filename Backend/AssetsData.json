@@ -1,169 +1,83 @@
 {
   "Assets": [
     {
-      "id": "ed55",
-      "emp_Id": "1",
+      "id": "1",
+      "emp_id": "1",
+      "emp_Name": "John",
+      "processor": "intel i5",
+      "os": "mac-OS",
+      "license": "xxxx",
+      "update": "23-06-2024",
+      "brand": "Apple",
+      "expiry": "30-12-2025"
+    },
+    {
+      "id": "2",
+      "emp_id": "2",
       "emp_Name": "Ayush",
       "processor": "intel i3",
-      "os": "d",
-      "license": "xx",
+      "os": "windows-11",
+      "license": "xxxx",
       "update": "23-06-224",
       "brand": "dell",
       "expiry": "30-12-2025"
     },
     {
-      "id": "84d1",
-      "emp_Id": "2",
-      "emp_Name": "Abhay",
-      "processor": "intel i3",
-      "os": "windows-11",
-      "license": "xxxx",
-      "update": "23-06-224",
-      "brand": "Accer",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "ce8a",
-      "emp_Id": "3",
-      "emp_Name": "Ananya",
-      "processor": "AMD Ryzen 5",
-      "os": "Ubuntu 20.04",
-      "license": "xyz",
-      "update": "23-06-224",
-      "brand": "HP",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "6b17",
-      "emp_Id": "4",
-      "emp_Name": "Raj",
-      "processor": "Intel Core i5",
-      "os": "Windows 10",
-      "license": "abc",
-      "update": "23-06-224",
-      "brand": "Lenovo",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "9f42",
-      "emp_Id": "5",
-      "emp_Name": "Sneha",
-      "processor": "Intel Core i7",
-      "os": "macOS Big Sur",
-      "license": "def",
-      "update": "23-06-224",
-      "brand": "Apple",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "4a7e",
-      "emp_Id": "6",
-      "emp_Name": "Vikas",
-      "processor": "AMD Ryzen 7",
-      "os": "Fedora 34",
-      "license": "lmn",
-      "update": "23-06-224",
-      "brand": "ASUS",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "7b3f",
-      "emp_Id": "7",
-      "emp_Name": "Neha",
-      "processor": "Intel Pentium",
-      "os": "Linux Mint 20.3",
-      "license": "opq",
-      "update": "23-06-224",
-      "brand": "Samsung",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "28e9",
-      "emp_Id": "8",
-      "emp_Name": "Rahul",
-      "processor": "AMD Athlon",
-      "os": "Windows 11",
-      "license": "rst",
-      "update": "23-06-224",
-      "brand": "Microsoft",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "d702",
-      "emp_Id": "9",
-      "emp_Name": "Priya",
-      "processor": "Intel Celeron",
-      "os": "Chrome OS",
-      "license": "uvw",
-      "update": "23-06-224",
-      "brand": "Google",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "b1fa",
-      "emp_Id": "10",
-      "emp_Name": "Karan",
-      "processor": "ARM Cortex",
-      "os": "Android 12",
-      "license": "xyz",
-      "update": "23-06-224",
-      "brand": "OnePlus",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "f3c5",
-      "emp_Id": "11",
-      "emp_Name": "Anjali",
-      "processor": "Qualcomm Snapdragon",
-      "os": "LineageOS",
-      "license": "abc",
-      "update": "23-06-224",
-      "brand": "Xiaomi",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "ac19",
-      "emp_Id": "12",
-      "emp_Name": "Alok",
-      "processor": "Apple M1",
-      "os": "iOS 15",
-      "license": "def",
-      "update": "23-06-224",
-      "brand": "iPhone",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "1da8",
-      "emp_Id": "13",
-      "emp_Name": "Suresh",
-      "processor": "MediaTek Helio",
-      "os": "MIUI",
-      "license": "lmn",
-      "update": "23-06-224",
-      "brand": "Redmi",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "b7d6",
-      "emp_Id": "14",
-      "emp_Name": "Suman",
-      "processor": "Samsung Exynos",
-      "os": "One UI",
-      "license": "opq",
-      "update": "23-06-224",
-      "brand": "Samsung",
-      "expiry": "30-12-2025"
-    },
-    {
-      "id": "933a",
-      "emp_Id": "15",
-      "emp_Name": "john doe",
+      "id": "3",
+      "emp_id": "3",
+      "emp_Name": "John",
       "processor": "intel i5",
-      "os": "windows-11",
-      "license": "xxxx",
-      "update": "23-06-224",
-      "brand": "Accer",
-      "expiry": "30-12-2025"
+      "os": "macOS",
+      "license": "yyyy",
+      "update": "20-07-224",
+      "brand": "Apple",
+      "expiry": "15-09-2026"
+    },
+    {
+      "id": "4",
+      "emp_id": "4",
+      "emp_Name": "Emily",
+      "processor": "AMD Ryzen 7",
+      "os": "Linux",
+      "license": "zzzz",
+      "update": "10-08-224",
+      "brand": "HP",
+      "expiry": "05-11-2024"
+    },
+    {
+      "id": "5",
+      "emp_id": "5",
+      "emp_Name": "Michael",
+      "processor": "Intel Core i7",
+      "os": "Windows 10",
+      "license": "wwww",
+      "update": "05-09-224",
+      "brand": "Lenovo",
+      "expiry": "20-10-2023"
+    }
+  ],
+  "category": [
+    {
+      "sNo": "1",
+      "Machines": "11",
+      "Count": "11",
+      "Assigned": "11a",
+      "id": "3975"
+    },
+    {
+      "id": "w",
+      "sNo": "2",
+      "Machines": "3",
+      "Count": "3",
+      "Assigned": "3"
+    }
+  ],
+  "Software": [
+    {
+      "id": "19ae",
+      "software": "xxxxx",
+      "version": "version",
+      "assign": "12"
     }
   ]
 }

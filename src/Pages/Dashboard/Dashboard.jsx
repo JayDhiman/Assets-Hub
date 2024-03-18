@@ -13,7 +13,7 @@ const Dashboard = () => {
 const [assetsData,setAssetData] = useState([])
 const [categoryData,setCategoryData]= useState([])
 const [softwareData,setSoftwareData]= useState([])
-console.log(assetsData)
+
   useEffect(()=>{
 
   fetchAssetData()

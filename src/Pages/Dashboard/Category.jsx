@@ -26,7 +26,7 @@ const Category = () => {
   }, []);
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/headers");
+      const res = await axios.get("http://localhost:3000/category");
       setCategoryData(res.data);
       console.log(res.data);
     } catch (error) {
@@ -38,10 +38,14 @@ const Category = () => {
   const handleRequestSubmit = async (data) => {
     try {
       if (dataID) {
-        await axios.put(`http://localhost:3001/headers/${dataID.id}`, data);
+        await axios.put(`http://localhost:3000/category/${dataID.id}`, data);
         setUpdateForm(false);
       } else {
-        await axios.post(`http://localhost:3001/headers`, data);
+        await axios.post(`http://localhost:3000/category`, {
+          ...data,
+          id: data.sNo
+
+        });
         setAddForm(false);
       }
       fetchData();
@@ -60,7 +64,7 @@ const Category = () => {
   const handleDelete = async () => {
     try {
       if (dataID) {
-        await axios.delete(`http://localhost:3001/headers/${dataID.id}`);
+        await axios.delete(`http://localhost:3000/category/${dataID.id}`);
         fetchData(); // Fetch data after successful deletion
         setDeleteForm(false); // Close the delete confirmation popup
       }
@@ -81,7 +85,7 @@ const Category = () => {
       return [
         {
           Header:"S.NO",
-          accessor:"num"
+          accessor:"sNo"
         },
         {
          Header:"MACHINES",

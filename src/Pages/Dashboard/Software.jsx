@@ -1,6 +1,6 @@
     import React, { useState, useEffect, useMemo } from "react";
     import Layout from "../../Components/Dashboard/Layout";
-    import Input from "../../Components/Input";
+    // import Input from "../../Components/Input";
     import { IoAddOutline } from "react-icons/io5";
     import SoftwareForm from "../../Components/Dashboard/Software/SoftwareForm";
     import { useSortBy, useTable, usePagination } from "react-table"; // Import usePagination
@@ -23,7 +23,7 @@
 
       const fetchData = async () => {
         try {
-          const res = await axios.get("http://localhost:4000/Software");
+          const res = await axios.get("http://localhost:3000/Software");
           setSoftwareData(res.data);
         } catch (error) {
           console.log(error, "Error fetching the data from the server");
@@ -33,10 +33,13 @@
       const handleRequestSubmit = async (data) => {
         try {
           if (dataID) {
-            await axios.put(`http://localhost:4000/Software/${dataID.id}`, data);
+            await axios.put(`http://localhost:3000/Software/${dataID.id}`, data);
             setUpdateForm(false);
           } else {
-            await axios.post(`http://localhost:4000/Software`, data);
+            await axios.post(`http://localhost:3000/Software`, {
+              ...data,
+              id:data.sNo
+            });
             setAddForm(false);
           }
           fetchData();
@@ -54,7 +57,7 @@
       const handleDelete = async () => {
         try {
           if (dataID) {
-            await axios.delete(`http://localhost:4000/Software/${dataID.id}`);
+            await axios.delete(`http://localhost:3000/Software/${dataID.id}`);
             fetchData(); // Fetch data after successful deletion
             setDeleteForm(false); // Close the delete confirmation popup
           }
