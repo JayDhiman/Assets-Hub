@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../Input";
 
+
 const AssetsForm = ({ intialvalue, onSubmit, onClose }) => {
 
   const {
@@ -133,14 +134,7 @@ const AssetsForm = ({ intialvalue, onSubmit, onClose }) => {
             {errors.expiry?.type === "required" && (
               <p className="text-red-500">{errors.expiry.message}</p>
             )}
-            <Input
-              label="DETAILS:"
-              placeholder="Enter Details"
-              type="text"
-              {...register("details", {
-                required: true,
-              })}
-            />
+            
             {errors.software?.type === "required" && (
               <p className="text-red-500">{errors.software.message}</p>
             )}
@@ -155,5 +149,9 @@ const AssetsForm = ({ intialvalue, onSubmit, onClose }) => {
     </div>
   );
 };
+
+
+
+
 
 export default AssetsForm;
