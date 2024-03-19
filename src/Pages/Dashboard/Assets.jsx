@@ -211,6 +211,8 @@ const Assets = () => {
   // filter
   const handleToggleFilter = ()=> setFilter(!filter)
 
+  
+
   return (
     <Layout>
       <div className="flex overflow-auto border-b">
@@ -225,9 +227,9 @@ const Assets = () => {
 
         {/* filter */}
         <div className="m-4 pt-1 flex items-center gap-1 ">
-          <div>
+          <div className="">
             <Input
-            
+            className= 'w-[15vw]' 
             placeholder = "Enter a keyword..."
             />
           </div>
