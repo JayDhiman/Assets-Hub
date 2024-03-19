@@ -2,25 +2,37 @@ import React, { useState, useEffect, useMemo } from "react";
 import Layout from "../../Components/Dashboard/Layout";
 import Input from "../../Components/Input";
 import { IoAddOutline } from "react-icons/io5";
-import AssetsForm from "../../Components/Dashboard/AssetsData/AssetsForm";
+import Form from "../../Components/Dashboard/Form";
 import axios from "axios";
-import { useSortBy, useTable, usePagination,  } from "react-table";
-import { MdOutlineDelete } from "react-icons/md";
-import { RxUpdate } from "react-icons/rx";
-import { GrFormPreviousLink } from "react-icons/gr";
-import { GrFormNextLink } from "react-icons/gr";
 import { MdFilterList } from "react-icons/md";
+import Table from "../../Components/Dashboard/Table";
 
-``
+
+
+
+
 
 const Assets = () => {
+  
   const [assets, setAssets] = useState([]); // state for managing the data
   const [assetID, setAssetID] = useState(null); // State for selected asset to be updated
   const [addForm, setAddForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
   const [deleteForm, setDeleteForm] = useState(false);
-
   const [filter,setFilter] = useState(false)
+
+
+  const assetFieldsConfig = [
+    { name: "emp_id", label: "EMP_ID", placeholder: "Enter emp_id..", type: "text", required: true },
+    { name: "emp_Name", label: "EMP_NAME", placeholder: "Enter employee name...", type: "text", required: true },
+    { name: "processor", label: "PROCESSOR", placeholder: "Enter Processor...", type: "text", required: true },
+    { name: "os", label: "OS", placeholder: "Enter os...", type: "text", required: true },
+    { name: "license", label: "LICENSE", placeholder: "Enter license...", type: "text", required: true },
+    { name: "update", label: "UPDATE", placeholder: "Update...", type: "text", required: true },
+    { name: "brand", label: "BRAND", placeholder: "Enter brand...", type: "text", required: true },
+    { name: "expiry", label: "EXPIRY", placeholder: "Enter expiry...", type: "text", required: true },
+    
+  ];
 
   // function for getting the values from the server
   useEffect(() => {
@@ -30,7 +42,6 @@ const Assets = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get("http://localhost:3000/Assets");
-      console.log(res)
       setAssets(res.data);
     } catch (error) {
       console.log("Error getting the response from the server", error);
@@ -81,6 +92,7 @@ const Assets = () => {
   };
   // function for editing the entity
   const handleEdit = (asset) => {
+    console.log("Selected asset:", asset);
     setAssetID(asset);
     setEditForm(true);
   };
@@ -155,57 +167,7 @@ const Assets = () => {
     }
   }, [assets]);
   // for adding the action buttons
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((prev) => [
-      ...prev,
-      {
-        id: "action",
-        Header: "Action",
-        Cell: ({ row }) => (
-          <div className="">
-            <button
-              className="px-1 p-1 text-blue-400"
-              onClick={() => handleEdit(row.original)}
-            >
-              <RxUpdate />
-            </button>
-
-            <button
-              className="text-red-500"
-              onClick={() => handleDeleteConfirmation(row.original)}
-            >
-              <MdOutlineDelete />
-            </button>
-          </div>
-        ),
-      },
-    ]);
-  };
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    page, // Instead of `rows`, we'll use `page`
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageCount,
-    state: { pageIndex },
-    
-  } = useTable(
-    {
-      columns,
-      data: assets,
-      initialState: { pageIndex: 0, pageSize: 10 }, // Initial page index
-    },
-    useSortBy,
-    tableHooks,
-    usePagination ,    //  usePagination hook
-          
-  );
+  
 
 
   // filter
@@ -299,111 +261,24 @@ const Assets = () => {
         </div>
       </div>
 
-      <div className="">
+        <div>
         <div className="container mx-auto w-full p-2 ">
+
           {/* Table Component */}
-
-          <div className="w-auto h-auto m-2 overflow-y-scroll ">
-            <div className="mt-1 p overflow-auto ">
-              <table
-                {...getTableProps()}
-                className="w-full text-sm text-left rtl:text-right text-gray-500 border border-gray-200 rounded-lg overflow-hidden shadow-xl"
-              >
-                <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 border-b border-gray-200">
-                  {headerGroups.map((headerGroup, index) => (
-                    <tr
-                      {...headerGroup.getHeaderGroupProps()}
-                      className={index % 2 === 0 ? "bg-gray-300" : ""}
-                    >
-                      {headerGroup.headers.map((column) => (
-                        <th
-                          {...column.getHeaderProps(
-                            column.getSortByToggleProps()
-                          )}
-                          className="p-2 px-3 m-4 font-semibold border-r border-gray-200"
-                        >
-                          <div className="flex items-center">
-                            <span>{column.render("Header")}</span>
-                            {column.isSorted && (
-                              <span className="ml-1">
-                                {column.isSortedDesc ? " 🔽" : " 🔼"}
-                              </span>
-                            )}
-                          </div>
-                        </th>
-                      ))}
-                    </tr>
-                  ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                  {page.map((row, index) => {
-                    prepareRow(row);
-                    return (
-                      <tr
-                        {...row.getRowProps()}
-                        className={`${
-                          index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                        } hover:bg-blue-100 cursor-pointer transition-colors`}
-                      >
-                        {row.cells.map((cell, cellIndex) => (
-                          <td
-                            {...cell.getCellProps()}
-                            className={`p-3 border-t border-gray-200 ${
-                              cellIndex === row.cells.length - 1
-                                ? "border-r border-gray-200"
-                                : ""
-                            }`}
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-            {/* Pagination */}
-            <div className="flex justify-center m-4 gap-2">
-              <button
-                className="rounded-xl bg-black text-white px-6 hover:bg-gray-600 hover:text-gray-100"
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              >
-                <GrFormPreviousLink
-                  className={`h-6 w-6 ${
-                    !canPreviousPage && "opacity-50 cursor-not-allowed "
-                  }`}
-                />
-              </button>
-              <span>
-                {pageIndex + 1} of {pageCount}
-              </span>
-
-              <button
-                className="rounded-xl bg-black text-white px-6 hover:bg-gray-600 hover:text-white-100"
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-              >
-                <GrFormNextLink
-                  className={`h-6 w-6 ${
-                    !canNextPage && "opacity-50 cursor-not-allowed"
-                  }`}
-                />
-              </button>
-            </div>
-          </div>
+          <Table columns={columns} data={assets} handleDeleteConfirmation={handleDeleteConfirmation} handleEdit={handleEdit} />
 
           {addForm && (
-            <AssetsForm
+            <Form
+              fieldsConfig = {assetFieldsConfig}
               onSubmit={handleForm}
               onClose={() => setAddForm(false)}
             />
           )}
           {editForm && (
-            <AssetsForm
+            <Form
+              fieldsConfig = {assetFieldsConfig}
               onSubmit={handleForm}
-              intialvalue={assetID} // Pass the selected asset data to the form
+              initialValues={assetID} // Pass the selected asset data to the form
               onClose={() => setEditForm(false)}
             />
           )}
@@ -436,3 +311,4 @@ const Assets = () => {
 };
 
 export default Assets;
+

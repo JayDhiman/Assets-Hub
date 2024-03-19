@@ -2,15 +2,11 @@
     import Layout from "../../Components/Dashboard/Layout";
     // import Input from "../../Components/Input";
     import { IoAddOutline } from "react-icons/io5";
-    import SoftwareForm from "../../Components/Dashboard/Software/SoftwareForm";
-    import { useSortBy, useTable, usePagination } from "react-table"; // Import usePagination
-    import axios from "axios";
-    import { MdOutlineDelete } from "react-icons/md";
-    import { RxUpdate } from "react-icons/rx";
-    import { GrFormPreviousLink } from "react-icons/gr";
-    import { GrFormNextLink } from "react-icons/gr";
-
+    import Form from "../../Components/Dashboard/Form";
+    import Table from "../../Components/Dashboard/Table";
+    
     const Software = () => {
+    
       const [softwareData, setSoftwareData] = useState([]); // state for managing the data
       const [dataID, setDataID] = useState(null);
       const [addForm, setAddForm] = useState(false);
@@ -98,57 +94,13 @@
         }
       }, [softwareData]);
 
-      // Custom hook for the Action buttons to display
-      const tableHook = (hook) => {
-        hook.visibleColumns.push((prev) => [
-          ...prev,
-          {
-            id: "action",
-            Header: "Action",
-            Cell: ({ row }) => (
-              <div className="">
-                <button
-                  className="px-1 p-1 text-blue-400 text-lg hover:scale-110 duration-200 transition"
-                  onClick={() => handleEdit(row.original)}
-                >
-                  <RxUpdate />
-                </button>
+      const assetFieldsConfig = [
+        { name: "software", label: "SNO", placeholder: "Enter SNO", type: "text", required: true },
+        { name: "version", label: "VERSION", placeholder: "Enter VERSION", type: "text", required: true },
+        { name: "assign", label: "ASSIGN", placeholder: "Enter ASSIGNS", type: "text", required: true },
 
-                <button
-                  className="text-red-500 text-lg hover:scale-110 duration-200 transition"
-                  onClick={() => handleDeleteConfirmation(row.original)}
-                >
-                  <MdOutlineDelete />
-                </button>
-              </div>
-            ),
-          },
-        ]);
-      };
-
-      const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        page, // Instead of `rows`, we'll use `page`
-        nextPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-        pageCount,
-        state: { pageIndex },
-      } = useTable(
-        {
-          columns,
-          data: softwareData,
-          initialState: { pageIndex: 0, pageSize: 10 }, // Initial page index
-        },
-        tableHook,
-        useSortBy,
-        usePagination //  usePagination hook
-      );
-
+      ]
+       
       return (
         <Layout>
           <div className=" overflow-hidden">
@@ -177,108 +129,20 @@
             </div>
             <div className="container mx-auto w-full p-2 ">
               {/* table */}
-              <div className="w-auto h-auto m-2 overflow-y-scroll ">
-                <div className="mt-1 overflow-auto ">
-                  <table
-                    {...getTableProps()}
-                    className="w-full text-sm text-left rtl:text-right text-gray-500 border border-gray-200 rounded-lg overflow-hidden shadow-xl"
-                  >
-                    <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 border-b border-gray-200">
-                      {headerGroups.map((headerGroup, index) => (
-                        <tr
-                          {...headerGroup.getHeaderGroupProps()}
-                          className={index % 2 === 0 ? "bg-gray-300" : ""}
-                        >
-                          {headerGroup.headers.map((column) => (
-                            <th
-                              {...column.getHeaderProps(
-                                column.getSortByToggleProps()
-                              )}
-                              className="p-2 px-2 m-2 font-semibold border-r border-gray-200"
-                            >
-                              <div className="flex items-center">
-                                <span>{column.render("Header")}</span>
-                                {column.isSorted && (
-                                  <span className="ml-1">
-                                    {column.isSortedDesc ? " 🔽" : " 🔼"}
-                                  </span>
-                                )}
-                              </div>
-                            </th>
-                          ))}
-                        </tr>
-                      ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                      {page.map((row, index) => {
-                        prepareRow(row);
-                        return (
-                          <tr
-                            {...row.getRowProps()}
-                            className={`${
-                              index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                            } hover:bg-blue-100 cursor-pointer transition-colors`}
-                          >
-                            {row.cells.map((cell, cellIndex) => (
-                              <td
-                                {...cell.getCellProps()}
-                                className={`p-3 border-t border-gray-200 ${
-                                  cellIndex === row.cells.length - 1
-                                    ? "border-r border-gray-200"
-                                    : ""
-                                }`}
-                              >
-                                {cell.render("Cell")}
-                              </td>
-                            ))}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Pagination */}
-                <div className="flex justify-center m-4 gap-2 mb-2">
-                  <button
-                    className="rounded-xl bg-black text-white px-6 hover:bg-gray-600 hover:text-gray-100"
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                  >
-                    <GrFormPreviousLink
-                      className={`h-6 w-6 ${
-                        !canPreviousPage && "opacity-50 cursor-not-allowed "
-                      }`}
-                    />
-                  </button>
-                  <span>
-                    {pageIndex + 1} of {pageCount}
-                  </span>
-
-                  <button
-                    className="rounded-xl bg-black text-white px-6 hover:bg-gray-600 hover:text-white-100"
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                  >
-                    <GrFormNextLink
-                      className={`h-6 w-6 ${
-                        !canNextPage && "opacity-50 cursor-not-allowed"
-                      }`}
-                    />
-                  </button>
-                </div>
-              </div>
+              <Table columns={columns} data={softwareData} handleDeleteConfirmation ={handleDeleteConfirmation} handleEdit={handleEdit} />
 
               {addForm && (
-                <SoftwareForm
+                <Form
+                  fieldsConfig = {assetFieldsConfig}
                   onSubmit={handleRequestSubmit}
                   onClose={() => setAddForm(false)}
                 />
               )}
               {updateForm && (
-                <SoftwareForm
+                <Form
+                  fieldsConfig = {assetFieldsConfig}
                   onSubmit={handleRequestSubmit}
-                  initialValue={dataID}
+                  initialValues={dataID}
                   onClose={() => setUpdateForm(false)}
                 />
               )}

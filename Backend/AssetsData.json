@@ -3,13 +3,13 @@
     {
       "id": "1",
       "emp_id": "1",
-      "emp_Name": "John",
+      "emp_Name": "John doe",
       "processor": "intel i5",
       "os": "mac-OS",
       "license": "xxxx",
-      "update": "23-06-2024",
+      "update": "2024-03-20",
       "brand": "Apple",
-      "expiry": "30-12-2025"
+      "expiry": "2024-03-20"
     },
     {
       "id": "2",
@@ -153,17 +153,6 @@
       "update": "d",
       "brand": "d",
       "expiry": "d"
-    },
-    {
-      "id": "15",
-      "emp_id": "15",
-      "emp_Name": "x",
-      "processor": "a",
-      "os": "d",
-      "license": "dg",
-      "update": "g",
-      "brand": "g",
-      "expiry": "g"
     }
   ],
   "category": [
@@ -173,13 +162,6 @@
       "Count": "11",
       "Assigned": "11a",
       "id": "3975"
-    },
-    {
-      "id": "w",
-      "sNo": "2",
-      "Machines": "3",
-      "Count": "3",
-      "Assigned": "3"
     }
   ],
   "Software": [
@@ -188,6 +170,33 @@
       "software": "xxxxx",
       "version": "version",
       "assign": "12"
+    }
+  ],
+  "Employee": [
+    {
+      "employee_id": "EMP001",
+      "full_name": "John Doe",
+      "department": "Finance",
+      "position": "Financial Analyst",
+      "email": "john.doe@example.com",
+      "phone": "+1234567890",
+      "location": "New York",
+      "assets_assigned": [
+        {
+          "asset_id": "ASSET001",
+          "asset_name": "Laptop",
+          "serial_number": "SN123456",
+          "assigned_date": "2024-03-19",
+          "assigned_by": "Manager X"
+        },
+        {
+          "asset_id": "ASSET002",
+          "asset_name": "Mobile Phone",
+          "serial_number": "SN654321",
+          "assigned_date": "2024-03-20",
+          "assigned_by": "Manager Y"
+        }
+      ]
     }
   ]
 }
