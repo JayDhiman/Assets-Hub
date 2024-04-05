@@ -4,18 +4,20 @@ import Sidebar from './Sidebar';
 
 const Layout = ({ children }) => {
   return (
-    <div className="h-screen overflow-hidden">
-       <Navbar />
-         
-      <div className="flex h-full">
-        <div>
+    <>
+      <div className="flex h-screen overflow-hidden bg-gray-50">
+        <div className="  shadow-xl">
           <Sidebar />
         </div>
-        <div className="w-full overflow-auto">
-          {children}
+
+        <div className="flex flex-col w-full">
+          <Navbar />
+          <div className="flex-grow flex overflow-hidden">
+            <div className="flex-grow overflow-auto">{children}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

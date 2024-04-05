@@ -51,9 +51,10 @@ try {
 //  detail of current user
 async currentUser(){
 try {
-    return await this.account.get()
+  return await this.account.get()
+  
 } catch (error) {
-    // console.log("Appwrite service :: currentUser :: error", error);       
+    console.log("Appwrite service :: currentUser :: error", error);       
     }
     return null;
 }

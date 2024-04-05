@@ -1,65 +1,33 @@
 import React, { useState } from "react";
-import logo1 from "../../assets/logo1.webp";
 import LogoutBtn from "../Header/Logoutbtn";
-// import { CgDarkMode } from "react-icons/cg";
-// import { MdOutlineLightMode } from "react-icons/md";
+import { CgDarkMode } from "react-icons/cg";
+import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/ThemeToggle";
-
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.toggleTheme.theme);
-
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  // const [navMenu,setNavMenu] =useState(false) // for the hamburger menu
-
   const handleToggleTheme = () => {
-    dispatch(toggleTheme()); // Dispatch the toggleTheme action
+    dispatch(toggleTheme());
   };
 
   const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
 
   return (
     <>
-      <div className={`w-auto h-auto dark`}>
+      <div className={`w-auto h-auto dark border-b`}>
         <nav
-          className={`w-full flex items-center justify-between ${
-            theme === "dark" ? "dark text-white" : "bg-stone-900"
+          className={`w-full flex items-center justify-end ${
+            theme === "dark" ? "dark text-white" : ""
           }`}
         >
-          <div className="mx-6 flex items-center justify-center p-2">
-            <div>
-              <img src={logo1} alt="" className="w-[40px]" />
-            </div>
-            <div className="mt-3">
-              <h1
-                className={`uppercase text-xl font-primary font-light  ${
-                  theme === "dark" ? " text-black" : "text-white"
-                }  max-sm:hidden`}
-              >
-                AssetHub
-              </h1>
-            </div>
-          </div>
-
           <div className="mx-6 max-sm:mx-3 p-2 ">
-            <ul className="flex items-center justify-between gap-2">
-              <li
-                className={`text-[27px] hover:scale-110 duration-200   ${
-                  theme === "dark" ? " dark text-black" : "text-white"
-                } max-sm:text-[15px]`}
-              >
-                {/* <button className="pt-[4px] mt-1"
-       onClick={handleToggleTheme}>
-        {theme === "dark" ? <MdOutlineLightMode /> : <CgDarkMode />}
-      </button> */}
-              </li>
-
+            <ul className="flex items-center justify-end gap-2">
               {/* dropdown menu */}
-
               <li>
                 <div className={`relative inline-block text-left `}>
                   <div>
@@ -90,14 +58,16 @@ const Navbar = () => {
                   )}
                 </div>
               </li>
-              {/* || (
-    <div className="">
-    <RiMenu3Line
-    className={`sm:hidden text-white`}
-    onClick={()=>setNavMenu(!navMenu)} />
-</div>
-  )
-} */}
+
+              <li
+                className={`text-[27px] hover:scale-110 duration-200   ${
+                  theme === "dark" ? " dark text-black" : "text-white"
+                } max-sm:text-[15px]`}
+              >
+                <button className="pt-[4px] mt-1" onClick={handleToggleTheme}>
+                  {theme === "dark" ? <MdOutlineLightMode /> : <CgDarkMode />}
+                </button>
+              </li>
             </ul>
           </div>
         </nav>

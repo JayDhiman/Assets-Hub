@@ -1,15 +1,15 @@
 {
   "Assets": [
     {
-      "id": "1",
       "emp_id": "1",
-      "emp_Name": "John doe",
-      "processor": "intel i5",
-      "os": "mac-OS",
-      "license": "xxxx",
-      "update": "2024-03-20",
-      "brand": "Apple",
-      "expiry": "2024-03-20"
+      "emp_Name": "23",
+      "processor": "21",
+      "os": "1234",
+      "license": "1234",
+      "update": "q4",
+      "brand": "q",
+      "expiry": "wqe",
+      "id": "1"
     },
     {
       "id": "2",
@@ -144,24 +144,52 @@
       "expiry": "x"
     },
     {
-      "id": "14",
-      "emp_id": "14",
-      "emp_Name": "sdf",
-      "processor": "sdf",
-      "os": "dsfsf",
-      "license": "f",
-      "update": "d",
-      "brand": "d",
-      "expiry": "d"
+      "id": "gh",
+      "emp_id": "gh",
+      "emp_Name": "67",
+      "processor": "98",
+      "os": "98",
+      "license": "hg",
+      "update": "nb",
+      "brand": "in",
+      "expiry": "hg"
     }
   ],
   "category": [
     {
       "sNo": "1",
-      "Machines": "11",
-      "Count": "11",
-      "Assigned": "11a",
+      "Machines": "Laptop",
+      "Count": "120",
+      "Assigned": "80",
       "id": "3975"
+    },
+    {
+      "id": "2",
+      "sNo": "2",
+      "Machines": "Computer",
+      "Count": "100",
+      "Assigned": "23"
+    },
+    {
+      "id": "3",
+      "sNo": "3",
+      "Machines": "Monitor",
+      "Count": "60",
+      "Assigned": "12"
+    },
+    {
+      "id": "4",
+      "sNo": "4",
+      "Machines": "Cables",
+      "Count": "110",
+      "Assigned": "79"
+    },
+    {
+      "id": "5",
+      "sNo": "5",
+      "Machines": "Phone",
+      "Count": "90",
+      "Assigned": "45"
     }
   ],
   "Software": [
@@ -196,7 +224,8 @@
           "assigned_date": "2024-03-20",
           "assigned_by": "Manager Y"
         }
-      ]
+      ],
+      "id": "c7a7"
     }
   ]
 }

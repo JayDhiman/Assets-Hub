@@ -6,21 +6,18 @@ import Form from "../../Components/Dashboard/Form";
 import axios from "axios";
 import { MdFilterList } from "react-icons/md";
 import Table from "../../Components/Dashboard/Table";
-
-
-
-
-
+import FilterForm from '../../Components/Dashboard/FilterForm'
 
 const Assets = () => {
-  
+
   const [assets, setAssets] = useState([]); // state for managing the data
   const [assetID, setAssetID] = useState(null); // State for selected asset to be updated
   const [addForm, setAddForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
   const [deleteForm, setDeleteForm] = useState(false);
-  const [filter,setFilter] = useState(false)
-
+  const [filter, setFilter] = useState(false);
+  const [selectedColumn, setSelectedColumn] = useState(null);
+  const [filterValue, setFilterValue] = useState("");
 
   const assetFieldsConfig = [
     { name: "emp_id", label: "EMP_ID", placeholder: "Enter emp_id..", type: "text", required: true },
@@ -31,7 +28,6 @@ const Assets = () => {
     { name: "update", label: "UPDATE", placeholder: "Update...", type: "text", required: true },
     { name: "brand", label: "BRAND", placeholder: "Enter brand...", type: "text", required: true },
     { name: "expiry", label: "EXPIRY", placeholder: "Enter expiry...", type: "text", required: true },
-    
   ];
 
   // function for getting the values from the server
@@ -50,7 +46,6 @@ const Assets = () => {
 
   // function for handling the post and put request
   const handleForm = async (data) => {
-    
     try {
       if (assetID) {
         const response = await axios.put(`http://localhost:3000/Assets/${assetID.id}`, data);
@@ -67,15 +62,10 @@ const Assets = () => {
         const existingEmployee = assets.find((asset) => asset.id === data.id);
         if (existingEmployee) {
           alert("A user with the same ID already exists. Please choose a different ID.");
-
         } else {
-          const response = await axios.post("http://localhost:3000/Assets", 
-          {  ...data,
-             id:data.emp_id
-          }
+          const response = await axios.post("http://localhost:3000/Assets",
+            { ...data, id: data.emp_id }
           );
-         
-        
           if (response.status === 201) {
             // Data successfully created
             fetchData();
@@ -90,6 +80,7 @@ const Assets = () => {
       console.log("Error submitting the form", error);
     }
   };
+
   // function for editing the entity
   const handleEdit = (asset) => {
     console.log("Selected asset:", asset);
@@ -108,13 +99,14 @@ const Assets = () => {
       console.error("Error deleting asset:", error);
     }
   };
+
   const handleDeleteConfirmation = (asset) => {
     setAssetID(asset);
     setDeleteForm(true);
   };
 
   // Table
-  const columns = useMemo(() => {
+  const COLUMNS = useMemo(() => {
     if (assets.length === 0) {
       // Return placeholder columns or default column structure when no data is available
       return [
@@ -157,94 +149,102 @@ const Assets = () => {
       ];
     } else {
       // Return columns based on actual data
-
       return Object.keys(assets[0] || {})
         .filter((key) => key !== "id")
         .map((key) => ({
           Header: key.toUpperCase(),
           accessor: key,
+
         }));
     }
   }, [assets]);
-  // for adding the action buttons
+
+  const columns = useMemo(() => COLUMNS.map(column => ({
+    ...column,
+    Filter: FilterForm
+  })), []);
+
+  const handleDropdownChange = (e) => {
+    setSelectedColumn(e.target.value);
+    setFilterValue("");
+    setFilter(!filter);
+  };
   
+  const handleInputChange = (e) => {
 
-
-  // filter
-  const handleToggleFilter = ()=> setFilter(!filter)
-
+    setFilterValue(e.target.value);
   
+    // Filter assets based on the input value across all columns
+    const filteredAssets = assets.filter((asset) =>
+      Object.values(asset).some((val) =>
+        String(val).toLowerCase().includes(filterValue)
+      )
+    );
+  
+    // Update the filtered assets
+    setAssets(filteredAssets);
+  };
+
 
   return (
     <Layout>
-      <div className="flex overflow-auto border-b">
+      <div >
+
+     
+      <div 
+      
+      className="flex overflow-auto border-b">
         <div className="w-full overflow-hidden">
           <div className="m-4 ">
             <h1 className="text-2xl font-primary mx-1 font-medium ">Assets</h1>
-            <h2 className="uppercase text-[15px] mx-1 mb-2 ">
-              Dashboard / Assets
-            </h2>
+            <h2 className="uppercase text-[15px] mx-1 mb-2 ">Dashboard / Assets</h2>
           </div>
         </div>
 
         {/* filter */}
         <div className="m-4 pt-1 flex items-center gap-1 ">
-          <div className="">
-            <Input
-            className= 'w-[15vw]' 
-            placeholder = "Enter a keyword..."
-            />
+          <div className=" inline-block">
+            <button
+              onClick={handleDropdownChange}
+              className=" inline-flex rounded-lg px-3 py-2 text-black  hover:bg-gray-200  items-center justify-center gap-1"
+            >
+              <span className="py-[5px]">
+                <MdFilterList className="text-[20px]" />
+              </span>
+              <p className="font-light">Filters</p>
+            </button>
+
+            {filter && (
+              <div className="absolute min-w-[18vw]  z-10 mt-2 w-auto origin-top-right right-4 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
+                <div className="py-2 px-3">
+                  <Input
+                    placeholder="Enter a Keyword.."
+                    value={filterValue}
+                    onChange={handleInputChange} />
+                </div>
+                  {
+                  Object.keys(assets[0] || {})
+                    .map((key, index) => (
+                      <ul className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50" key={index}>
+                        <li className="">
+                          <input type="checkbox" />
+                        </li>
+
+                        <li className="font-thin ">
+                          {key.toUpperCase()}
+                        </li>
+
+                      </ul>
+                    ))
+                }
+
+
+
+
+              </div>
+            )}
           </div>
-
-           <div className=" inline-block">
-
-          <button
-          onClick={handleToggleFilter}
-           className=" inline-flex rounded-lg px-3 py-2 text-black  hover:bg-gray-200  items-center justify-center gap-1"
-         >
-            <span className="py-[5px]">
-              <MdFilterList className="text-[20px]" />
-            </span>
-            <p className="font-light">Filters</p>
-          </button>
-        
-         {
-           filter && (
-            <div className="absolute min-w-42  z-10 mt-2 w-auto origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              Emp_ID
-
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              EMP_NAME
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              PROCESSOR
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              OS
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              LICENSE
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              UPDATE
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              BRAND
-              </div>
-              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
-              EXPIRY
-              </div>
-              
-          
-              </div>
-              </div>
-          )
-          }
-          </div> 
-          
 
           {/* ADD button */}
           <button
@@ -261,22 +261,27 @@ const Assets = () => {
         </div>
       </div>
 
-        <div>
+      <div>
         <div className="container mx-auto w-full p-2 ">
-
           {/* Table Component */}
-          <Table columns={columns} data={assets} handleDeleteConfirmation={handleDeleteConfirmation} handleEdit={handleEdit} />
-
+          <Table
+            columns={columns}
+            data={assets}
+            handleDeleteConfirmation={handleDeleteConfirmation}
+            handleEdit={handleEdit}
+            selectedColumn={selectedColumn}
+            filterValue={filterValue}
+          />
           {addForm && (
             <Form
-              fieldsConfig = {assetFieldsConfig}
+              fieldsConfig={assetFieldsConfig}
               onSubmit={handleForm}
               onClose={() => setAddForm(false)}
             />
           )}
           {editForm && (
             <Form
-              fieldsConfig = {assetFieldsConfig}
+              fieldsConfig={assetFieldsConfig}
               onSubmit={handleForm}
               initialValues={assetID} // Pass the selected asset data to the form
               onClose={() => setEditForm(false)}
@@ -306,9 +311,9 @@ const Assets = () => {
           </div>
         </div>
       )}
+       </div>
     </Layout>
   );
 };
 
 export default Assets;
-
