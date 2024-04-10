@@ -1,7 +1,7 @@
 {
   "Assets": [
     {
-      "emp_id": "1",
+      "emp_id": "1s",
       "emp_Name": "23",
       "processor": "21",
       "os": "1234",
@@ -153,6 +153,39 @@
       "update": "nb",
       "brand": "in",
       "expiry": "hg"
+    },
+    {
+      "id": ",nm",
+      "emp_id": ",nm",
+      "emp_Name": "nm",
+      "processor": "mn",
+      "os": "mn",
+      "license": "nm,",
+      "update": "nm ",
+      "brand": "nm,",
+      "expiry": "nm"
+    },
+    {
+      "id": "as1",
+      "emp_id": "as1",
+      "emp_Name": "dasf",
+      "processor": "sdaf",
+      "os": "dsf",
+      "license": "d",
+      "update": "d",
+      "brand": "d",
+      "expiry": "d"
+    },
+    {
+      "id": "Emp-01",
+      "emp_id": "Emp-01",
+      "emp_Name": "John Doe",
+      "processor": "intel i3",
+      "os": "windows-11",
+      "license": "xxxxx",
+      "update": "23-06-2024",
+      "brand": "dell",
+      "expiry": "30-12-2025"
     }
   ],
   "category": [
@@ -162,13 +195,6 @@
       "Count": "120",
       "Assigned": "80",
       "id": "3975"
-    },
-    {
-      "id": "2",
-      "sNo": "2",
-      "Machines": "Computer",
-      "Count": "100",
-      "Assigned": "23"
     },
     {
       "id": "3",
@@ -190,42 +216,67 @@
       "Machines": "Phone",
       "Count": "90",
       "Assigned": "45"
+    },
+    {
+      "id": "6",
+      "sNo": "6",
+      "Machines": "Headset",
+      "Count": "10",
+      "Assigned": "2"
     }
   ],
   "Software": [
     {
-      "id": "19ae",
-      "software": "xxxxx",
-      "version": "version",
-      "assign": "12"
+      "software": "Microsoft Office",
+      "version": "2019",
+      "assign": "User-A",
+      "id": "19ae"
+    },
+    {
+      "id": "9a77",
+      "software": "Adobe Photoshop",
+      "version": "CC 2022",
+      "assign": "User A"
+    },
+    {
+      "id": "a831",
+      "software": "AutoCAD",
+      "version": "2023",
+      "assign": "User A"
+    },
+    {
+      "id": "9c7e",
+      "software": "VMware Workstation",
+      "version": "6",
+      "assign": "user-b"
+    },
+    {
+      "id": "ba93",
+      "software": " MATLAB",
+      "version": "R2024a",
+      "assign": "User A"
     }
   ],
   "Employee": [
     {
-      "employee_id": "EMP001",
-      "full_name": "John Doe",
-      "department": "Finance",
-      "position": "Financial Analyst",
-      "email": "john.doe@example.com",
+      "id": "Emp-01",
+      "employee_id": "Emp-01",
+      "full_name": "John-doe",
+      "department": "Development",
+      "position": "Backend-developer",
+      "email": "test@gmail.com",
       "phone": "+1234567890",
-      "location": "New York",
-      "assets_assigned": [
-        {
-          "asset_id": "ASSET001",
-          "asset_name": "Laptop",
-          "serial_number": "SN123456",
-          "assigned_date": "2024-03-19",
-          "assigned_by": "Manager X"
-        },
-        {
-          "asset_id": "ASSET002",
-          "asset_name": "Mobile Phone",
-          "serial_number": "SN654321",
-          "assigned_date": "2024-03-20",
-          "assigned_by": "Manager Y"
-        }
-      ],
-      "id": "c7a7"
+      "location": "Delhi"
+    },
+    {
+      "id": "Emp-02",
+      "employee_id": "Emp-02",
+      "full_name": "Ayush Sharma",
+      "department": "Development",
+      "position": "Full-stack",
+      "email": "ayush@123",
+      "phone": "+1234567890",
+      "location": "Noida"
     }
   ]
 }

@@ -1,37 +1,38 @@
-import React from 'react';
-import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
+import React, { useEffect } from 'react';
+import { useTable, useSortBy, usePagination, useGlobalFilter, useFilters } from 'react-table';
 import { MdOutlineDelete } from 'react-icons/md';
-import { RxUpdate } from 'react-icons/rx';
+import { FiEdit } from "react-icons/fi";
 import { GrFormPreviousLink, GrFormNextLink } from 'react-icons/gr';
+import { GrView } from "react-icons/gr";
 
-const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, selectedColumn, filterValue }) => {
-  
-  // Filter logic
-  
-
+const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, globalFilterValue,handleView }) => {
   // Custom hook for the Action buttons to display
-  const tableHook = (hook) => {
-    hook.visibleColumns.push((prev) => [
-      ...prev,
+  const tableHook = (hooks) => {
+    hooks.visibleColumns.push((columns) => [
+      ...columns,
       {
         id: 'action',
         Header: 'Action',
         Cell: ({ row }) => (
-          <div className="">
-            <button className="px-1 p-1 text-blue-400" onClick={() => handleEdit(row.original)}>
-              <RxUpdate />
+          <div className="p-1 text-[16px]">
+            <button className="px-1 p-1  text-blue-400" onClick={() => handleEdit(row.original)}>
+              <FiEdit />
             </button>
             <button className="text-red-500" onClick={() => handleDeleteConfirmation(row.original)}>
               <MdOutlineDelete />
             </button>
+            {/* Conditional rendering of handleView */}
+            {row.original.hasOwnProperty('employee_id') && (
+              <button className="px-1 text-cyan-900"
+              onClick={() => handleView(row.original)}><GrView/></button>
+            )}
           </div>
         ),
       },
     ]);
   };
 
-
-  // Table instance
+  // Table instance with filters
   const {
     getTableProps,
     getTableBodyProps,
@@ -44,30 +45,23 @@ const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, selectedCo
     canPreviousPage,
     pageCount,
     state: { pageIndex },
+    setGlobalFilter,
   } = useTable(
     {
       columns,
       data,
       initialState: { pageIndex: 0, pageSize: 10 },
     },
-    useFilters,
     tableHook,
+    useFilters,
+    useGlobalFilter,
     useSortBy,
     usePagination
   );
-  
-  const filteredData = React.useMemo(() => {
-    if (!selectedColumn || !filterValue){
-      return page;
 
-    } 
-    return page.filter((row) => {
-      const cellValue = row[selectedColumn];
-      return cellValue && cellValue.toString().toLowerCase().includes(filterValue.toLowerCase());
-    });
-  }, [page, selectedColumn, filterValue]);
-  console.log("selected col", selectedColumn)
-  
+  useEffect(() => {
+    setGlobalFilter(globalFilterValue || '');
+  }, [globalFilterValue, setGlobalFilter]);
 
   return (
     <>
@@ -78,7 +72,6 @@ const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, selectedCo
             className="w-full text-sm text-left rtl:text-right text-gray-500 border border-gray-200 rounded-lg overflow-hidden shadow-xl"
           >
             {/* Table header */}
-
             <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 border-b border-gray-200">
               {headerGroups.map((headerGroup, index) => (
                 <tr
@@ -106,7 +99,7 @@ const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, selectedCo
 
             {/* Table body */}
             <tbody {...getTableBodyProps()}>
-              {filteredData.map((row, index) => {
+              {page.map((row, index) => {
                 prepareRow(row);
                 return (
                   <tr

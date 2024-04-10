@@ -22,10 +22,10 @@ const Sidebar = () => {
   // list items for the Dashboard Items
   const DashboardItems = [
     { id: 1, title: 'Dashboard', slug: '/dashboard', icon: <RxDashboard /> },
-    { id: 2, title: 'Employee', slug: '/dashboard/employee', icon: <FaRegUser /> },
-    { id: 3, title: 'Assets', slug: '/dashboard/assets', icon: <MdOutlineWebAsset /> },
-    { id: 4, title: 'Category', slug: '/dashboard/category', icon: <TbCategoryPlus /> },
-    { id: 5, title: 'Software', slug: '/dashboard/software', icon: <SiBmcsoftware /> }
+    { id: 2, title: 'Employee',  slug: '/dashboard/employee', icon: <FaRegUser /> },
+    { id: 3, title: 'Assets',    slug: '/dashboard/assets', icon: <MdOutlineWebAsset /> },
+    { id: 4, title: 'Category',  slug: '/dashboard/category', icon: <TbCategoryPlus /> },
+    { id: 5, title: 'Software',  slug: '/dashboard/software', icon: <SiBmcsoftware /> }
   ];
 
   return (
@@ -66,25 +66,6 @@ const Sidebar = () => {
         </ul>
       </div>
 
-
-
-{/* 
-      <div className="absolute bottom-6 mx-3">
-       <div className={`flex items-center uppercase  ${!sidebarOpen ? 'mx-2':'mx-3'}  hover:text-blue-200 hover:scale-105 hover:transtion hover:duration-200`}>
-        <span className={`text-white inline-block ${!sidebarOpen ? 'text-2xl':'text-xl'} hover:scale-105`}><IoIosLogOut /></span>
-        <div>
-  {sidebarOpen ? (
-    <LogoutBtn className="text-white text-md px-1 uppercase" value="logout" />
-  ) : (
-    <LogoutBtn className="text-white text-md px-1 uppercase" value="" />
-  )}
-</div>
-        </div>
-          
-
-
-        
-      </div> */}
     </aside>
   );
 };

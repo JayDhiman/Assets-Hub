@@ -1,23 +1,24 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Layout from "../../Components/Dashboard/Layout";
-import Input from "../../Components/Input";
 import { IoAddOutline } from "react-icons/io5";
 import Form from "../../Components/Dashboard/Form";
 import axios from "axios";
 import { MdFilterList } from "react-icons/md";
 import Table from "../../Components/Dashboard/Table";
-import FilterForm from '../../Components/Dashboard/FilterForm'
+import Input from "../../Components/Input";
 
 const Assets = () => {
-
   const [assets, setAssets] = useState([]); // state for managing the data
   const [assetID, setAssetID] = useState(null); // State for selected asset to be updated
   const [addForm, setAddForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
   const [deleteForm, setDeleteForm] = useState(false);
-  const [filter, setFilter] = useState(false);
-  const [selectedColumn, setSelectedColumn] = useState(null);
-  const [filterValue, setFilterValue] = useState("");
+
+  const [selectedColumn, setSelectedColumn] = useState(null); // State to store the selected column for filtering
+  const [filter, setFilter] = useState(false); // State to manage filter dropdown visibility
+  const [globalFilterValue, setGlobalFilterValue] = useState(""); // State to store the global filter value
+
+  const filterRef = useRef(null); // Reference to filter dropdown
 
   const assetFieldsConfig = [
     { name: "emp_id", label: "EMP_ID", placeholder: "Enter emp_id..", type: "text", required: true },
@@ -30,7 +31,7 @@ const Assets = () => {
     { name: "expiry", label: "EXPIRY", placeholder: "Enter expiry...", type: "text", required: true },
   ];
 
-  // function for getting the values from the server
+  // Function for getting the values from the server
   useEffect(() => {
     fetchData();
   }, []);
@@ -44,7 +45,7 @@ const Assets = () => {
     }
   };
 
-  // function for handling the post and put request
+  // Function for handling the post and put request
   const handleForm = async (data) => {
     try {
       if (assetID) {
@@ -63,9 +64,7 @@ const Assets = () => {
         if (existingEmployee) {
           alert("A user with the same ID already exists. Please choose a different ID.");
         } else {
-          const response = await axios.post("http://localhost:3000/Assets",
-            { ...data, id: data.emp_id }
-          );
+          const response = await axios.post("http://localhost:3000/Assets", { ...data, id: data.emp_id });
           if (response.status === 201) {
             // Data successfully created
             fetchData();
@@ -81,13 +80,13 @@ const Assets = () => {
     }
   };
 
-  // function for editing the entity
+  // Function for editing the entity
   const handleEdit = (asset) => {
-    console.log("Selected asset:", asset);
     setAssetID(asset);
     setEditForm(true);
   };
 
+  // Function for deleting an asset
   const handleDelete = async () => {
     try {
       if (assetID) {
@@ -100,52 +99,25 @@ const Assets = () => {
     }
   };
 
+  // Function for showing delete confirmation
   const handleDeleteConfirmation = (asset) => {
     setAssetID(asset);
     setDeleteForm(true);
   };
 
-  // Table
+  // Columns for the table
   const COLUMNS = useMemo(() => {
     if (assets.length === 0) {
       // Return placeholder columns or default column structure when no data is available
       return [
-        {
-          Header: "EMP_ID",
-          accessor: "emp_id",
-        },
-        {
-          Header: "EMP_NAME",
-          accessor: "emp_Name",
-        },
-        {
-          Header: "S.NO",
-          accessor: "num",
-        },
-        {
-          Header: "PROCESSOR",
-          accessor: "processor",
-        },
-        {
-          Header: "OS",
-          accessor: "os",
-        },
-        {
-          Header: "LICENSE",
-          accessor: "license",
-        },
-        {
-          Header: "UPDATE",
-          accessor: "update",
-        },
-        {
-          Header: "BRAND",
-          accessor: "brand",
-        },
-        {
-          Header: "EXPIRY",
-          accessor: "expiry",
-        },
+        { Header: "EMP_ID", accessor: "emp_id" },
+        { Header: "EMP_NAME", accessor: "emp_Name" },
+        { Header: "PROCESSOR", accessor: "processor" },
+        { Header: "OS", accessor: "os" },
+        { Header: "LICENSE", accessor: "license" },
+        { Header: "UPDATE", accessor: "update" },
+        { Header: "BRAND", accessor: "brand" },
+        { Header: "EXPIRY", accessor: "expiry" },
       ];
     } else {
       // Return columns based on actual data
@@ -154,164 +126,179 @@ const Assets = () => {
         .map((key) => ({
           Header: key.toUpperCase(),
           accessor: key,
-
         }));
     }
   }, [assets]);
 
-  const columns = useMemo(() => COLUMNS.map(column => ({
-    ...column,
-    Filter: FilterForm
-  })), []);
+  // Handle filter dropdown visibility toggle
+  const handleDropdownChange = () => setFilter(!filter);
 
-  const handleDropdownChange = (e) => {
-    setSelectedColumn(e.target.value);
-    setFilterValue("");
-    setFilter(!filter);
-  };
-  
+  // Handle input change for global filtering
   const handleInputChange = (e) => {
-
-    setFilterValue(e.target.value);
-  
-    // Filter assets based on the input value across all columns
-    const filteredAssets = assets.filter((asset) =>
-      Object.values(asset).some((val) =>
-        String(val).toLowerCase().includes(filterValue)
-      )
-    );
-  
-    // Update the filtered assets
-    setAssets(filteredAssets);
+   
+    setGlobalFilterValue(e.target.value);
   };
 
+  // Function to toggle checkbox selection
+  const handleCheckboxToggle = (column) => {
+    setSelectedColumn(selectedColumn === column ? null : column); // Toggle the selected column
+  };
+
+  // Function to filter data based on selected column and global filter value
+  const filteredData = useMemo(() => {
+    if (!selectedColumn && !globalFilterValue) {
+      return assets; // Return original data if no column is selected and no global filter is applied
+    }
+    
+    let filtered = assets;
+    
+    // Apply global filter if it's active
+    if (globalFilterValue) {
+      filtered = filtered.filter(asset => {
+
+        return Object.values(asset).some(value => {
+
+          // Check if the value contains the globalFilterValue
+          return value.toString().toLowerCase().includes(globalFilterValue.toLowerCase());
+        });
+      });
+    }
+    
+    // Apply column filter if a column is selected
+    if (selectedColumn) {
+      filtered = filtered.filter(asset => {
+        const columnValue = asset[selectedColumn.accessor]; // Get the value of the selected column
+
+        return columnValue.toString().toLowerCase().includes(globalFilterValue.toLowerCase());
+      });
+    }
+    
+    return filtered;
+  }, [assets, selectedColumn, globalFilterValue]);
+
+  // Close the filter dropdown when user clicks outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setFilter(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Layout>
-      <div >
-
-     
-      <div 
-      
-      className="flex overflow-auto border-b">
-        <div className="w-full overflow-hidden">
+      <div className="overflow-x-auto">
+        <div className="flex justify-between items-center overflow-y border-b">
           <div className="m-4 ">
-            <h1 className="text-2xl font-primary mx-1 font-medium ">Assets</h1>
-            <h2 className="uppercase text-[15px] mx-1 mb-2 ">Dashboard / Assets</h2>
+            <h1 className="text-2xl font-primary mx-1 font-medium">Assets</h1>
+            <h2 className="uppercase text-[15px] mx-1 mb-2">Dashboard / Assets</h2>
           </div>
-        </div>
-
-        {/* filter */}
-        <div className="m-4 pt-1 flex items-center gap-1 ">
-          <div className=" inline-block">
-            <button
-              onClick={handleDropdownChange}
-              className=" inline-flex rounded-lg px-3 py-2 text-black  hover:bg-gray-200  items-center justify-center gap-1"
-            >
-              <span className="py-[5px]">
-                <MdFilterList className="text-[20px]" />
-              </span>
-              <p className="font-light">Filters</p>
-            </button>
-
-            {filter && (
-              <div className="absolute min-w-[18vw]  z-10 mt-2 w-auto origin-top-right right-4 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
-                <div className="py-2 px-3">
-                  <Input
-                    placeholder="Enter a Keyword.."
-                    value={filterValue}
-                    onChange={handleInputChange} />
-                </div>
-                  {
-                  Object.keys(assets[0] || {})
-                    .map((key, index) => (
+          <div className="flex px-2">
+            <div className="py-2 px-1">
+              <Input
+                placeholder={` Enter a Keyword...`}
+                value={globalFilterValue}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="m-2 pt-1 flex items-center gap-1 ">
+              <div className="inline-block relative" ref={filterRef}>
+                <button
+                  onClick={handleDropdownChange}
+                  className="inline-flex rounded-lg px-1 py-2 text-black hover:bg-gray-200  items-center justify-center gap-1"
+                >
+                  <span className="py-[5px]">
+                    <MdFilterList className="text-[20px]" />
+                  </span>
+                  <p className="font-light">Filters</p>
+                </button>
+                {filter && (
+                  <div className="absolute min-w-[18vw] z-10 mt-2 w-auto right-1  rounded-lg bg-gray-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
+                    {COLUMNS.map((column, index) => (
                       <ul className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50" key={index}>
                         <li className="">
-                          <input type="checkbox" />
+                          <Input
+                            type="checkbox"
+                            checked={selectedColumn === column}
+                            onChange={() => handleCheckboxToggle(column)}
+                          />
                         </li>
-
-                        <li className="font-thin ">
-                          {key.toUpperCase()}
-                        </li>
-
+                        <li className="font-thin">{column.Header}</li>
                       </ul>
-                    ))
-                }
-
-
-
-
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-
-          {/* ADD button */}
-          <button
-            className="rounded-xl py-[10px] bg-gray- text-black px-2  hover:bg-gray-200 flex"
-            onClick={() => {
-              setAddForm(true);
-            }}
-          >
-            <span className="text-2xl px-1">
-              <IoAddOutline />
-            </span>
-            <span className="max-sm:hidden text-[15px]">ADD</span>
-          </button>
-        </div>
-      </div>
-
-      <div>
-        <div className="container mx-auto w-full p-2 ">
-          {/* Table Component */}
-          <Table
-            columns={columns}
-            data={assets}
-            handleDeleteConfirmation={handleDeleteConfirmation}
-            handleEdit={handleEdit}
-            selectedColumn={selectedColumn}
-            filterValue={filterValue}
-          />
-          {addForm && (
-            <Form
-              fieldsConfig={assetFieldsConfig}
-              onSubmit={handleForm}
-              onClose={() => setAddForm(false)}
-            />
-          )}
-          {editForm && (
-            <Form
-              fieldsConfig={assetFieldsConfig}
-              onSubmit={handleForm}
-              initialValues={assetID} // Pass the selected asset data to the form
-              onClose={() => setEditForm(false)}
-            />
-          )}
-        </div>
-      </div>
-
-      {deleteForm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
-          <div className="bg-white p-4 rounded-lg">
-            <p>Are you sure you want to delete this asset?</p>
-            <div className="flex justify-end mt-4">
+            </div>
+            <div className="m-2 pt-1">
               <button
-                onClick={() => setDeleteForm(false)} // Close delete confirmation
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                onClick={() => {
+                  setAddForm(true);
+                }}
+                className="rounded-xl py-[10px] bg-gray- text-black px-1  hover:bg-gray-200 flex"
               >
-                Cancel
-              </button>
-              <button
-                onClick={handleDelete} // Call handleDelete directly
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
-              >
-                Delete
+                <span className="text-2xl px-1">
+                  <IoAddOutline />
+                </span>
+                <span className="max-sm:hidden text-[15px]">ADD</span>
               </button>
             </div>
           </div>
         </div>
-      )}
-       </div>
+        <div>
+          <div className="container mx-auto w-full p-2 ">
+            <Table
+              columns={COLUMNS}
+              data={filteredData}
+              handleDeleteConfirmation={handleDeleteConfirmation}
+              handleEdit={handleEdit}
+              globalFilterValue={globalFilterValue}
+            />
+            {addForm && (
+              <Form
+                fieldsConfig={assetFieldsConfig}
+                onSubmit={handleForm}
+                onClose={() => setAddForm(false)}
+              />
+            )}
+            {editForm && (
+              <Form
+                fieldsConfig={assetFieldsConfig}
+                onSubmit={handleForm}
+                initialValues={assetID} // Pass the selected asset data to the form
+                onClose={() => setEditForm(false)}
+              />
+            )}
+          </div>
+        </div>
+        {deleteForm && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+            <div className="bg-white p-4 rounded-lg">
+              <p>Are you sure you want to delete this asset?</p>
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={() => setDeleteForm(false)} // Close delete confirmation
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete} // Call handleDelete directly
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </Layout>
   );
 };

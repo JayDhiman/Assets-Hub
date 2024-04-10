@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         <div className="flex flex-col w-full">
           <Navbar />
           <div className="flex-grow flex overflow-hidden">
-            <div className="flex-grow overflow-auto">{children}</div>
+            <div className="flex-grow overflow-auto bg-slate-100">{children}</div>
           </div>
         </div>
       </div>

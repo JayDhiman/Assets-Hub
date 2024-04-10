@@ -6,6 +6,10 @@ import { SiBmcsoftware } from 'react-icons/si';
 import axios from 'axios';
 import AssetsCategoryChart from '../../Components/Dashboard/Charts/AssetsCategoryChart';
 import AssetsPieChart from '../../Components/Dashboard/Charts/AssetsDistributionPieChart';
+import { Link } from 'react-router-dom';
+import authService from '../../Appwrite/Authservice';
+
+
 
 // create a object and map through
 
@@ -15,6 +19,13 @@ const Dashboard = () => {
   const [assetsData, setAssetsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [softwareData, setSoftwareData] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
+  const [user,setUser] = useState(null)
+
+  useEffect(()=>{
+
+    fetchUser()
+  },[user])
 
 
 
@@ -24,10 +35,22 @@ const Dashboard = () => {
     fetchAssetData("Assets", setAssetsData)
     fetchAssetData("category", setCategoryData)
     fetchAssetData("Software", setSoftwareData)
+    fetchAssetData("Employee", setEmployeeData)
 
   }, [])
-  //Asset Data
 
+  // user Name
+  const fetchUser = async() =>{
+    try {
+      const user = await authService.currentUser()
+      setUser(user)
+
+    } catch (error) {
+      console.log(error,"Something went Wrong")
+    }
+  }
+
+  //Asset Data
   const fetchAssetData = async (endpoint, setData) => {
     try {
       const res = await axios.get(`http://localhost:3000/${endpoint}`);
@@ -49,7 +72,9 @@ const Dashboard = () => {
           {/* heading */}
           <div className='m-4 border-b'>
             {/* it needs to be dynamic */}
-            <h1 className='text-2xl font-primary mx-1 font-medium '>Welcome Admin!</h1>
+            <h1 className='text-2xl font-primary mx-1 font-medium '>Welcome {user && (
+              <span>{user.name}</span>
+            )}</h1>
             <h2 className='uppercase text-[15px] mx-2 mb-2 '>Dashboard</h2>
           </div>
 
@@ -59,18 +84,27 @@ const Dashboard = () => {
 
           {/* Data cards */}
           <div className='flex items-center justify-center flex-wrap gap-4 p-2'>
+
             {/* card-1 */}
-            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[300px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
+            <Link to={"/dashboard/assets"}>
+            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
                 <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] bg-orange-100 rounded-full p-2' />
               </div>
+             
+              
               <div>
                 <h2 className='text-xl font-semibold text-black'>{assetsData.length}</h2>
                 <h1 className='font-light text-lg'>Assets</h1>
               </div>
             </div>
+              </Link>
+
             {/* card-2 */}
-            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[300px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
+
+             
+              <Link to={"/dashboard/category"}>
+            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
                 <TbCategoryPlus className='text-orange-400 lg:text-[60px]  bg-orange-100 rounded-full p-2' />
               </div>
@@ -79,8 +113,13 @@ const Dashboard = () => {
                 <h1 className='font-light text-lg'>Category</h1>
               </div>
             </div>
+            </Link>
+
             {/* card-3 */}
-            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[300px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
+            <Link to={"/dashboard/software"}>
+
+          
+            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
                 <SiBmcsoftware className='text-orange-400 lg:text-[60px] bg-orange-100 rounded-full p-2' />
               </div>
@@ -89,6 +128,21 @@ const Dashboard = () => {
                 <h1 className='font-light text-lg'>Software</h1>
               </div>
             </div>
+            </Link>
+
+            <Link to={"/dashboard/employee"}>
+            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
+              <div className='p-2'>
+                <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] bg-orange-100 rounded-full p-2' />
+              </div>
+             
+              
+              <div>
+                <h2 className='text-xl font-semibold text-black'>{employeeData.length}</h2>
+                <h1 className='font-light text-lg'>Employee</h1>
+              </div>
+            </div>
+              </Link>
           </div>
 
         </div>
@@ -98,7 +152,7 @@ const Dashboard = () => {
       {/* charts section goes here */}
 
      {/* Asest-category-section */}
-      <div className="flex items-center justify-evenly mt-6 pt-8  flex-wrap   p-2  ">
+      <div className="flex items-center justify-evenly mt-6 pt-8  flex-wrap   p-4 bg-slate-100 container sm:max-w-[80vw] overflow-auto mx-auto rounded-xl  ">
         <AssetsCategoryChart />
         <div className=''>
           <AssetsPieChart />

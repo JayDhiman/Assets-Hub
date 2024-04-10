@@ -1,27 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogoutBtn from "../Header/Logoutbtn";
 import { CgDarkMode } from "react-icons/cg";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/ThemeToggle";
 import { Link } from "react-router-dom";
+import authService from "../../Appwrite/Authservice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.toggleTheme.theme);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+  const [user,setUser] = useState(null)
+  useEffect(()=>{
+
+    fetchUser()
+  },[])
+  
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
   };
 
   const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
 
+
+  
+  const fetchUser = async() =>{
+    try {
+      const user = await authService.currentUser()
+      setUser(user)
+
+    } catch (error) {
+      console.log(error,"Something went Wrong")
+    }
+  }
+
+  
   return (
     <>
-      <div className={`w-auto h-auto dark border-b`}>
+      <div className={`w-auto h-auto dark border-b `}>
         <nav
-          className={`w-full flex items-center justify-end ${
+          className={`w-full  flex items-center justify-end ${
             theme === "dark" ? "dark text-white" : ""
           }`}
         >
@@ -40,7 +60,9 @@ const Navbar = () => {
                       }`}
                       onClick={toggleProfileDropdown}
                     >
-                      J
+                      {user &&(
+                        <span>{user.name.charAt(0)}</span>
+                      )}
                     </button>
                   </div>
 

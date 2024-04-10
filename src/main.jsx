@@ -18,6 +18,8 @@ import Category from './Pages/Dashboard/Category'
 import Employee from './Pages/Dashboard/Employee'
 import Software from './Pages/Dashboard/Software'
 import Profile from './Components/Dashboard/Profile'
+import EmployeeProfile from './Pages/Dashboard/EmployeeProfile'
+
 
 
 const router  = createBrowserRouter([
@@ -88,6 +90,14 @@ const router  = createBrowserRouter([
         element:
         <AuthLayout authentication={true}>
           <Profile/>         
+
+        </AuthLayout>
+      },
+      {
+        path: "/dashboard/employeeData/:employee_id",
+        element:
+        <AuthLayout authentication={true}>
+          <EmployeeProfile/>
 
         </AuthLayout>
       }

@@ -1,75 +1,82 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 const AssetCategoryChart = () => {
-  // Sample data for assets and quantities
-  const assetData = [
-    { category: 'Laptop',   quantity: 120 },
-    { category: 'Computer', quantity: 70 },
-    { category: 'Phone',    quantity: 150 },
-    { category: 'Headset',  quantity: 40 },
-    { category: 'cables',   quantity: 150 },
-  ];
+  const [chartData, setChartData] = useState({});
 
-  // Extracting labels and data from assetData
-  const labels = assetData.map(asset => asset.category);
-  const quantities = assetData.map(asset => asset.quantity);
+  useEffect(() => {
+    fetchChartData();
+  }, []);
 
-  const data = {
-    labels: labels, // Labels for each bar
-    datasets: [
-      {
-        label: 'Quantity', // Label for the dataset
-        backgroundColor: 'rgba(14,90,192,0.2)', // Bar color
-        borderColor: 'rgba(75,192,192,1)', // Border color
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.4)', // Hover color
-        hoverBorderColor: 'rgba(75,192,192,1)', // Hover border color
-        data: quantities // Quantities for each category
-      }
-    ]
-  };
+  const fetchChartData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/category");
+      const data = response.data;
 
-  const options = {
-    indexAxis: 'y',
-    scales: {
-      x: {
-        grid: {
-          display: false // Hide x-axis grid lines
+      if (data && data.length > 0) {
+        let machines = [];
+        let counts = [];
+        let assigned = [];
+
+        for (const category of data) {
+          machines.push(category.Machines);
+          counts.push(category.Count);
+          assigned.push(category.Assigned);
         }
-      },
-      y: {
-        ticks: {
-          crossAlign: 'far'
-        },
-        grid: {
-          display: false // Hide y-axis grid lines
-        }
-      }
-    },
 
-    plugins: {
-      legend: {
-        display: false
+        setChartData({
+          labels: machines,
+          datasets: [
+            {
+              label: "Count",
+              data: counts,
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1
+            },
+            {
+              label: "Assigned",
+              data: assigned,
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1
+            }
+          ]
+        });
+      } else {
+        console.log("No data received from the API.");
       }
+    } catch (error) {
+      console.log("Error fetching chart data:", error);
     }
   };
 
-
   return (
-
-    <div className=" p-2 rounded-lg w-1/2 shadow-xl  overflow-auto">
-      <h2 className="text-lg mb-4 text-center font-extralight uppercase text-stone-800">Asset-Categories </h2>
-      <div className="bg-white p-4 rounded-lg shadow">
-        <Bar
-          data={data}
-          options={options}
-        />
+    <div className="App">
+      <div className='md:min-w-[600px] md:min-h-[40vh] '>
+        {chartData.labels && chartData.labels.length > 0 && (
+          <Bar
+            data={chartData}
+            options={{
+              responsive: true,
+              title: { text: "Asset Categories", display: true },
+              scales: {
+                y: {
+                  beginAtZero: true // Ensure the y-axis starts at zero
+                }
+              }
+            }}
+          />
+        )}
       </div>
-    </div>
+      <h1 className='text-center font-extralight'>Asset Category Chart</h1>
 
+    </div>
   );
 };
 
 export default AssetCategoryChart;
+
+

@@ -2,9 +2,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../Input";
+import { IoClose } from "react-icons/io5";
 
 const Form = ({ fieldsConfig, initialValues, onSubmit, onClose }) => {
-  console.log(initialValues)
+
   const {
     register,
     handleSubmit,
@@ -29,12 +30,12 @@ const Form = ({ fieldsConfig, initialValues, onSubmit, onClose }) => {
 
   return (
     <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 flex justify-center items-center">
-      <div className="bg-gray-100 rounded-lg shadow-lg p-6 max-w-lg w-full">
+      <div className="bg-gray-100 rounded-lg shadow-lg p-6 max-w-lg w-full relative">
         <button
           className="absolute top-2 right-2 text-red-400 text-xl hover:text-red-800"
           onClick={onClose}
         >
-          X
+          <IoClose/>
         </button>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

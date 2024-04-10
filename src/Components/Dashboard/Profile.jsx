@@ -3,69 +3,54 @@ import Layout from "./Layout";
 import authService from "../../Appwrite/Authservice";
 
 const Profile = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetchUser()
-  }, [])
+    fetchUser();
+  }, []);
 
   const fetchUser = async () => {
     try {
-      const user = await authService.currentUser()
-      console.log(user)
-      setUser(user)
-
+      const userData = await authService.currentUser();
+      console.log(userData)
+      setUser(userData);
     } catch (error) {
-      console.log("seomething went wrong");
+      console.log("Something went wrong");
     }
-  }
+  };
 
   return (
+    // <Layout>
+    //   <div className="overflow-auto ">
+    //     <div className="flex justify-start items-center mx-3 mb-8">
+    //       <h1 className="text-2xl font-medium">Profile</h1>
+    //     </div>
+
+    //     <div className="flex items-center rounded-lg p-4 container mx-auto  ">
+
+    //       {user && (
+    //         <div className="mx-auto px-3 container bg-slate-200 rounded-lg shadow-lg">
+    //           <div className="flex items-center p-3">
+
+
+
+    //             <div className="   h-36 w-36 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+    //               <span className="text-[80px]">{user.name.charAt(0).toUpperCase()}</span>
+    //             </div>
+    //             <div>
+    //               <div className="text-lg font-semibold">{user.name}</div>
+    //               <div className="text-gray-600">{user.email}</div>
+    //               <div className="text-sm font-semibold"> Registration -{user.registration}</div>
+
+    //             </div>
+    //           </div>
+    //         </div>
+    //       )}
+    //     </div>
+    //   </div>
+    // </Layout>
     <Layout>
-      <div className="flex overflow-auto border-b">
-        <div className="w-full overflow-hidden">
-          <div className="m-4 ">
-            <h1 className="text-2xl font-primary mx-1 font-medium ">Profile</h1>
-            {/* <h2 className="uppercase text-[15px] mx-1 mb-2 ">
-              Dashboard / Profile
-            </h2> */}
-          </div>
-        </div>
-
-
-
-
-      </div>
-      <div>
-
-        {user && (
-
-
-          // console.log(user.email)
-
-          <div className="flex items-center justify-center gap-1">
-            <div className="">
-              <div>
-                <button
-                  type="button"
-                  className={`inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white  text-xl font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  m-[2px] px-[9px] py-[5px]
-                    `}
-
-                >
-                  {user.name.charAt(0).toUpperCase()}
-                </button>
-              </div>
-            </div>
-            <div>
-            <p>Email: {user.email}</p>
-
-            </div>
-
-
-            {/* Display other user details as needed */}
-          </div>
-        )}
-      </div>
+      
     </Layout>
   );
 };
