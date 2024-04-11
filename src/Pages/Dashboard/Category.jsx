@@ -178,10 +178,10 @@ const Category = () => {
   }, [categoryData, selectedColumn, globalFilterValue]);
 
   const assetFieldsConfig = [
-    { name: "sNo", label: "SNO", placeholder: "Enter SNO", type: "text", required: true },
-    { name: "Machines", label: "MACHINES", placeholder: "Enter SNO", type: "text", required: true },
-    { name: "Count", label: "COUNT", placeholder: "Enter COUNT", type: "text", required: true },
-    { name: "Assigned", label: "ASSIGNED", placeholder: "Enter ASSIGNED", type: "text", required: true },
+    { name: "sNo", label: "SNO", placeholder: "Enter SNO", type: "text", required: "Enter SNO" },
+    { name: "Machines", label: "MACHINES", placeholder: "Enter SNO", type: "text", required: "Enter Machine" },
+    { name: "Count", label: "COUNT", placeholder: "Enter COUNT", type: "number", required: "Enter Count" },
+    { name: "Assigned", label: "ASSIGNED", placeholder: "Enter ASSIGNED", type: "number", required: "Enter Assigned" },
     
    ]
 
@@ -189,19 +189,19 @@ const Category = () => {
   return (
     <Layout>
       <div className="flex justify-between items-center overflow-y border-b">
-          <div className="m-4 ">
-            <h1 className="text-2xl font-primary mx-1 font-medium">Category</h1>
-            <h2 className="uppercase text-[15px] mx-1 mb-2">Dashboard / Category</h2>
+          <div className="m-2 ">
+            <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Category</h1>
+            <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Category</h2>
           </div>
-          <div className="flex px-2">
-            <div className="py-2 px-1">
+          <div className="flex  md:flex-nowrap px-2">
+            <div className="py-3 px-1">
               <Input
                 placeholder={` Enter a Keyword...`}
                 value={globalFilterValue}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="m-2 pt-1 flex items-center gap-1 ">
+            <div className="m-2 pt-1 flex items-center gap-1 max-sm:m-0 ">
               <div className="inline-block relative" ref={filterRef}>
                 <button
                   onClick={handleDropdownChange}
@@ -210,10 +210,10 @@ const Category = () => {
                   <span className="py-[5px]">
                     <MdFilterList className="text-[20px]" />
                   </span>
-                  <p className="font-light">Filters</p>
+                  <p className="font-light max-sm:hidden">Filters</p>
                 </button>
                 {filter && (
-                  <div className="absolute min-w-[18vw] z-10 mt-2 w-auto right-1  rounded-lg bg-gray-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="absolute min-w-[18vw] z-10 mt-2 w-auto  2xl:right-0 lg:right-0 max-sm:-left-12  rounded-lg bg-blue-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
                     {columns.map((column, index) => (
                       <ul className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50" key={index}>

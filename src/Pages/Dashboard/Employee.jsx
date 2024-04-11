@@ -41,7 +41,7 @@ try{
 }
 
 const handleRequestSubmit = async (data) => {
-  console.log("data",data)
+
   try {
     if (empId) {
       const response = await axios.put(`http://localhost:3000/Employee/${empId.employee_id}`, data);
@@ -220,33 +220,33 @@ useEffect(() => {
 
   return (
     <Layout>
-    <div className=" overflow-hidden">
-      <div className="flex justify-between items-center overflow-y border-b">
-        <div className="m-4 ">
-          <h1 className="text-2xl font-primary mx-1 font-medium">Employee</h1>
-          <h2 className="uppercase text-[15px] mx-1 mb-2">Dashboard / Employee</h2>
-        </div>
-        <div className="flex px-2">
-          <div className="py-2 px-1">
-            <Input
-              placeholder={` Enter a Keyword...`}
-              value={globalFilterValue}
-              onChange={handleInputChange}
-            />
+    <div className="overflow-x-hidden">
+        <div className="flex  justify-between items-center border-b">
+          <div className="m-2">
+            <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Employee</h1>
+            <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Employee</h2>
           </div>
-          <div className="m-2 pt-1 flex items-center gap-1 ">
+          <div className="flex  md:flex-nowrap px-2">
+            <div className="py-3 px-1 ">
+              <Input
+                placeholder={` Enter a Keyword...`}
+                value={globalFilterValue}
+                onChange={handleInputChange}
+              />
+            </div>
+          <div className="m-2 pt-1 flex items-center gap-1 max-sm:m-0">
             <div className="inline-block relative" ref={filterRef}>
               <button
                 onClick={handleDropdownChange}
-                className="inline-flex rounded-lg px-1 py-2 text-black hover:bg-gray-200  items-center justify-center gap-1"
+                className="inline-flex rounded-lg px-1 py-2 text-black hover:bg-gray-200  items-center justify-center gap-1 max-sm:gap-0"
               >
                 <span className="py-[5px]">
                   <MdFilterList className="text-[20px]" />
                 </span>
-                <p className="font-light">Filters</p>
+                <p className="font-light max-sm:hidden">Filters</p>
               </button>
               {filter && (
-                <div className="absolute min-w-[18vw] z-10 mt-2 w-auto right-1  rounded-lg bg-gray-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="absolute min-w-[18vw] z-10 mt-2 w-auto right-1  rounded-lg bg-blue-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
                   {columns.map((column, index) => (
                     <ul className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50" key={index}>
@@ -264,30 +264,33 @@ useEffect(() => {
               )}
             </div>
           </div>
-          <div className="m-2 pt-1">
+          <div className="m-2 pt-1 max-sm:m-0">
             <button
               onClick={() => {
                 setAddform(true);
               }}
               className="rounded-xl py-[10px] bg-gray- text-black px-1  hover:bg-gray-200 flex"
             >
-              <span className="text-2xl px-1">
+              <span className="text-2xl px-1 max-sm:pt-1">
                 <IoAddOutline />
               </span>
               <span className="max-sm:hidden text-[15px]">ADD</span>
             </button>
-          </div>
+          </div> 
         </div>
       </div>
-      <div className="container mx-auto w-full p-2 ">
-        {/* table */}
-        <Table
-          columns={columns}
-          data={filteredData}
-          handleDeleteConfirmation={handleDeleteConfirmation}
-          handleEdit={handleEdit}
-          globalFilterValue={globalFilterValue}
-          handleView={handleView} />
+
+      <div className="container mx-auto w-full p-2  ">
+
+            {/* Table */}
+            <Table
+              columns={columns}
+              data={filteredData}
+              handleDeleteConfirmation={handleDeleteConfirmation}
+              handleEdit={handleEdit}
+              globalFilterValue={globalFilterValue}
+              handleView={handleView}
+            />
 
         {addForm && (
           <Form

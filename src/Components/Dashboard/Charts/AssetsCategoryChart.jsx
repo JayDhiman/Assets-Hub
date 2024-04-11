@@ -54,13 +54,14 @@ const AssetCategoryChart = () => {
   };
 
   return (
-    <div className="App">
-      <div className='md:min-w-[600px] md:min-h-[40vh] '>
+    <div className="flex flex-col items-center justify-cente bg-slate-50 max-sm:max-w-[250px] ">
+      <div className="w-full sm:max-w-[500px] lg:min-w-[600px] h-96 lg:h-80 sm:h-96 max-sm:h-56 ">
         {chartData.labels && chartData.labels.length > 0 && (
           <Bar
             data={chartData}
             options={{
               responsive: true,
+              maintainAspectRatio: false, // Ensure aspect ratio is not maintained
               title: { text: "Asset Categories", display: true },
               scales: {
                 y: {
@@ -71,12 +72,9 @@ const AssetCategoryChart = () => {
           />
         )}
       </div>
-      <h1 className='text-center font-extralight'>Asset Category Chart</h1>
-
+      <h1 className="text-center font-extralight mt-6">Asset Category Chart</h1>
     </div>
   );
 };
 
 export default AssetCategoryChart;
-
-

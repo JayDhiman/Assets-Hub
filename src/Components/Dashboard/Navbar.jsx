@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LogoutBtn from "../Header/Logoutbtn";
 import { CgDarkMode } from "react-icons/cg";
 import { MdOutlineLightMode } from "react-icons/md";
@@ -6,15 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/ThemeToggle";
 import { Link } from "react-router-dom";
 import authService from "../../Appwrite/Authservice";
+import { RxHamburgerMenu } from "react-icons/rx";
 
-const Navbar = () => {
+
+const Navbar = ({toggleSidebarOpen}) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.toggleTheme.theme);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
   const [user,setUser] = useState(null)
+  
   useEffect(()=>{
-
     fetchUser()
   },[])
   
@@ -39,21 +56,29 @@ const Navbar = () => {
   
   return (
     <>
-      <div className={`w-auto h-auto dark border-b `}>
+      <div ref={profileRef} className={`w-auto h-auto dark border-b `}>
         <nav
-          className={`w-full  flex items-center justify-end ${
+          className={`w-full  flex items-center justify-end  ${
             theme === "dark" ? "dark text-white" : ""
           }`}
         >
+          <div className="sm:hidden  text-start ">
+              <button
+              onClick={toggleSidebarOpen}
+               className="sm:hidden max-sm:block">
+                <RxHamburgerMenu/>
+              </button>
+            </div>
           <div className="mx-6 max-sm:mx-3 p-2 ">
+            
             <ul className="flex items-center justify-end gap-2">
               {/* dropdown menu */}
               <li>
-                <div className={`relative inline-block text-left `}>
-                  <div>
+                <div className={`relative inline-block text-center `}>
+                  <div className=""> 
                     <button
                       type="button"
-                      className={`inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white  text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  m-[2px] px-[9px] py-[5px] ${
+                      className={`inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white  text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  m-[2px] px-[10px] py-[5px] ${
                         theme === "dark"
                           ? "bg-stone-800 text-black hover:bg-stone-900 hover:text-white "
                           : "hover:bg-slate-200 "
@@ -69,27 +94,28 @@ const Navbar = () => {
                   {isProfileOpen && (
                     <div className="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
-                        <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
+                        <div className="block mx-2 px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
                           <Link to={"/dashboard/profile"}>Profile</Link>
                         </div>
-                        <div className="block px-4 py-1 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
+                        <div className="block border-b mx-2 px-4 py-1 text-gray-800 hover:bg-gray-200 cursor-pointer text-sm transition-colors duration-300">
                           <LogoutBtn value={"Logout"} />
                         </div>
+                        <div
+                   className={`text-[12px] block text-center hover:scale-110 duration-200   ${
+                  theme === "dark" ? " dark text-black" : "text-white"
+                } max-sm:text-[15px]`}
+              >
+                <button className="pt-[4px] mt-1" onClick={handleToggleTheme}>
+                  {/* {theme === "dark" ? <MdOutlineLightMode /> : <CgDarkMode />} */}dark
+                </button>
+              </div>
                       </div>
                     </div>
                   )}
                 </div>
               </li>
 
-              <li
-                className={`text-[27px] hover:scale-110 duration-200   ${
-                  theme === "dark" ? " dark text-black" : "text-white"
-                } max-sm:text-[15px]`}
-              >
-                <button className="pt-[4px] mt-1" onClick={handleToggleTheme}>
-                  {theme === "dark" ? <MdOutlineLightMode /> : <CgDarkMode />}
-                </button>
-              </li>
+             
             </ul>
           </div>
         </nav>

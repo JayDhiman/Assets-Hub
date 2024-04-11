@@ -87,9 +87,9 @@ const Dashboard = () => {
 
             {/* card-1 */}
             <Link to={"/dashboard/assets"}>
-            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
+            <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition '>
               <div className='p-2'>
-                <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] bg-orange-100 rounded-full p-2' />
+                <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] sm:text-[60px] max-sm:text-[50px]  bg-orange-100 rounded-full p-2' />
               </div>
              
               
@@ -106,7 +106,7 @@ const Dashboard = () => {
               <Link to={"/dashboard/category"}>
             <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
-                <TbCategoryPlus className='text-orange-400 lg:text-[60px]  bg-orange-100 rounded-full p-2' />
+                <TbCategoryPlus className='text-orange-400 sm:text-[60px] max-sm:text-[50px]  bg-orange-100 rounded-full p-2' />
               </div>
               <div>
                 <h2 className='text-xl font-semibold'>{categoryData.length}</h2>
@@ -121,7 +121,7 @@ const Dashboard = () => {
           
             <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
-                <SiBmcsoftware className='text-orange-400 lg:text-[60px] bg-orange-100 rounded-full p-2' />
+                <SiBmcsoftware className='text-orange-400 sm:text-[60px] max-sm:text-[50px] bg-orange-100 rounded-full p-2' />
               </div>
               <div>
                 <h2 className='text-xl font-semibold'>{softwareData.length}</h2>
@@ -133,7 +133,7 @@ const Dashboard = () => {
             <Link to={"/dashboard/employee"}>
             <div className='rounded-xl shadow-md bg-gray-50 flex items-center justify-center flex-wrap gap-8 w-[250px] h-[100px] hover:-translate-y-1  hover:duration-300 hover:transition'>
               <div className='p-2'>
-                <MdOutlineWebAsset className='text-orange-400 lg:text-[70px] bg-orange-100 rounded-full p-2' />
+                <MdOutlineWebAsset className='text-orange-400 sm:text-[60px] max-sm:text-[50px] bg-orange-100 rounded-full p-2' />
               </div>
              
               
@@ -152,7 +152,7 @@ const Dashboard = () => {
       {/* charts section goes here */}
 
      {/* Asest-category-section */}
-      <div className="flex items-center justify-evenly mt-6 pt-8  flex-wrap   p-4 bg-slate-100 container sm:max-w-[80vw] overflow-auto mx-auto rounded-xl  ">
+      <div className="flex items-center justify-evenly mt-6 pt-8  flex-wrap   p-4 bg-slate-100 container sm:max-w-[80vw] overflow-auto mx-auto rounded-xl max-sm:max-w-full ">
         <AssetsCategoryChart />
         <div className=''>
           <AssetsPieChart />

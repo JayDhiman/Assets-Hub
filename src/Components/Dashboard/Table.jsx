@@ -14,16 +14,16 @@ const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, globalFilt
         id: 'action',
         Header: 'Action',
         Cell: ({ row }) => (
-          <div className="p-1 text-[16px]">
-            <button className="px-1 p-1  text-blue-400" onClick={() => handleEdit(row.original)}>
+          <div className="p-1 lg:text-[16px] sm:text-[12px] md:text-[14px] max-sm:text-[10px] sm:p-0">
+            <button className="md:px-1   text-blue-400 max-sm:px-0" onClick={() => handleEdit(row.original)}>
               <FiEdit />
             </button>
-            <button className="text-red-500" onClick={() => handleDeleteConfirmation(row.original)}>
+            <button className="text-red-500 md:px-1 " onClick={() => handleDeleteConfirmation(row.original)}>
               <MdOutlineDelete />
             </button>
             {/* Conditional rendering of handleView */}
             {row.original.hasOwnProperty('employee_id') && (
-              <button className="px-1 text-cyan-900"
+              <button className="md:px-1   text-cyan-900"
               onClick={() => handleView(row.original)}><GrView/></button>
             )}
           </div>
@@ -65,14 +65,14 @@ const Table = ({ columns, data, handleEdit, handleDeleteConfirmation, globalFilt
 
   return (
     <>
-      <div className="w-auto h-auto m-2 overflow-y-scroll ">
+      <div className="w-auto h-auto m-2 overflow-y-scroll overflow-auto ">
         <div className="mt-1 p overflow-auto ">
           <table
             {...getTableProps()}
-            className="w-full text-sm text-left rtl:text-right text-gray-500 border border-gray-200 rounded-lg overflow-hidden shadow-xl"
+            className="w-full text-sm text-left rtl:text-right text-gray-500 border border-gray-200 rounded-lg overflow-auto shadow-xl"
           >
             {/* Table header */}
-            <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 border-b border-gray-200">
+            <thead className="text-[14px] text-gray-700 uppercase bg-gray-100 border-b border-gray-200 text-center max-sm:text-[12px]">
               {headerGroups.map((headerGroup, index) => (
                 <tr
                   {...headerGroup.getHeaderGroupProps()}

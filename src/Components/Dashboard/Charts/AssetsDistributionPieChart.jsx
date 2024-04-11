@@ -56,7 +56,7 @@ const AssetsPieChart = () => {
   const totalAssets = data.datasets[0].data.reduce((acc, cur) => acc + cur, 0);
 
   return (
-    <div className='bg-white py-2 p-3 rounded-2xl relative drop-shadow-md'>
+    <div className='bg-white py-2 p-3 rounded-2xl relative drop-shadow-md max-sm:w-fit'>
       <div className='container'>
         <Doughnut data={data} options={options} />
       </div>
