@@ -27,9 +27,13 @@ const EmployeeProfile = () => {
 
   return (
     <Layout>
-      <div className="  shadow-3xl rounded-primary relative mx-auto flex h-full w-full max-w-[80vw] flex-col items-center  bg-cover bg-clip-border p-[16px] ">
+     <div className="m-2">
+            <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Employee Profile</h1>
+            <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Employee / Employee-Profile</h2>
+          </div>
+      <div className="  shadow-3xl  relative mx-auto flex h-full w-full max-w-[80vw] flex-col items-center  bg-cover bg-clip-border p-[16px] ">
         {/* banner section */}
-        <div className="relative top-10 mt-5 flex h-64 w-full justify-center rounded-xl bg-cover bg-blue-200 max-w-[80vw] mx-auto text-white"></div>
+        <div className="relative top-10 mt-2 flex h-64 w-full justify-center rounded-xl bg-cover bg-blue-200 max-w-[80vw] mx-auto text-white"></div>
 
         <div className="static h-fit  flex  min-w-[75vw] items-start pt-2 justify-start rounded-lg border-[3px] border-white  bg-white drop-shadow-xl">
           {empData && (

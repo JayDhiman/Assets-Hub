@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Layout from "../../Components/Dashboard/Layout";
-// import Input from "../../Components/Input";
 import { IoAddOutline } from "react-icons/io5";
-import Form from "../../Components/Dashboard/Form";
 import Table from "../../Components/Dashboard/Table";
 import Input from "../../Components/Input";
 import { MdFilterList } from "react-icons/md";
 import axios from "axios";
+import SoftwareForm from "../../Components/Dashboard/Software/SoftwareForm";
+import SoftwareDetails from "../../Components/Dashboard/Software/SoftwareDetails";
+
 
 const Software = () => {
-
   const [softwareData, setSoftwareData] = useState([]); // state for managing the data
-  const [dataID, setDataID] = useState(null);
+  const [dataID, setDataID] = useState();
   const [addForm, setAddForm] = useState(false);
   const [updateForm, setUpdateForm] = useState(false);
   const [deleteForm, setDeleteForm] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState(null); // State to store the selected column for filtering
   const [filter, setFilter] = useState(false); // State to manage filter dropdown visibility
   const [globalFilterValue, setGlobalFilterValue] = useState(""); // State to store the global filter value
+  const [softwareDetails, setSoftwareDetails] = useState(false);
 
   const filterRef = useRef(null); // Reference to filter dropdown
 
   useEffect(() => {
     fetchData();
   }, []);
+
 
   const fetchData = async () => {
     try {
@@ -34,11 +36,13 @@ const Software = () => {
     }
   };
 
-
   const handleRequestSubmit = async (data) => {
     try {
       if (dataID) {
-        const response = await axios.put(`http://localhost:3000/Software/${dataID.id}`, data);
+        const response = await axios.put(
+          `http://localhost:3000/Software/${dataID.software_id}`,
+          data
+        );
         if (response.status === 200) {
           // Data successfully updated
           fetchData();
@@ -49,11 +53,18 @@ const Software = () => {
         }
       } else {
         // Proceed with creating a new asset
-        const existingEmployee = softwareData.find((softwaredata) => softwaredata.id === data.id);
+        const existingEmployee = softwareData.find(
+          (softwaredata) => softwaredata.software_id === data.id
+        );
         if (existingEmployee) {
-          alert("A user with the same ID already exists. Please choose a different ID.");
+          alert(
+            "A user with the same ID already exists. Please choose a different ID."
+          );
         } else {
-          const response = await axios.post("http://localhost:3000/Software", { ...data, id: data.emp_id });
+          const response = await axios.post("http://localhost:3000/Software", {
+            ...data,
+            id: data.software_id,
+          });
           if (response.status === 201) {
             // Data successfully created
             fetchData();
@@ -69,15 +80,17 @@ const Software = () => {
     }
   };
 
-  const handleEdit = (asset) => {
-    setDataID(asset);
+  const handleEdit = (software) => {
+    setDataID(software);
     setUpdateForm(true);
   };
 
   const handleDelete = async () => {
     try {
       if (dataID) {
-        await axios.delete(`http://localhost:3000/Software/${dataID.id}`);
+        await axios.delete(
+          `http://localhost:3000/Software/${dataID.software_id}`
+        );
         fetchData(); // Fetch data after successful deletion
         setDeleteForm(false); // Close the delete confirmation popup
       }
@@ -91,14 +104,9 @@ const Software = () => {
     setDeleteForm(true); // Show the delete confirmation popup
   };
 
-  // Columns for table
   const columns = useMemo(() => {
     if (softwareData.length === 0) {
       return [
-        {
-          Header: "SNO",
-          accessor: "id",
-        },
         {
           Header: "SOFTWARE",
           accessor: "software",
@@ -108,33 +116,33 @@ const Software = () => {
           accessor: "version",
         },
         {
-          Header: "ASSIGNED",
-          accessor: "assign",
+          Header: "PURCHASE DATE",
+          accessor: "purchaseDate",
+        },
+        {
+          Header: "EXPIRATION DATE",
+          accessor: "expirationDate",
         },
       ];
     } else {
-      return Object.keys(softwareData[0] || {})
-        .filter((key) => key !== "id")
-        .map((key) => ({
-          Header: key.toUpperCase(),
-          accessor: key,
-        }));
+      const selectedEntries = ["software", "version", "vendor", "purchaseDate", "expirationDate",];
+      return selectedEntries.map((key) => ({
+        Header: key.toUpperCase(),
+        accessor: key,
+      }));
     }
   }, [softwareData]);
+  
 
-  const assetFieldsConfig = [
-    { name: "id", label: "ID", placeholder: "Enter ID", type: "text", required: true },
-    { name: "software", label: "SOFTWARE", placeholder: "Enter SOFTWARE", type: "text", required: true },
-    { name: "version", label: "VERSION", placeholder: "Enter VERSION", type: "text", required: true },
-    { name: "assign", label: "ASSIGN", placeholder: "Enter ASSIGNS", type: "text", required: true },
-
-  ]
+  const handleSoftwareView = (software) => {
+    setDataID(software);
+    setSoftwareDetails(software);
+  };
 
   const handleDropdownChange = () => setFilter(!filter);
 
   // Handle input change for global filtering
   const handleInputChange = (e) => {
-
     setGlobalFilterValue(e.target.value);
   };
 
@@ -153,22 +161,26 @@ const Software = () => {
 
     // Apply global filter if it's active
     if (globalFilterValue) {
-      filtered = filtered.filter(asset => {
-
-        return Object.values(asset).some(value => {
-
+      filtered = filtered.filter((asset) => {
+        return Object.values(asset).some((value) => {
           // Check if the value contains the globalFilterValue
-          return value.toString().toLowerCase().includes(globalFilterValue.toLowerCase());
+          return value
+            .toString()
+            .toLowerCase()
+            .includes(globalFilterValue.toLowerCase());
         });
       });
     }
 
     // Apply column filter if a column is selected
     if (selectedColumn) {
-      filtered = filtered.filter(softwareData => {
+      filtered = filtered.filter((softwareData) => {
         const columnValue = softwareData[selectedColumn.accessor]; // Get the value of the selected column
 
-        return columnValue.toString().toLowerCase().includes(globalFilterValue.toLowerCase());
+        return columnValue
+          .toString()
+          .toLowerCase()
+          .includes(globalFilterValue.toLowerCase());
       });
     }
 
@@ -189,13 +201,14 @@ const Software = () => {
     };
   }, []);
 
-
   return (
     <Layout>
       <div className=" overflow-x-hidden">
-        <div className="flex justify-between items-center overflow-y border-b">
+        <div className="flex justify-between items-center overflow-y border-b p-3">
           <div className="m-2 ">
-            <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Software</h1>
+            <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">
+              Software
+            </h1>
             <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Software</h2>
           </div>
           <div className="flex px-2  md:flex-nowrap">
@@ -219,9 +232,14 @@ const Software = () => {
                 </button>
                 {filter && (
                   <div className="absolute min-w-[18vw] z-10 mt-2 w-auto right-1  rounded-lg bg-blue-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <h1 className="mx-auto text-center font-light mt-1">Filter</h1>
+                    <h1 className="mx-auto text-center font-light mt-1">
+                      Filter
+                    </h1>
                     {columns.map((column, index) => (
-                      <ul className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50" key={index}>
+                      <ul
+                        className="flex items-center gap-1 px-4 p-1 hover:bg-gray-50"
+                        key={index}
+                      >
                         <li className="">
                           <Input
                             type="checkbox"
@@ -251,25 +269,27 @@ const Software = () => {
             </div>
           </div>
         </div>
+        
         <div className="container mx-auto w-full p-2 ">
           {/* table */}
+
           <Table
             columns={columns}
             data={filteredData}
             handleDeleteConfirmation={handleDeleteConfirmation}
             handleEdit={handleEdit}
-            globalFilterValue={globalFilterValue} />
+            globalFilterValue={globalFilterValue}
+            handleViewSoftware={handleSoftwareView}
+          />
 
           {addForm && (
-            <Form
-              fieldsConfig={assetFieldsConfig}
+            <SoftwareForm
               onSubmit={handleRequestSubmit}
               onClose={() => setAddForm(false)}
             />
           )}
           {updateForm && (
-            <Form
-              fieldsConfig={assetFieldsConfig}
+            <SoftwareForm
               onSubmit={handleRequestSubmit}
               initialValues={dataID}
               onClose={() => setUpdateForm(false)}
@@ -278,23 +298,30 @@ const Software = () => {
           {deleteForm && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
               <div className="bg-white p-4 rounded-lg">
-                <p>Are you sure you want to delete this asset?</p>
-                <div className="flex justify-end mt-4">
+                <p className='text-lg my-2 pb-2'>Are you sure you want to delete this asset?</p>
+                <div className="flex justify-center gap-2 mt-4">
                   <button
                     onClick={() => setDeleteForm(false)}
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded text-md"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded text-md"
                   >
                     Delete
                   </button>
                 </div>
               </div>
             </div>
+          )}
+
+          {softwareDetails && (
+            <SoftwareDetails
+              Software={dataID}
+              onClose={() => setSoftwareDetails(false)}
+            />
           )}
         </div>
       </div>

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import LogoutBtn from "../Header/Logoutbtn";
-import { CgDarkMode } from "react-icons/cg";
-import { MdOutlineLightMode } from "react-icons/md";
+// import { CgDarkMode } from "react-icons/cg";
+// import { MdOutlineLightMode } from "react-icons/md";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/ThemeToggle";
 import { Link } from "react-router-dom";
@@ -56,11 +58,11 @@ const Navbar = ({toggleSidebarOpen}) => {
   
   return (
     <>
-      <div ref={profileRef} className={`w-auto h-auto dark border-b `}>
+      <div ref={profileRef} className={`w-auto h-auto dark`}>
         <nav
           className={`w-full  flex items-center justify-end  ${
             theme === "dark" ? "dark text-white" : ""
-          }`}
+          } `}
         >
           <div className="sm:hidden  text-start ">
               <button
@@ -89,6 +91,7 @@ const Navbar = ({toggleSidebarOpen}) => {
                         <span>{user.name.charAt(0)}</span>
                       )}
                     </button>
+                   
                   </div>
 
                   {isProfileOpen && (
@@ -115,6 +118,19 @@ const Navbar = ({toggleSidebarOpen}) => {
                 </div>
               </li>
 
+              <li className="">
+        <div className="relative inline-block text-center">
+          <IoIosNotificationsOutline
+            className="text-[24px] mt-2"
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Upcoming Feature"
+
+          />
+          <ReactTooltip id="my-tooltip" />
+        </div>
+      </li>
+
+                  
              
             </ul>
           </div>

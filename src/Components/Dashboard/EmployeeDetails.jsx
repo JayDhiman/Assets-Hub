@@ -6,7 +6,9 @@ import { CiLocationOn } from "react-icons/ci";
 import {  useNavigate } from 'react-router-dom';
 
 const EmployeeDetails = ({ onClose, employee }) => {
+
   const navigate = useNavigate();
+
 
   // Function to handle click on "Details" button
   const handleDetailsClick = () => {

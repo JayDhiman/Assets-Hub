@@ -35,10 +35,10 @@ const Profile = () => {
         </div>
         <div>
           <div className="font-semibold text-xl text-white">
-            Name: <span className="font-light">{user.name}</span>
+            <span className="font-light">{user.name}</span>
           </div>
           <div className="text-[15px] text-white">
-            Email: <span className="text-white">{user.email}</span>
+            <span className="text-white">{user.email}</span>
           </div>
         </div>
       </div>
@@ -58,18 +58,18 @@ const Profile = () => {
                     <ul className="text-black py-3 px-3 text-md">
                       <li className=" text-light font-semibold text-zinc-900 py-2 ">
                         {" "}
-                        Asset Id:{" "}
+                        Full Name:{" "}
                         <span className=" font-light text-stone-500 px-1 ">
                           {" "}
-                          {/* {empData.full_name} */} St02
+                          {/* {empData.full_name} */}Test
                         </span>
                       </li>
                       <li className=" text-light font-semibold text-zinc-900 py-2">
                         {" "}
-                        Asset Name:{" "}
+                        Location:{" "}
                         <span className=" font-light text-stone-500 px-1">
                           {" "}
-                          {/* {empData.phone} */} Laptop
+                          {/* {empData.phone} */} delhi
                         </span>
                       </li>
                       <li className=" text-light font-semibold text-zinc-900 py-2 ">

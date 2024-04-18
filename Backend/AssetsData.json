@@ -1,34 +1,60 @@
 {
   "Assets": [
     {
-      "id": "0433",
-      "empId": "1",
-      "emp Name": "John doe",
-      "assetId": "St02",
-      "asset category": "Laptop",
-      "serial number": "s012-X",
+      "id": "X01-23",
+      "assetName": "Acer Swift Go 12 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23",
       "processor": "intel i3",
       "os": "windows-11",
       "license": "xxxxx",
       "brand": "dell",
-      "assigned date": "2024-04-10",
-      "expiry date": "2024-04-26",
-      "assigned by": "Ayush"
+      "status": "In Use",
+      "empID": "01",
+      "empName": "Ayush",
+      "email": "test@gmail.com",
+      "contact": "020233",
+      "assignedDate": "2024-04-26",
+      "returnDate": "2024-05-11"
     },
     {
-      "id": "08a8",
-      "empId": "2",
-      "emp Name": "rohan",
-      "assetId": "adsf",
-      "asset category": "dsafds",
-      "serial number": "af",
-      "processor": "dafadsf",
-      "os": "dfsa",
-      "license": "dsaf",
-      "brand": "adsf",
-      "assigned date": "2024-04-30",
-      "expiry date": "2024-04-19",
-      "assigned by": "asdf"
+      "id": "A01_Eas",
+      "assetName": "MAC air",
+      "assetCategory": "Laptop",
+      "serialNo": "A01_Eas",
+      "processor": "IOS",
+      "os": "macOS Sonoma 14.4.1",
+      "license": "xxxx",
+      "brand": "Apple",
+      "status": "In Use",
+      "empID": "1212",
+      "empName": "Rajat sharma",
+      "email": "test@gmail.com",
+      "contact": "9045212145",
+      "assignedDate": "2024-04-17",
+      "returnDate": "2024-05-11"
+    },
+    {
+      "id": "sdfdfrr",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "sdfdfrr",
+      "processor": "w",
+      "os": "w",
+      "license": "w",
+      "brand": "w",
+      "status": "Under Maintenance"
+    },
+    {
+      "id": "X01-23dssss",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23dssss",
+      "processor": "intel i3",
+      "os": "windows-11",
+      "license": "xxxxx",
+      "brand": "Accer",
+      "status": "Out of Service"
     }
   ],
   "category": [
@@ -38,13 +64,6 @@
       "Count": "120",
       "Assigned": "80",
       "id": "3975"
-    },
-    {
-      "id": "3",
-      "sNo": "3",
-      "Machines": "Monitor",
-      "Count": "60",
-      "Assigned": "12"
     },
     {
       "id": "4",
@@ -77,47 +96,45 @@
   ],
   "Software": [
     {
-      "software": "Microsoft Office",
-      "version": "2019",
-      "assign": "User-A",
-      "id": "19ae"
-    },
-    {
-      "id": "9a77",
-      "software": "Adobe Photoshop",
-      "version": "CC 2022",
-      "assign": "User A"
-    },
-    {
-      "id": "a831",
+      "id": "01",
+      "software_id": "01",
       "software": "AutoCAD",
-      "version": "2023",
-      "assign": "User A"
-    },
-    {
-      "id": "9c7e",
-      "software": "VMware Workstation",
-      "version": "6",
-      "assign": "user-b"
-    },
-    {
-      "id": "ba93",
-      "software": " MATLAB",
-      "version": "R2024a",
-      "assign": "User A"
+      "version": "2022",
+      "purchaseDate": "2024-04-16",
+      "expirationDate": "2024-06-25",
+      "vendor": "Autodesk",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "category": "D",
+      "supportContact": "support@autodesk.com",
+      "status": "Active",
+      "installation": [
+        {
+          "laptopId": "01",
+          "installationDate": "2024-04-16",
+          "serialNo": "AA-01",
+          "employeeId": "01",
+          "empName": "Ashwin"
+        },
+        {
+          "laptopId": "02",
+          "installationDate": "2024-04-17",
+          "serialNo": "BB-02",
+          "employeeId": "02",
+          "empName": "Rohit"
+        },
+        {
+          "laptopId": "03",
+          "installationDate": "2024-04-14",
+          "serialNo": "cc03",
+          "employeeId": "03",
+          "empName": "Raman"
+        }
+      ],
+      "expiration Date": "2024-04-16"
     }
   ],
   "Employee": [
-    {
-      "id": "Emp-01",
-      "employee_id": "Emp-01",
-      "full_name": "John-doe",
-      "department": "Development",
-      "position": "Backend-developer",
-      "email": "test@gmail.com",
-      "phone": "+1234567890",
-      "location": "Delhi"
-    },
     {
       "id": "Emp-02",
       "employee_id": "Emp-02",
@@ -140,13 +157,23 @@
     },
     {
       "id": "asd",
-      "employee_id": "asd",
-      "full_name": "aaa",
-      "department": "sadf",
-      "position": "sdaf",
-      "email": "sdaf",
-      "phone": "sdaf",
+      "employee_id": "emp-id",
+      "full_name": "aryan",
+      "department": "ss",
+      "position": "dev",
+      "email": "email2123@gmail",
+      "phone": "+1002202",
       "location": "dsa"
+    },
+    {
+      "id": "Emp-01",
+      "employee_id": "Emp-01",
+      "full_name": "John-doe",
+      "department": "Development",
+      "position": "Backend-developer",
+      "email": "test@gmai",
+      "phone": "+1234567890",
+      "location": "Dehradun"
     }
   ]
 }

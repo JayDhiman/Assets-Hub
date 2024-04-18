@@ -65,7 +65,15 @@ const Login = () => {
               </Link>
             </p>
             <form onSubmit={handleSubmit(login)} className="mt-8">
-              {loading && <p className="text-center">Loading...</p>}
+              {loading &&
+              
+              <div className="flex justify-center items-center h-full">
+              <div
+                className="h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-spin_3s_linear_infinite"
+                role="status"
+              ></div>
+            </div>
+    }
               {/* Error for invalid credentials */}
               {loginError && (
                 <p className="text-red-600  text-sm text-center">{loginError}</p>

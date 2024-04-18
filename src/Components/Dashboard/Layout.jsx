@@ -9,15 +9,16 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div className="flex h-screen overflow-auto w-auto bg-gray-50">
-        <div className=" shadow-xl">
+      <div className="flex h-screen overflow-hidden w-auto bg-zinc-100 ">
+        <div className=" py-4">
           <Sidebar sidebarOpen={sidebarOpen} toggleSidebarOpen={toggleSidebarOpen} />
         </div>
 
         <div className="flex flex-col w-full overflow-hidden">
-          {/* <Navbar toggleSidebarOpen={toggleSidebarOpen} /> */}
-          <div className="flex-grow flex overflow-hidden">
-            <div className="flex-grow overflow-auto bg-slate-100">{children}</div>
+          <Navbar toggleSidebarOpen={toggleSidebarOpen} />
+
+          <div className="flex-grow flex overflow-y-auto">
+            <div className="flex-grow overflow-y-auto " >{children}</div>
           </div>
         </div>
       </div>

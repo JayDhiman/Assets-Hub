@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useMemo, useState ,useRef} from 'react'
 import Layout from '../../Components/Dashboard/Layout'
 import axios from 'axios'
@@ -23,6 +20,8 @@ const [selectedColumn, setSelectedColumn] = useState(null); // State to store th
 const [filter, setFilter] = useState(false); // State to manage filter dropdown visibility
 const [globalFilterValue, setGlobalFilterValue] = useState(""); // State to store the global filter value
 
+
+
 const filterRef = useRef(null); // Reference to filter dropdown
 
 useEffect(() => {
@@ -41,9 +40,9 @@ try{
 }
 
 const handleRequestSubmit = async (data) => {
-
   try {
     if (empId) {
+      // If empId exists, it means you're updating an existing employee
       const response = await axios.put(`http://localhost:3000/Employee/${empId.employee_id}`, data);
       if (response.status === 200) {
         // Data successfully updated
@@ -51,23 +50,25 @@ const handleRequestSubmit = async (data) => {
         setEmpId(null);
         setUpdateForm(false);
       } else {
-        console.log("Error updating the asset:", response);
+        console.log("Error updating the employee:", response);
       }
     } else {
-      // Proceed with creating a new asset
-      const existingEmployee = empData.find((emp) => emp.id === data.id);
+
+      const existingEmployee = empData.find((emp) => emp.id === data.employee_id);
       if (existingEmployee) {
-        alert("A user with the same ID already exists. Please choose a different ID.");
+
+       alert("User with same id alrerdy exists")
+
       } else {
-        const response = await axios.post("http://localhost:3000/Employee",
-         { ...data, id: data.employee_id });
+
+        const response = await axios.post("http://localhost:3000/Employee", { ...data, id: data.employee_id });
         if (response.status === 201) {
-          // Data successfully created
+
           fetchEmpData();
           setEmpId(null);
           setAddform(false);
         } else {
-          console.log("Error creating the asset:", response);
+          console.log("Error creating the employee:", response);
         }
       }
     }
@@ -75,6 +76,7 @@ const handleRequestSubmit = async (data) => {
     console.log("Error submitting the form", error);
   }
 };
+
 
 const handleEdit = (emp) => {
   setEmpId(emp);
@@ -221,7 +223,7 @@ useEffect(() => {
   return (
     <Layout>
     <div className="overflow-x-hidden">
-        <div className="flex  justify-between items-center border-b">
+        <div className="flex  justify-between items-center border-b p-3">
           <div className="m-2">
             <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Employee</h1>
             <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Employee</h2>
@@ -280,6 +282,10 @@ useEffect(() => {
         </div>
       </div>
 
+  
+
+
+
       <div className="container mx-auto w-full p-2  ">
 
             {/* Table */}
@@ -310,17 +316,17 @@ useEffect(() => {
         {deleteForm && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
             <div className="bg-white p-4 rounded-lg">
-              <p>Are you sure you want to delete this asset?</p>
-              <div className="flex justify-end mt-4">
+              <p className='text-lg my-2 pb-2'>Are you sure you want to delete this asset?</p>
+              <div className="flex justify-center gap-2 mt-4">
                 <button
                   onClick={() => setDeleteForm(false)}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold  py-1 px-3 rounded text-md"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded text-md"
                 >
                   Delete
                 </button>

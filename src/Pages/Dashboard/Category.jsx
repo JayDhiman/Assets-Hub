@@ -188,7 +188,7 @@ const Category = () => {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center overflow-y border-b">
+      <div className="flex justify-between items-center overflow-y border-b p-3">
           <div className="m-2 ">
             <h1 className="md:text-2xl sm:text-xl font-primary mx-1 font-medium max-sm:text-lg">Category</h1>
             <h2 className="uppercase md:text-[15px] sm:text-[12px] mx-1 mb-2 max-sm:text-[9px]">Dashboard / Category</h2>
@@ -278,17 +278,17 @@ const Category = () => {
       {deleteForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="bg-white p-4 rounded-lg">
-            <p>Are you sure you want to delete this asset?</p>
-            <div className="flex justify-end mt-4">
+            <p className="text-lg my-2 pb-2"> Are you sure you want to delete this asset?</p>
+            <div className="flex justify-center gap-2 mt-4">
               <button
                 onClick={() => setDeleteForm(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded text-md "
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded text-md"
               >
                 Delete
               </button>

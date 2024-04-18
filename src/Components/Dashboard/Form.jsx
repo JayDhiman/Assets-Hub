@@ -8,7 +8,7 @@ const Form = ({ fieldsConfig, initialValues, onSubmit, onClose }) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useForm({
     defaultValues: initialValues || {},
   });
@@ -19,9 +19,6 @@ const Form = ({ fieldsConfig, initialValues, onSubmit, onClose }) => {
       reset();
     }
   };
-
-  // Check if all fields are filled
-  const isAllFieldsFilled = Object.keys(dirtyFields).length === fieldsConfig.length;
 
   return (
     <div className="fixed inset-0 top-0 backdrop-blur-md bg-opacity-30 flex justify-center items-center">
@@ -58,12 +55,7 @@ const Form = ({ fieldsConfig, initialValues, onSubmit, onClose }) => {
             ))}
           </div>
           <div className="text-center mt-4">
-            <button
-              className={`${
-                !isAllFieldsFilled || Object.keys(errors).length > 0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
-              } text-white font-bold py-2 px-4 rounded`}
-              disabled={!isAllFieldsFilled || Object.keys(errors).length > 0} // Disable the button if not all fields are filled or there are errors
-            >
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               {initialValues ? "Update" : "Submit"}
             </button>
           </div>

@@ -124,12 +124,14 @@ Use our Programmable QR Code Tags and track & mantain your assets</h1>
        </div>
        <p className='font-thin text-sm  text-center pt-3 xl:text-lg'>Each scan updates your asset's location.</p>
        <p className='font-extralight text-sm xl:text-lg'>Know where things last were.</p>
+       <p className='font-semibold text-sm xl:text-lg text-neutral-600 mt-2'>Upcoming Feature.</p>
+
         
 </div>
 
 </div>
 
-<div className=' flex max-sm:flex-col items-center '>
+<div className=' flex max-sm:flex-col items-center mb-3 '>
 
 {/* items */}
 <div className="xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4   hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-300 hover:delay-200">
@@ -146,9 +148,9 @@ Use our Programmable QR Code Tags and track & mantain your assets</h1>
 </div>
 
 
-<div className=' flex max-sm:flex-col items-center '>
-
 {/* items */}
+{/* <div className=' flex max-sm:flex-col items-center '>
+
 <div className="xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4  hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-300 hover:delay-200">
  <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4'>Create and Program Your Assets</h1>
  <div className='py-3 text-orange-300 drop-shadow-xl decoration-purple-100'>
@@ -160,7 +162,7 @@ Use our Programmable QR Code Tags and track & mantain your assets</h1>
         
 </div>
 
-</div>
+</div> */}
 
 </div>
 

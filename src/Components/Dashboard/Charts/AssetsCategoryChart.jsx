@@ -32,14 +32,14 @@ const AssetCategoryChart = () => {
             {
               label: "Count",
               data: counts,
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(220, 255, 255, 0.9)", // Adjusted color for count
+              borderColor: "rgba(229, 104, 118, 0.19)",
               borderWidth: 1
             },
             {
               label: "Assigned",
               data: assigned,
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              backgroundColor: "rgba(212, 224, 255, 0.9)", // Adjusted color for assigned
               borderColor: "rgba(54, 162, 235, 1)",
               borderWidth: 1
             }
@@ -54,8 +54,8 @@ const AssetCategoryChart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-cente bg-slate-50 max-sm:max-w-[250px] ">
-      <div className="w-full sm:max-w-[500px] lg:min-w-[600px] h-96 lg:h-80 sm:h-96 max-sm:h-56 ">
+    <div className="flex flex-col items-center justify-center bg-sk-50 max-w-fit rounded-lg p-2 ">
+      <div className="w-full  sm:h-96 sm:min-w-[55vw] max-sm:h-56 ">
         {chartData.labels && chartData.labels.length > 0 && (
           <Bar
             data={chartData}
@@ -72,8 +72,8 @@ const AssetCategoryChart = () => {
           />
         )}
       </div>
-      <h1 className="text-center font-extralight mt-6">Asset Category Chart</h1>
     </div>
+
   );
 };
 
