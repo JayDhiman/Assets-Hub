@@ -55,6 +55,17 @@
       "license": "xxxxx",
       "brand": "Accer",
       "status": "Out of Service"
+    },
+    {
+      "id": "X01-23dss",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23dss",
+      "processor": "ss",
+      "os": "ss",
+      "license": "dsaf",
+      "brand": "sdf",
+      "status": "Available"
     }
   ],
   "category": [
@@ -98,40 +109,44 @@
     {
       "id": "01",
       "software_id": "01",
-      "software": "AutoCAD",
-      "version": "2022",
-      "purchaseDate": "2024-04-16",
-      "expirationDate": "2024-06-25",
-      "vendor": "Autodesk",
+      "software": "MS-Excel",
+      "version": "2024",
+      "purchaseDate": "2024-04-19",
+      "expirationDate": "2024-04-30",
+      "vendor": "Microsoft inc.",
       "licenseType": "Subscription",
       "licenseKey": "ABCD-EFGH-IJKL-MNOP",
-      "category": "D",
-      "supportContact": "support@autodesk.com",
+      "supportContact": "support@microsoft.com",
       "status": "Active",
-      "installation": [
-        {
-          "laptopId": "01",
-          "installationDate": "2024-04-16",
-          "serialNo": "AA-01",
-          "employeeId": "01",
-          "empName": "Ashwin"
-        },
-        {
-          "laptopId": "02",
-          "installationDate": "2024-04-17",
-          "serialNo": "BB-02",
-          "employeeId": "02",
-          "empName": "Rohit"
-        },
-        {
-          "laptopId": "03",
-          "installationDate": "2024-04-14",
-          "serialNo": "cc03",
-          "employeeId": "03",
-          "empName": "Raman"
-        }
-      ],
-      "expiration Date": "2024-04-16"
+      "installation": []
+    },
+    {
+      "id": "1",
+      "software_id": "1",
+      "software": "VS-Code",
+      "version": "2023",
+      "purchaseDate": "2024-04-19",
+      "expirationDate": "2024-04-19",
+      "vendor": "Microsoft inc.",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "supportContact": "support@microsoft.com",
+      "status": "Active",
+      "installation": []
+    },
+    {
+      "id": "sdf",
+      "software_id": "sdf",
+      "software": "MS-Office",
+      "version": "2023",
+      "purchaseDate": "2024-04-02",
+      "expirationDate": "2024-05-11",
+      "vendor": "Microsoft inc.",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "supportContact": "support@microsoft.com",
+      "status": "Active",
+      "installation": []
     }
   ],
   "Employee": [

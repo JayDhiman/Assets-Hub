@@ -3,13 +3,15 @@ import { motion } from "framer-motion";
 import Button from '../Components/Button';
 import Dashboard1 from '../assets/Dashboard1.png'
 import Carousel from '../Components/Carousel';
-import { CiMobile1 } from "react-icons/ci";
+
 import { CiLocationOn } from "react-icons/ci";
 import { MdWebAsset } from "react-icons/md";
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header/Header';
-
+import mobileResponsive from "../assets/mobileResponsive.jpeg"
+import location from "../assets/location.jpeg"
+import employeeFeature from "../assets/employeeFeature.jpeg"
 
 
 
@@ -18,7 +20,7 @@ const Homecontent = () => {
  
     return (
     <>
-  <Header />
+    <div className='bg-gray-100'>  <Header />
   <motion.main 
    initial="hidden"
    animate="visible"
@@ -28,7 +30,7 @@ const Homecontent = () => {
     
     
 
-    <div className='relative w-full  flex flex-col  justify-between items-start max-xl:px-3 pt-28  mx-auto bg-sky-900  '>
+    <div className='relative w-full  flex flex-col  justify-between items-start max-xl:px-3 pt-28  mx-auto bg-gradient-to-t from-stone-700 to-stone-900  '>
       
       <div className='font-bold  mx-auto md:text-4xl text-lg max-sm:text-[20px] max-sm:leading-[1] '>
        <motion.h1 
@@ -67,7 +69,7 @@ const Homecontent = () => {
    
       <div className='mx-auto mb-12'>
       <Link to={"/login"}>
-      <Button  className='text-sm md:text-lg font-light hover:font-medium hover:bg-orange-600 mt-3 md:mx-4 md:px-4 '>
+      <Button  className='text-sm md:text-lg font-light  hover:bg-blue-700 mt-3 md:mx-4 md:px-4 '>
         GET STARTED
       </Button>
       </Link>  
@@ -88,88 +90,84 @@ const Homecontent = () => {
 
   {/* cards */}
 
-<section className=' overflow-hidden w-full mt-12 pt-12'>
+  <section className='overflow-hidden w-full my-6 pt-12 bg-white container mx-auto rounded-lg shadow-xl drop-shadow-xl py-2 pb-8 mb-12' >
+    <h1 className='  -translate-y-5 font-primary font-semibold  text-xl max-sm:text-sm text-center mb-4'>Features</h1>
+  <div className='flex max-md:flex-col gap-6 md:gap-12 max-md:gap-12 items-center justify-center p-1 flex-wrap'>
 
- 
-<h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4 pb-8 '>
-  
-Use our Programmable QR Code Tags and track & mantain your assets</h1>
-<div className=' flex max-sm:flex-col gap-6 justify-center p-1 flex-wrap'>
+    <div className='flex max-sm:flex-col items-center w-96'>
 
- {/* wrapper */}
-<div className=' flex max-sm:flex-col items-center'>
+      <div className="relative flex flex-col  text-gray-700 bg-sky-50 shadow-md bg-clip-border rounded-xl h-[450px]">
+        <div className="relative h-52 -translate-y-6 mx-4  overflow-hidden text-gray-50 shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40  hover:duration-300 hover:transition-all hover:-translate-y-7">
+          <img src={mobileResponsive} alt="responsive design" />
+        </div>
+        <div className="px-3">
+          <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            Mobile Responsive Ready
+          </h5>
+          <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+            Our website is mobile-responsive, guaranteeing a seamless experience across all devices. Whether on a smartphone, tablet, or desktop, users can effortlessly access and interact with our content. 
+          </p>
+        </div>
+        <div className="p-6 ">
+          <button className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-blue-600 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-blue-700 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
+            Read More
+          </button>
+        </div>
+      </div>
 
-{/* items */}
-<div className=" xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4  hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-200 hover:delay-300">
-       <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4'>Ready for mobile Devices</h1>
-       <div className='py-3 text-orange-300 '>
-        <CiMobile1 className="2xl:text-[120px] xl:text-[100px] lg:text-[80px] md:text-[60px] max-md:text-[40px]" />
-       </div>
-       <p className='font-thin text-sm  text-center pt-3 xl:text-lg'>No extra hardware needed. Most </p>
-       <p className='font-extralight text-sm xl:text-lg'> smartphones support Company.</p>
-      
-        
-</div>
-
-</div>
-
-
-<div className='flex max-sm:flex-col items-center  '>
-
-{/* items */}
-<div className=" xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4  hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-300 hover:delay-200">
-       <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4'>Location tracking</h1>
-       <div className='py-3 text-orange-300 drop-shadow-xl decoration-purple-100'>
-        <CiLocationOn className="2xl:text-[120px] xl:text-[100px] lg:text-[80px] md:text-[60px] max-md:text-[40px]" />
-       </div>
-       <p className='font-thin text-sm  text-center pt-3 xl:text-lg'>Each scan updates your asset's location.</p>
-       <p className='font-extralight text-sm xl:text-lg'>Know where things last were.</p>
-       <p className='font-semibold text-sm xl:text-lg text-neutral-600 mt-2'>Upcoming Feature.</p>
-
-        
-</div>
-
-</div>
-
-<div className=' flex max-sm:flex-col items-center mb-3 '>
-
-{/* items */}
-<div className="xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4   hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-300 hover:delay-200">
-       <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4'>Create and Program Your Assets</h1>
-       <div className='py-3 text-orange-300 drop-shadow-xl decoration-purple-100'>
-        <MdWebAsset className="2xl:text-[120px] xl:text-[100px] lg:text-[80px] md:text-[60px] max-md:text-[40px]" />
-       </div>
-       <p className='font-thin text-sm  text-center pt-3 xl:text-lg'>Print your own.Attach them to anything </p>
-      <p className='font-extralight text-sm xl:text-lg'>  you want to track.</p>
-
-        
-</div>
-
-</div>
+    </div>
 
 
-{/* items */}
-{/* <div className=' flex max-sm:flex-col items-center '>
+    <div className='flex  justify-centermax-sm:flex-col items-center w-96  '>
 
-<div className="xl:w-96 xl:h-96 md:w-64 md:h-64 flex flex-col items-center shadow-lg bg-slate-100 rounded-xl max-sm:w-fit max-sm:h-fit  mb-4  hover:shadow-2xl hover:shadow-black hover:border-spacing-3 hover:-translate-y-2 hover:duration-300 hover:delay-200">
- <h1 className='text-lg pt-4 max-sm:text-center max-sm:text-lg mx-1 text-center xl:text-2xl md:pt-2 xl:my-4'>Create and Program Your Assets</h1>
- <div className='py-3 text-orange-300 drop-shadow-xl decoration-purple-100'>
-        <MdWebAsset className="2xl:text-[120px] xl:text-[100px] lg:text-[80px] md:text-[60px]  max-md:text-[40px]" />
-       </div>
-       <p className='font-thin text-sm  text-center pt-3 xl:text-lg'>Print your own.Attach them to anything </p>
-      <p className='font-extralight text-sm xl:text-lg'>  you want to track.</p>
+      <div className="relative  flex flex-col mt text-gray-700 bg-sky-50 shadow-md bg-clip-border rounded-xl h-[450px]">
+    <div className=" -translate-y-7 mx-4  h-52 overflow-hidden text-gray-50 shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40  hover:duration-300 hover:transition-all hover:-translate-y-8">
+          <img src={location} alt="responsive design" />
+        </div> 
+        <div className="px-3 ">
+          <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            Track Location
+          </h5>
+          <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+            Our track location feature enhances user experience by utilizing their current geographical position. To overall satisfaction with our website.
+          </p>
+          <p className='text-center font-m text-sm xl:text-lg text-zinc-400 mt-2'>Upcoming Feature.</p>
+        </div>
+        <div className="p-4 ">
+          <button className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-blue-600 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-blue-700 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
+            Read More
+          </button>
+        </div>
+      </div>
 
-        
-</div>
+    </div>
 
-</div> */}
+       <div className='flex max-sm:flex-col items-center w-96'>
 
-</div>
+      <div className="relative flex flex-col  text-gray-700 bg-sky-50 shadow-md bg-clip-border rounded-xl h-[450px]">
+        <div className=" -translate-y-7  mx-4  overflow-hidden text-gray-50 shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40 hover:duration-300 hover:transition-all hover:-translate-y-8">
+          <img src={employeeFeature} alt="responsive design" />
+        </div>
+        <div className="px-3">
+          <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            Employee Data Management
+          </h5>
+          <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+            Empowering users to efficiently manage employee data, this feature offers comprehensive tools for organizing and maintaining personnel information. 
+          </p>
+        </div>
+        <div className="p-6 ">
+          <button className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-blue-600 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-blue-700 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
+            Read More
+          </button>
+        </div>
+      </div>
 
+    </div>
 
-
-
+  </div>
 </section>
+
               
           
   {/* Service Section */}
@@ -177,6 +175,9 @@ Use our Programmable QR Code Tags and track & mantain your assets</h1>
    <Carousel />
  </section>
  <Footer/>
+
+ </div>
+
  
     </>
   )

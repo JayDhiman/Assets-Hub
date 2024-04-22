@@ -1,5 +1,5 @@
-import Chart from 'chart.js/auto';
 import axios from 'axios';
+import Chart from 'chart.js/auto'; // Import Chart from 'chart.js/auto' to use Chart.js directly
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 
@@ -26,20 +26,28 @@ const AssetCategoryChart = () => {
           assigned.push(category.Assigned);
         }
 
+        // Define gradient colors for the datasets
+        const ctx = document.createElement('canvas').getContext('2d');
+        const gradientCount = ctx.createLinearGradient(0, 300, 0, 0);
+        gradientCount.addColorStop(0, 'rgba(131, 133, 158, 0.9)');
+        gradientCount.addColorStop(1, 'rgba(131, 133, 158, 0)');
+        const gradientAssigned = ctx.createLinearGradient(0, 300, 0, 0);
+        gradientAssigned.addColorStop(0, 'rgba(90, 100, 225, 0.57)');
+        gradientAssigned.addColorStop(1, 'rgba(90, 100, 225, 0)');
+
         setChartData({
           labels: machines,
           datasets: [
             {
               label: "Count",
               data: counts,
-              backgroundColor: "rgba(220, 255, 255, 0.9)", // Adjusted color for count
-              borderColor: "rgba(229, 104, 118, 0.19)",
+              backgroundColor: gradientCount, // Use gradient color for count
               borderWidth: 1
             },
             {
               label: "Assigned",
               data: assigned,
-              backgroundColor: "rgba(212, 224, 255, 0.9)", // Adjusted color for assigned
+              backgroundColor: gradientAssigned, // Use gradient color for assigned
               borderColor: "rgba(54, 162, 235, 1)",
               borderWidth: 1
             }
@@ -54,8 +62,8 @@ const AssetCategoryChart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-sk-50 max-w-fit rounded-lg p-2 ">
-      <div className="w-full  sm:h-96 sm:min-w-[55vw] max-sm:h-56 ">
+  
+      <div className="w-full h-full">
         {chartData.labels && chartData.labels.length > 0 && (
           <Bar
             data={chartData}
@@ -71,9 +79,9 @@ const AssetCategoryChart = () => {
             }}
           />
         )}
-      </div>
+      
+      
     </div>
-
   );
 };
 

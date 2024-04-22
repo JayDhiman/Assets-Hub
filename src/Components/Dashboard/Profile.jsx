@@ -48,65 +48,61 @@ const Profile = () => {
 
 
  {/* Details section */}
-      <div className="flex items-center justify-start w-full  container max-w-[80vw] mx-auto gap-4 h-auto ">
-       
-        <div className=" bg-white w-full h-full drop-shadow-2xl rounded-lg py-2 flex items-center justify-center gap-2 ">
-       
-       <div className="flex items-center justify-center  gap-3">
-       <div className="mb-12 p-4    font-medium text-[14px] mt-7 pt-4 text-zinc-500  rounded-lg drop-shadow-lg ">
-                    <h1 className="text-start px-3 font-semibold text-[16px] text-zinc-900"></h1>
-                    <ul className="text-black py-3 px-3 text-md">
-                      <li className=" text-light font-semibold text-zinc-900 py-2 ">
-                        {" "}
-                        Full Name:{" "}
-                        <span className=" font-light text-stone-500 px-1 ">
-                          {" "}
-                          {/* {empData.full_name} */}Test
+ <div className="flex items-center justify-start w-full container max-w-[80vw] mx-auto gap-4 h-auto">
+    <div className="bg-white w-full h-full drop-shadow-2xl rounded-lg py-2 flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-3">
+            <div className="mb-12 p-4 font-medium text-[14px] mt-7 pt-4 text-zinc-500 rounded-lg drop-shadow-lg">
+                <h1 className="text-start px-3 font-semibold text-[16px] text-zinc-900"></h1>
+                <ul className="text-black py-3 px-3 text-md">
+                    <li className="text-light font-semibold text-zinc-900 py-2 max-sm:text-md">
+                        Full Name:
+                        <span className="font-light text-stone-500 px-1 max-sm:text-sm">
+                            {/* {empData.full_name} */}
+                            Test
                         </span>
-                      </li>
-                      <li className=" text-light font-semibold text-zinc-900 py-2">
-                        {" "}
-                        Location:{" "}
-                        <span className=" font-light text-stone-500 px-1">
-                          {" "}
-                          {/* {empData.phone} */} delhi
+                    </li>
+
+                    <li className="text-light font-semibold text-zinc-900 py-2 max-sm:text-md hidden lg:block">
+                        Location:
+                        <span className="font-light text-stone-500 px-1 max-sm:text-sm">
+                            {/* {empData.phone} */}
+                            Delhi
                         </span>
-                      </li>
-                      <li className=" text-light font-semibold text-zinc-900 py-2 ">
-                        {" "}
-                        Serial NO:{" "}
-                        <span className=" font-light text-stone-500 px-1">
-                          {" "}
-                          {/* {empData.department} */} St01sf
+                    </li>
+
+                    <li className="text-light font-semibold text-zinc-900 py-2 max-sm:text-md hidden lg:block">
+                        Serial NO:
+                        <span className="font-light text-stone-500 px-1 max-sm:text-sm">
+                            {/* {empData.department} */}
+                            St01sf
                         </span>
-                      </li>
-                      <li className=" text-light font-semibold text-zinc-900 py-2 ">
-                        {" "}
-                        Assigned Date:{" "}
-                        <span className=" font-light text-stone-500 px-1">
-                          {" "}
-                          {/* {empData.location} */} 2024-04-10
+                    </li>
+
+                    <li className="text-light font-semibold text-zinc-900 py-2 max-sm:text-md hidden lg:block">
+                        Assigned Date:
+                        <span className="font-light text-stone-500 px-1 max-sm:text-sm">
+                            {/* {empData.location} */}
+                            2024-04-10
                         </span>
-                      </li>
-                      <li className=" text-light font-semibold text-zinc-900 py-2 ">
-                        {" "}
-                        Expiry Date:{" "}
-                        <span className=" font-light text-stone-500 px-1">
-                          {" "}
-                          {/* {empData.employee_id} */}2024-04-26
+                    </li>
+
+                    <li className="text-light font-semibold text-zinc-900 py-2 max-sm:text-md hidden lg:block">
+                        Expiry Date:
+                        <span className="font-light text-stone-500 px-1 max-sm:text-md">
+                            {/* {empData.employee_id} */}
+                            2024-04-26
                         </span>
-                      </li>
-                     
-                    </ul>
-                  </div>
-       </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
        <div className="border-r h-48  border-l-black"></div>
 
-       <div className="flex items-center justify-center  gap-3">
+       <div className="flex items-center justify-center  gap-3 max-sm:gap-1">
        <div className="mb-12 p-4    font-medium text-[14px] mt-7 pt-4 text-zinc-500  rounded-lg drop-shadow-lg ">
                     <h1 className="text-start px-3 font-semibold text-[16px] text-zinc-900"></h1>
-                    <ul className="text-black py-3 px-3 text-md">
+                    <ul className="text-black py-3 sm:px-3 text-md">
                       <li className=" text-light font-semibold text-zinc-900 py-2 ">
                         {" "}
                         Asset Id:{" "}

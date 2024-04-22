@@ -26,13 +26,18 @@ const AssetsPieChart = () => {
     labels: uniqueSoftware,
     datasets: [
       {
-        label: "Users",
-        data: uniqueSoftware.map(label => 
+        label: "installation",
+        data: uniqueSoftware.map(label => (
           software.filter(item => item.software === label).length
+
+        )
+
+         
+        
         ),
         backgroundColor: [
-          'rgba(125, 69, 132, 0.9)',
-          'rgba(154, 12, 35, 0.7)',
+          'rgba(131, 237, 158, 0.87)',
+          'rgba(30, 145, 242, 0.4)',
           'rgba(255, 206, 86, 0.8)',
           'rgba(75, 192, 192, 0.8)',
           'rgba(153, 102, 255, 0.8)',
@@ -47,29 +52,24 @@ const AssetsPieChart = () => {
   const options = {
     plugins: {
       legend: {
-        display: false // Hide the legend (labels)
+        display: false // Hide the labels
       }
     }
   };
 
   // Calculate total number of assets
-  const totalAssets = data.datasets[0].data.reduce((acc, cur) => acc + cur, 0);
+
 
   return (
-    <div className=' py-2 p-3 rounded-2xl relative drop-shadow-md max-sm:w-fit'>
-      <div className='container'>
+    <div className=' px-1 rounded-2xl relative drop-shadow-md max-sm:w-full'>
+      <div className='m-2 md:py-2 max-sm:py-1'>
         <Doughnut data={data} options={options} />
       </div>
-      <div className='mb-3'>
-        {data.labels.map((label, index) => (
-          <div key={index} className='flex'>
-            <div className='text-sm font-thin mx-2'>{label} -</div>
-            <div className='text-sm font-thin '>
-              {((data.datasets[0].data[index] / totalAssets) * 100).toFixed(2)}%
-            </div>
-          </div>
-        ))}
+      
+      <div className='md:pt-4 max-sm:py-2'>
+        <h1 className='uppercase text-md font-primary font-light text-center'>Software Data</h1>
       </div>
+
     </div>
   );
 };
