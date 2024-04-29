@@ -132,7 +132,15 @@
       "licenseKey": "ABCD-EFGH-IJKL-MNOP",
       "supportContact": "support@microsoft.com",
       "status": "Active",
-      "installation": []
+      "installation": [
+        {
+          "laptopId": "01",
+          "installationDate": "2024-04-29",
+          "serialNo": "012xee",
+          "employeeId": "101",
+          "empName": "Ayush Bansal"
+        }
+      ]
     },
     {
       "id": "sdf",

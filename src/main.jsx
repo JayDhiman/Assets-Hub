@@ -19,7 +19,6 @@ import Employee from './Pages/Dashboard/Employee'
 import Software from './Pages/Dashboard/Software'
 import Profile from './Components/Dashboard/Profile'
 import EmployeeProfile from './Pages/Dashboard/EmployeeProfile'
-// import SoftwareDetails from './Components/Dashboard/Software/SoftwareDetails'
 import SoftwareData from './Components/Dashboard/Software/SoftwareData'
 import AsssignedAssets from './Components/Dashboard/Assetss/AsssignedAssets'
 
