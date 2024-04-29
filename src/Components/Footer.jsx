@@ -8,7 +8,7 @@ import { IoLogoYoutube } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <footer className='relative w-full  flex flex-col  justify-between items-start max-xl:px-3   mx-auto bg-sky-900 mt-40 pb-12 overflow-hidden' >
+    <footer className='relative w-full  flex flex-col  justify-between items-start max-xl:px-3   mx-auto bg-gradient-to-t from-stone-700 to-stone-900 mt-16 pb-12 overflow-hidden' >
     <div className=' xl:container mx-auto flex items-start justify-center gap-6 max-sm:gap-3 max-sm:flex-col overflow-hidden flex-wrap'>
     
     
@@ -19,12 +19,12 @@ const Footer = () => {
       {/* logo */}
     <div className='flex items-center justify-start  max-sm:flex-col mt-4  '>
     
-    <div className='text-xl mx-3 pt-2'>
+    <div className='text-xl ml-4 mr-1 pt-2'>
     <img src={logo1} alt="Logo" className='' width={50}/>
     </div>
     
     <div className='pt-3 '>
-      <h1 className='text-orange-300 text-2xl uppercase mt-3'>AssetHub</h1>
+      <h1 className='text-white text-2xl uppercase mt-3'>AssetHub</h1>
     </div>
     </div>
     

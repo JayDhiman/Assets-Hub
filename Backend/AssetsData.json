@@ -1,0 +1,202 @@
+{
+  "Assets": [
+    {
+      "id": "X01-23",
+      "assetName": "Acer Swift Go 12 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23",
+      "processor": "intel i3",
+      "os": "windows-11",
+      "license": "xxxxx",
+      "brand": "dell",
+      "status": "In Use",
+      "empID": "01",
+      "empName": "Ayush",
+      "email": "test@gmail.com",
+      "contact": "020233",
+      "assignedDate": "2024-04-26",
+      "returnDate": "2024-05-11"
+    },
+    {
+      "id": "A01_Eas",
+      "assetName": "MAC air",
+      "assetCategory": "Laptop",
+      "serialNo": "A01_Eas",
+      "processor": "IOS",
+      "os": "macOS Sonoma 14.4.1",
+      "license": "xxxx",
+      "brand": "Apple",
+      "status": "In Use",
+      "empID": "1212",
+      "empName": "Rajat sharma",
+      "email": "test@gmail.com",
+      "contact": "9045212145",
+      "assignedDate": "2024-04-17",
+      "returnDate": "2024-05-11"
+    },
+    {
+      "id": "sdfdfrr",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "sdfdfrr",
+      "processor": "w",
+      "os": "w",
+      "license": "w",
+      "brand": "w",
+      "status": "Under Maintenance"
+    },
+    {
+      "id": "X01-23dssss",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23dssss",
+      "processor": "intel i3",
+      "os": "windows-11",
+      "license": "xxxxx",
+      "brand": "Accer",
+      "status": "Out of Service"
+    },
+    {
+      "id": "X01-23dss",
+      "assetName": "Acer Swift Go 14 (SFG14-72T)",
+      "assetCategory": "Laptop",
+      "serialNo": "X01-23dss",
+      "processor": "ss",
+      "os": "ss",
+      "license": "dsaf",
+      "brand": "sdf",
+      "status": "Available"
+    }
+  ],
+  "category": [
+    {
+      "sNo": "1",
+      "Machines": "Laptop",
+      "Count": "120",
+      "Assigned": "80",
+      "id": "3975"
+    },
+    {
+      "id": "4",
+      "sNo": "4",
+      "Machines": "Cables",
+      "Count": "110",
+      "Assigned": "79"
+    },
+    {
+      "id": "5",
+      "sNo": "5",
+      "Machines": "Phone",
+      "Count": "90",
+      "Assigned": "45"
+    },
+    {
+      "id": "6",
+      "sNo": "6",
+      "Machines": "Headset",
+      "Count": "10",
+      "Assigned": "2"
+    },
+    {
+      "id": "6",
+      "sNo": "6",
+      "Machines": "Tabs",
+      "Count": "20",
+      "Assigned": "3"
+    }
+  ],
+  "Software": [
+    {
+      "id": "01",
+      "software_id": "01",
+      "software": "MS-Excel",
+      "version": "2024",
+      "purchaseDate": "2024-04-19",
+      "expirationDate": "2024-04-30",
+      "vendor": "Microsoft inc.",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "supportContact": "support@microsoft.com",
+      "status": "Active",
+      "installation": []
+    },
+    {
+      "id": "1",
+      "software_id": "1",
+      "software": "VS-Code",
+      "version": "2023",
+      "purchaseDate": "2024-04-19",
+      "expirationDate": "2024-04-19",
+      "vendor": "Microsoft inc.",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "supportContact": "support@microsoft.com",
+      "status": "Active",
+      "installation": [
+        {
+          "laptopId": "01",
+          "installationDate": "2024-04-29",
+          "serialNo": "012xee",
+          "employeeId": "101",
+          "empName": "Ayush Bansal"
+        }
+      ]
+    },
+    {
+      "id": "sdf",
+      "software_id": "sdf",
+      "software": "MS-Office",
+      "version": "2023",
+      "purchaseDate": "2024-04-02",
+      "expirationDate": "2024-05-11",
+      "vendor": "Microsoft inc.",
+      "licenseType": "Subscription",
+      "licenseKey": "ABCD-EFGH-IJKL-MNOP",
+      "supportContact": "support@microsoft.com",
+      "status": "Active",
+      "installation": []
+    }
+  ],
+  "Employee": [
+    {
+      "id": "Emp-02",
+      "employee_id": "Emp-02",
+      "full_name": "Ayush Sharma",
+      "department": "Development",
+      "position": "Full-stack",
+      "email": "ayush@123",
+      "phone": "+1234567890",
+      "location": "Noida"
+    },
+    {
+      "id": "emp-03",
+      "employee_id": "Emp-03",
+      "full_name": "Sachin Gupta",
+      "department": "QA",
+      "position": "Senior QA",
+      "email": "sachin01@gmail.com",
+      "phone": "+1234567890",
+      "location": "UP"
+    },
+    {
+      "id": "asd",
+      "employee_id": "emp-id",
+      "full_name": "aryan",
+      "department": "ss",
+      "position": "dev",
+      "email": "email2123@gmail",
+      "phone": "+1002202",
+      "location": "dsa"
+    },
+    {
+      "id": "Emp-01",
+      "employee_id": "Emp-01",
+      "full_name": "John-doe",
+      "department": "Development",
+      "position": "Backend-developer",
+      "email": "test@gmai",
+      "phone": "+1234567890",
+      "location": "Dehradun"
+    }
+  ]
+}

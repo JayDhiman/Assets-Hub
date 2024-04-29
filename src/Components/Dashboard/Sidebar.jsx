@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
-
-import { Link } from 'react-router-dom';
-import LogoutBtn from '../Header/Logoutbtn';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { RxDashboard } from 'react-icons/rx';
 import { FaRegUser } from 'react-icons/fa';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { SiBmcsoftware } from 'react-icons/si';
 import { MdOutlineWebAsset } from 'react-icons/md';
-import { IoIosLogOut } from "react-icons/io";
+import { IoIosCloseCircle } from "react-icons/io";
+import logo1 from "../../assets/logo1.webp";
 
+const Sidebar = ({ toggleSidebarOpen, sidebarOpen }) => {
+  const location = useLocation();
 
-const Sidebar = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('');
-
-  const handleToggleSidebar = () => setSidebarOpen(!sidebarOpen);
-  const handleActiveLink = (id) => setActiveLink(id);
-
-  // list items for the Dashboard Items
   const DashboardItems = [
     { id: 1, title: 'Dashboard', slug: '/dashboard', icon: <RxDashboard /> },
     { id: 2, title: 'Employee', slug: '/dashboard/employee', icon: <FaRegUser /> },
@@ -27,43 +20,38 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className={`h-screen  overflow-auto bg-gray-700 ${!sidebarOpen ? 'w-24 duration-200 ':'duration-200 w-52'}`}>
-      <div className='w-fit'>
-        <button onClick={handleToggleSidebar}>Open</button>
-      </div>
+    <aside className={`fixed bg-gradient-to-b from-neutral-600 to-neutral-900 rounded-xl h-full overflow-auto text-white ${sidebarOpen ? 'max-sm:absolute z-50 bg-zinc-700 rounded-xl w-44 max-sm:transition max-sm:duration-300' : 'max-sm:hidden'} flex flex-col relative my-1 mx-2`} >
+      {sidebarOpen && (
+        <button
+          onClick={toggleSidebarOpen}
+          className="absolute right-2 -top-1 ml-2 mt-4 text-xl text-red-400 sm:hidden"
+        >
+          <IoIosCloseCircle />
+        </button>
+      )}
       <div className="p-4">
-        {/* Profile image */}
-        <div className="text-white">Profile Image</div>
+        <Link to={"/dashboard"}>
+          <div className="flex items-center justify-center text-xl rounded-full h-[40px] gap-1">
+            <div className="mt-1">
+              <img src={logo1} alt="" className="w-[40px]" />
+            </div>
+            <div className="uppercase font-primary font-light max-sm:hidden mt-3">
+              <h1 className="text-xl pt-2">AssetHub</h1>
+            </div>
+          </div>
+        </Link>
       </div>
-
-      <div className="mt-8">
+      <div className="mt-3">
         <ul>
-          {DashboardItems.map((items) => (
-            <li key={items.id} className={`flex items-center py-2 px-4 text-white uppercase ${activeLink === items.id ? 'bg-gray-600' : ''} ${!sidebarOpen ? 'mx-2':'mx-3 '} hover:text-blue-200 hover:scale-105 hover:transtion hover:duration-200`}>
-              <Link to={items.slug} className="flex items-center gap-2">
-                <div className={`${!sidebarOpen ? 'text-2xl duration-200 transition':'text-xl duration-200 transition'} transition-all duration-300 transform hover:scale-110`}>{items.icon}</div>
-                <span className={`${!sidebarOpen ? "hidden": "block font-primary text-[15px]"} transition-all duration-300 `}>{items.title}</span>
+          {DashboardItems.map((item) => (
+            <li key={item.id} className={`flex items-center py-2 px-4 text-slate-100 uppercase ${location.pathname === item.slug ? 'bg-blue-600 rounded-lg' : ''} mx-3 hover:bg-stone-600 hover:scale-105 hover:transition hover:duration-200 hover:rounded-lg`}>
+              <Link to={item.slug} className="flex items-center gap-2 hover:scale-105 hover:duration-200">
+                <div className={`text-xl transition-all duration-300 transform`}>{item.icon}</div>
+                <span className={`block font-primary font-light text-[15px] transition-all duration-300`}>{item.title}</span>
               </Link>
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="absolute bottom-6 mx-3">
-       <div className={`flex items-center uppercase  ${!sidebarOpen ? 'mx-2':'mx-3'}  hover:text-blue-200 hover:scale-105 hover:transtion hover:duration-200`}>
-        <span className={`text-white inline-block ${!sidebarOpen ? 'text-2xl':'text-xl'} hover:scale-105`}><IoIosLogOut /></span>
-        <div>
-  {sidebarOpen ? (
-    <LogoutBtn className="text-white text-md px-1 uppercase" value="logout" />
-  ) : (
-    <LogoutBtn className="text-white text-md px-1 uppercase" value="" />
-  )}
-</div>
-        </div>
-          
-
-
-        
       </div>
     </aside>
   );
