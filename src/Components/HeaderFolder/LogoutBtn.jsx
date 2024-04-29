@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import authService from '../../Appwrite/Authservice';
 import { logout } from '../../store/AuthSlice';
 
-const  LogoutBtn = ({ className, value, ...props }) =>{
+const LogoutBtn = ({ className, value, ...props }) =>{
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

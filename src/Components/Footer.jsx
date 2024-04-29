@@ -1,6 +1,5 @@
 import React from 'react'
 import logo1 from '../assets/logo1.webp'
-
 import { FaFacebook } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";

@@ -3,10 +3,10 @@ import logo1 from '../../assets/logo1.webp';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LogoutBtn from './Logoutbtn';
+import LogoutBtn from './LogoutBtn';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'; // Import hamburger menu icons
 
-function Header() {
+const  Header = () => {
   const [showMenu, setShowMenu] = useState(false); // State variable for menu visibility
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
