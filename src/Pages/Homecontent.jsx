@@ -3,9 +3,6 @@ import { motion } from "framer-motion";
 import Button from '../Components/Button';
 import Dashboard1 from '../assets/Dashboard1.png'
 import Carousel from '../Components/Carousel';
-
-import { CiLocationOn } from "react-icons/ci";
-import { MdWebAsset } from "react-icons/md";
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header/Header';
@@ -58,9 +55,7 @@ const Homecontent = () => {
    <p className='max-sm:text-sm'><span className='text-green-300 font-normal'>Asset</span> and <span className='text-green-300 font-normal'>Equipment</span> tracking software used by <span className='text-green-300 font-normal'>teams</span>
    <span className='max-sm:hidden'> who value clarity.</span> 
     </p>
-   <p className='max-sm:text-sm'>Company is an open source asset management system
-   <span className='max-sm:hidden'>
-   that lets you create,
+   <p className='max-sm:text-sm'>Company is an <span className='text-green-300 font-normal'>Open source asset management system</span> <span className='max-sm:hidden'>that lets you create,
     </span></p>
    <p className='max-sm:hidden'> manage and overview your assets across
    locations.</p>

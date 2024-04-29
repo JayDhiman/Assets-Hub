@@ -20,10 +20,10 @@ this.account = new Account(this.client);
 //  register a new user
 
 
-async register({ email, password, name }) {
+async register({ email, password, name}) {
     try {
       // Create a new user account
-      const userAccount = await this.account.create( ID.unique(), email, password, name); // try to gen
+      const userAccount = await this.account.create( ID.unique(), email, password, name);
       
       if (userAccount) {
         // Return the user account data or a success message
