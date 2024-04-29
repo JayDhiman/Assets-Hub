@@ -15,9 +15,9 @@ const Signup = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null); // Add error state
     const dispatch = useDispatch();
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
 
-    const create = async(data) => {
+    const create = async (data) => {
         setLoading(true);
         try {
             const userData = await authService.register(data);

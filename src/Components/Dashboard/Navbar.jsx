@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import LogoutBtn from '../HeaderFolder/LogoutBtn';
+import LogoutBtn from '../Headerr/LogoutBtn'
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { useDispatch, useSelector } from "react-redux";

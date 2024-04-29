@@ -5,7 +5,7 @@ import Dashboard1 from '../assets/Dashboard1.png'
 import Carousel from '../Components/Carousel';
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
-import Header from '../Components/HeaderFolder/Header';
+import Header from '../Components/Headerr/Header'
 import mobileResponsive from "../assets/mobileResponsive.jpeg"
 import location from "../assets/location.jpeg"
 import employeeFeature from "../assets/employeeFeature.jpeg"
