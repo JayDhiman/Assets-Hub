@@ -141,9 +141,11 @@ const Assets = () => {
     fetchData();
   }, []);
 
+
+
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/Assets");
+      const res = await axios.get("https://assets-hub-blush.vercel.app/api/Assets");
       setAssets(res.data);
     } catch (error) {
       console.log("Error getting the response from the server", error);
@@ -155,7 +157,7 @@ const Assets = () => {
     try {
       if (assetID) {
         const response = await axios.put(
-          `http://localhost:3000/Assets/${assetID.serialNo}`, // Use serialNo instead of id
+          `https://assets-hub-blush.vercel.app/api/Assets/${assetID.serialNo}`,
           data
         );
         if (response.status === 200) {
@@ -180,7 +182,7 @@ const Assets = () => {
             "A user with the same ID already exists. Please choose a different ID."
           );
         } else {
-          const response = await axios.post("http://localhost:3000/Assets", {
+          const response = await axios.post("https://assets-hub-blush.vercel.app/api/Assets", {
             ...data,
             id: data.serialNo, // Use serialNo as id
           });
@@ -198,7 +200,6 @@ const Assets = () => {
       console.log("Error submitting the form", error);
     }
   };
-  
 const handleClosePopup = () => setAssetDetails(false)
 
 const handleEmpListView = (asset)=>{
@@ -216,7 +217,7 @@ const handleEmpListView = (asset)=>{
   const handleDelete = async () => {
     try {
       if (assetID) {
-        await axios.delete(`http://localhost:3000/Assets/${assetID.id}`);
+        await axios.delete(`https://assets-hub-blush.vercel.app/api/Assets/${assetID.id}`);
         fetchData();
         setDeleteForm(false);
       }
@@ -224,7 +225,6 @@ const handleEmpListView = (asset)=>{
       console.error("Error deleting asset:", error);
     }
   };
-
   // Function for showing delete confirmation
   const handleDeleteConfirmation = (asset) => {
     setAssetID(asset);
