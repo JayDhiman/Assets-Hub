@@ -66,6 +66,23 @@
       "license": "dsaf",
       "brand": "sdf",
       "status": "Available"
+    },
+    {
+      "id": "S01xs",
+      "assetName": "MacBook Pro 14-inch (M3 Max, 2023)",
+      "assetCategory": "Laptop",
+      "serialNo": "S01xs",
+      "processor": "Apple M3 Max",
+      "os": "IOS",
+      "license": "xxxx",
+      "brand": "Apple",
+      "status": "In Use",
+      "empID": "1",
+      "empName": "11",
+      "email": "abc@gmail.com",
+      "contact": "11",
+      "assignedDate": "2024-06-21",
+      "returnDate": "2024-06-22"
     }
   ],
   "category": [
@@ -81,7 +98,7 @@
       "sNo": "4",
       "Machines": "Cables",
       "Count": "110",
-      "Assigned": "79"
+      "Assigned": "90"
     },
     {
       "id": "5",
