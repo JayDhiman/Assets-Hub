@@ -137,17 +137,13 @@ const Assets = () => {
 
   // Function for getting the values from the server
 
-
-  const baseURL = "https://assets-hub-iota.vercel.app/api";
-  
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${baseURL}/data`); // Update the URL
+      const res = await axios.get("http://localhost:3000/Assets");
       setAssets(res.data);
     } catch (error) {
       console.log("Error getting the response from the server", error);
@@ -159,7 +155,7 @@ const Assets = () => {
     try {
       if (assetID) {
         const response = await axios.put(
-          `${baseURL}/data/${assetID.serialNo}`, // Update the URL
+          `http://localhost:3000/Assets/${assetID.serialNo}`, // Use serialNo instead of id
           data
         );
         if (response.status === 200) {
@@ -172,14 +168,30 @@ const Assets = () => {
         }
       } else {
         // Proceed with creating a new asset
-        const response = await axios.post(`${baseURL}/data`, data); // Update the URL
-        if (response.status === 201) {
-          // Data successfully created
-          fetchData();
-          setAssetID(null);
-          setAddForm(false);
+  
+        const existingAsset = assets.find((asset) => asset.serialNo === data.serialNo); // Use serialNo instead of assetID
+        const existingEmployee = assets.find((asset) => asset.id === data.empID);
+        if (existingAsset) {
+          alert(
+            "An asset with the same Serial Number already exists. Please choose a different Serial Number."
+          );
+        } else if (existingEmployee) {
+          alert(
+            "A user with the same ID already exists. Please choose a different ID."
+          );
         } else {
-          console.log("Error creating the asset:", response);
+          const response = await axios.post("http://localhost:3000/Assets", {
+            ...data,
+            id: data.serialNo, // Use serialNo as id
+          });
+          if (response.status === 201) {
+            // Data successfully created
+            fetchData();
+            setAssetID(null);
+            setAddForm(false);
+          } else {
+            console.log("Error creating the asset:", response);
+          }
         }
       }
     } catch (error) {
@@ -187,7 +199,7 @@ const Assets = () => {
     }
   };
   
-// const handleClosePopup = () => setAssetDetails(false)
+const handleClosePopup = () => setAssetDetails(false)
 
 const handleEmpListView = (asset)=>{
   setAssetID(asset)
@@ -204,7 +216,7 @@ const handleEmpListView = (asset)=>{
   const handleDelete = async () => {
     try {
       if (assetID) {
-        await axios.delete(`${baseURL}/data/${assetID.serialNo}`); // Update the URL
+        await axios.delete(`http://localhost:3000/Assets/${assetID.id}`);
         fetchData();
         setDeleteForm(false);
       }
