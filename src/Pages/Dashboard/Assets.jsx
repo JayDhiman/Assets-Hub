@@ -145,7 +145,7 @@ const Assets = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("https://assets-hub-blush.vercel.app/api/Assets");
+      const res = await axios.get("https://assethub-zeta.vercel.app/api/Assets");
       setAssets(res.data);
     } catch (error) {
       console.log("Error getting the response from the server", error);
@@ -157,7 +157,7 @@ const Assets = () => {
     try {
       if (assetID) {
         const response = await axios.put(
-          `https://assets-hub-blush.vercel.app/api/Assets/${assetID.serialNo}`,
+          `https://assethub-zeta.vercel.app/api/Assets/${assetID.serialNo}`,
           data
         );
         if (response.status === 200) {
@@ -182,7 +182,7 @@ const Assets = () => {
             "A user with the same ID already exists. Please choose a different ID."
           );
         } else {
-          const response = await axios.post("https://assets-hub-blush.vercel.app/api/Assets", {
+          const response = await axios.post("https://assethub-zeta.vercel.app/api/Assets", {
             ...data,
             id: data.serialNo, // Use serialNo as id
           });
